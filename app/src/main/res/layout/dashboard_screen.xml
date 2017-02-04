@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.sheharyararif.foodlings.DashboardScreen">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/LogoImageLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:srcCompat="@drawable/logo"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DashboardLabelLayout"
+            android:layout_below="@+id/LogoImageLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="Dashboard"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/text_heading_border"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/SearchTextBoxLayout"
+            android:layout_below="@id/DashboardLabelLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:hint="Search"
+                android:paddingLeft="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_shape"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/FirstRowLayout"
+            android:layout_below="@id/SearchTextBoxLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/PortalButton"
+                android:text="Portal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/tiles_border"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/NewsfeedButton"
+                android:text="Newsfeed"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/tiles_border"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/SecondRowLayout"
+            android:layout_below="@id/FirstRowLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/ProfileButton"
+                android:text="Profile"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/tiles_border"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
