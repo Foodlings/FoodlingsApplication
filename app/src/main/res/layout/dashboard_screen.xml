@@ -17,10 +17,9 @@
         android:layout_centerHorizontal="true"
         android:weightSum="5">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/LogoImageLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal">
@@ -30,9 +29,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 app:srcCompat="@drawable/logo"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_centerInParent="true"/>
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/SettingsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/settings_icon"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/border_without_right_border"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/DashboardLabelLayout"

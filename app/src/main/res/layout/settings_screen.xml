@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.sheharyararif.foodlings.SettingsScreen">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/LogoImageLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="150dp">
+
+            <TextView
+                android:text="Settings"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_gravity="center_vertical"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:background="@drawable/text_perforated_heading_border"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="-130dp">
+
+            <LinearLayout
+                android:id="@+id/ListLayout"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <TextView
+                    android:id="@+id/GeneralLabel"
+                    android:text="General"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_without_left_border"/>
+
+                <TableLayout
+                    android:id="@+id/GeneralSettingsGrid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="20dp">
+
+                    <TableRow
+                        android:id="@+id/FirstRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/NameLabel"
+                            android:text="Name"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <EditText
+                            android:id="@+id/NameTextBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:inputType="textPersonName"
+                            android:hint="Full Name"
+                            android:ems="7"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/edit_text"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/SecondRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/GenderLabel"
+                            android:text="Gender"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/GenderDropDown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:layout_weight="1"
+                            android:entries="@array/gender_list"
+                            android:prompt="@string/gender_prompt" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/ThirdRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/ProfilePictureLabelLabel"
+                            android:text="Profile Picture"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageButton
+                            android:id="@+id/ProfilePictureButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            app:srcCompat="@android:drawable/ic_input_add" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/FourthRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/CoverPhotoLabel"
+                            android:text="Cover Photo"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ImageButton
+                            android:id="@+id/CoverPhotoButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            app:srcCompat="@android:drawable/ic_input_add" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/PrivacyLabel"
+                    android:text="Privacy"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_without_left_border"/>
+
+                <TableLayout
+                    android:id="@+id/PrivacySettingsGrid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="20dp">
+
+                    <TableRow
+                        android:id="@+id/FifthRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/PostLabel"
+                            android:text="Post"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/PostDropDown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:layout_weight="1"
+                            android:entries="@array/post_list"
+                            android:prompt="@string/post_prompt" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/SixthRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/TagLabel"
+                            android:text="Tag"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <ToggleButton
+                            android:id="@+id/TagToggleButton"
+                            android:textOn="Yes"
+                            android:textOff="No"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/SeventhRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/FriendListLabel"
+                            android:text="Friends List"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/FriendListDropDown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:layout_weight="1"
+                            android:entries="@array/friend_list_list"
+                            android:prompt="@string/friend_list_prompt" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/EigthtRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2"
+                        android:layout_marginTop="20dp">
+
+                        <Button
+                            android:text="Log out"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button3" />
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

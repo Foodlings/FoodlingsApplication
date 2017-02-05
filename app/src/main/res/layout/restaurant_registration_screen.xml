@@ -9,8 +9,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sheharyararif.foodlings.RestaurantRegistrationScreen">
 
+    <LinearLayout
+        android:id="@+id/LegendSeparator"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <View
+            android:id="@+id/lineLeft"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#b8b8b8" />
+
+        <TextView
+            android:id="@+id/EmailText"
+            android:text=" Restaurant "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#525252"
+            android:textSize="30sp" />
+
+        <View
+            android:id="@+id/lineRight"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#b8b8b8" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="fill_parent"
+        android:layout_below="@id/LegendSeparator"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -21,46 +56,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:weightSum="11">
-
-            <LinearLayout
-                android:id="@+id/LegendSeparator"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <View
-                    android:id="@+id/lineLeft"
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="#b8b8b8" />
-
-                <TextView
-                    android:id="@+id/EmailText"
-                    android:text=" Restaurant "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="#525252"
-                    android:textSize="30sp" />
-
-                <View
-                    android:id="@+id/lineRight"
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="#b8b8b8" />
-            </LinearLayout>
-
+            android:weightSum="10">
 
             <TextView
                 android:id="@+id/RestaurantNameLabel"
-                android:layout_below="@id/LegendSeparator"
                 android:text="Restaurant Name"
                 android:textColor="#000"
                 android:textSize="18sp"
