@@ -1,15 +1,20 @@
 package com.example.sheharyararif.foodlings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class LoginScreen extends AppCompatActivity {
+
+    Button SigninButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,15 @@ public class LoginScreen extends AppCompatActivity {
             params.setMargins(0,200,0,0);
         }
         MainBlock.setLayoutParams(params);
+
+
+        //Signin Button's Click Event
+        SigninButton = (Button)findViewById(R.id.SigninButton);
+        SigninButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(LoginScreen.this, DashboardScreen.class)); }
+        });
 
     }
 

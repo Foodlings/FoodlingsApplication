@@ -30,5 +30,13 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v)
             { startActivity(new Intent(HomeScreen.this, RegistrationScreen.class)); }
         });
+
+        //Visitor Button's Click Event
+        VisitorButton = (Button)findViewById(R.id.VisitorButton);
+        VisitorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(HomeScreen.this, VisitorDashboard.class)); }
+        });
     }
 }
