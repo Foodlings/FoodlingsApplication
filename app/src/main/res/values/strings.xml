@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">Foodlings</string>
+
+    <string name="gender_prompt">Your Gender</string>
+    <string-array name="gender_list">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="post_prompt">Your Gender</string>
+    <string-array name="post_list">
+        <item>Friends</item>
+        <item>Public</item>
+    </string-array>
+
+    <string name="friend_list_prompt">Your Gender</string>
+    <string-array name="friend_list_list">
+        <item>Friends</item>
+        <item>Public</item>
+        <item>No one</item>
+    </string-array>
+
+    <string name="category_prompt">Your Gender</string>
+    <string-array name="category_list">
+        <item>Fast Food</item>
+        <item>Continental</item>
+    </string-array>
+
+    <string name="price_prompt">Your Gender</string>
+    <string-array name="price_list">
+        <item>&lt;100</item>
+        <item>&gt;100</item>
+    </string-array>
+
+    <string name="location_prompt">Your Gender</string>
+    <string-array name="location_list">
+        <item>Lahore</item>
+        <item>Islamabad</item>
+    </string-array>
+
 </resources>

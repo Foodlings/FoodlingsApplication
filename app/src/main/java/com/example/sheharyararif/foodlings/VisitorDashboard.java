@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class VisitorDashboard extends AppCompatActivity {
 
-    Button PortalButton, RegisterButton;
+    Button PortalButton, CommunityButton, RegisterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,14 @@ public class VisitorDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             { startActivity(new Intent(VisitorDashboard.this, PortalScreen.class)); }
+        });
+
+        //Community Button's Click Event
+        CommunityButton = (Button)findViewById(R.id.CommunityButton);
+        CommunityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(VisitorDashboard.this, CommunityScreen.class)); }
         });
 
         //Register Button's Click Event

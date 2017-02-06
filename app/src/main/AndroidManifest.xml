@@ -25,13 +25,31 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginScreen" />
+        <activity
+            android:name=".LoginScreen"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".RegistrationScreen" />
-        <activity android:name=".RestaurantRegistrationScreen" />
-        <activity android:name=".SubscriberRegistrationScreen" />
+        <activity
+            android:name=".RestaurantRegistrationScreen"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SubscriberRegistrationScreen"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".PictureUploadScreen" />
-        <activity android:name=".DashboardScreen" />
-        <activity android:name=".PortalScreen"></activity>
+        <activity
+            android:name=".DashboardScreen"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PortalScreen"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".VisitorDashboard" />
+        <activity
+            android:name=".SettingsScreen"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".AdvanceSearchScreen" />
+        <activity android:name=".CategoryScreen" />
+        <activity android:name=".CommunityScreen" />
+        <activity android:name=".SubscriberProfileScreen"></activity>
     </application>
 
 </manifest>
