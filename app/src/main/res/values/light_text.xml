@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="LightFont">
+        <item name="android:textColor">#595a5b</item>/>
+    </style>
+</resources>
