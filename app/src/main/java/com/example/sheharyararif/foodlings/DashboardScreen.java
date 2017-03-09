@@ -11,7 +11,7 @@ import android.widget.ImageView;
 public class DashboardScreen extends AppCompatActivity {
 
     ImageButton SettingsButton;
-    Button PortalButton;
+    Button PortalButton, ProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,14 @@ public class DashboardScreen extends AppCompatActivity {
             @Override
             public void onClick(View v)
             { startActivity(new Intent(DashboardScreen.this, PortalScreen.class)); }
+        });
+
+        //Profile Button's Click Event
+        ProfileButton = (android.widget.Button)findViewById(R.id.ProfileButton);
+        ProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class)); }
         });
     }
 }
