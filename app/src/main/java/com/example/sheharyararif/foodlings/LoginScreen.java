@@ -1,5 +1,6 @@
 package com.example.sheharyararif.foodlings;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,10 +15,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 
 public class LoginScreen extends AppCompatActivity {
@@ -28,7 +32,7 @@ public class LoginScreen extends AppCompatActivity {
     JSONArray dataArray = null;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingswebapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
+    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class LoginScreen extends AppCompatActivity {
         //TextBox initialization
         EmailTextBox = (EditText) findViewById(R.id.EmailTextBox);
         PasswordTextBox = (EditText) findViewById(R.id.PasswordTextBox);
+        url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
 
         //Signin Button's Click Event
         SigninButton = (Button)findViewById(R.id.SigninButton);
@@ -61,6 +66,7 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v)
             {
                 url = url + EmailTextBox.getText();
+                //startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                 new JSONParse().execute();
             }
         });
@@ -80,23 +86,33 @@ public class LoginScreen extends AppCompatActivity {
 
     private class JSONParse extends AsyncTask<String, String, JSONObject>
     {
+        private ProgressDialog pDialog;
         @Override
         protected void onPreExecute()
-        { super.onPreExecute(); }
+        { super.onPreExecute();
+            pDialog = new ProgressDialog(LoginScreen.this);
+            pDialog.setIndeterminate(false);
+            pDialog.setMessage("Verifying Credentials");
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
 
         @Override
         protected JSONObject doInBackground(String... args)
         {
             JSONParser jsonParser = new JSONParser();
 
+            Post post = null;
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(url, "GET");
+            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", post, null);
             return json;
         }
 
         @Override
         protected void onPostExecute(JSONObject json)
         {
+            pDialog.dismiss();
+            url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
             try
             {
                 // Getting JSON Array
@@ -107,14 +123,22 @@ public class LoginScreen extends AppCompatActivity {
                 String EmailAddress = c.getString("Email");
                 String Password = c.getString("Password");
 
-
                 if((EmailTextBox.getText().toString().equals(EmailAddress))&&(PasswordTextBox.getText().toString().equals(Password)))
                 {
                     startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                 }
+                else
+                {
+                    Toast.makeText(LoginScreen.this, "Wrong Credentials",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
             catch (JSONException e)
-            { e.printStackTrace(); }
+            {
+                e.printStackTrace();
+                Toast.makeText(LoginScreen.this, "Wrong Credentials",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

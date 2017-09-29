@@ -8,16 +8,18 @@ public class Subscriber
 {
 
     // Fields
-    int SubscriberID;
+    String SubscriberID;
     String SubscriberName;
     String Password;
     String Type;
     String Email;
-    int DisplayPictureID;
+    String DisplayPictureID;
     String PhoneNumber;
     String Bio;
     String Gender;
     String DoB;
+    String DisplayPicture;
+    String CoverPhoto;
 
 
     // Constructor-1
@@ -25,7 +27,7 @@ public class Subscriber
     {}
 
     // Constructor-2
-    public Subscriber(int SubscriberID, String SubscriberName, String Password, String type, String Email, int DisplayPictureID, String PhoneNumber, String Bio, String Gender, String DoB)
+    public Subscriber(String SubscriberID, String SubscriberName, String Password, String type, String Email, String DisplayPictureID, String PhoneNumber, String Bio, String Gender, String DoB)
     {
         this.SubscriberID = SubscriberID;
         this.SubscriberName = SubscriberName;
@@ -41,7 +43,7 @@ public class Subscriber
 
 
     // Setters
-    public void setSubscriberID(int SubscriberID)
+    public void setSubscriberID(String SubscriberID)
     {   this.SubscriberID = SubscriberID;   }
 
     public void setSubscriberName(String SubscriberName)
@@ -56,7 +58,7 @@ public class Subscriber
     public void setEmail(String Email)
     {   this.Email = Email;   }
 
-    public void setDisplayPictureID(int DisplayPictureID)
+    public void setDisplayPictureID(String DisplayPictureID)
     {   this.DisplayPictureID = DisplayPictureID;   }
 
     public void setPhoneNumber(String PhoneNumber)
@@ -71,9 +73,15 @@ public class Subscriber
     public void setDoB(String DoB)
     {   this.DoB = DoB;   }
 
+    public void setDisplayPicture(String DisplayPicture)
+    {   this.DisplayPicture = DisplayPicture;   }
+
+    public void setCoverPhoto(String CoverPhoto)
+    {   this.CoverPhoto = CoverPhoto;   }
+
 
     // Getters
-    public int getSubscriberID()
+    public String getSubscriberID()
     {   return SubscriberID;    }
 
     public String getSubscriberName()
@@ -88,7 +96,7 @@ public class Subscriber
     public String getEmail()
     {   return Email;   }
 
-    public int getDisplayPictureID()
+    public String getDisplayPictureID()
     {   return DisplayPictureID;    }
 
     public String getPhoneNumber()
@@ -102,4 +110,10 @@ public class Subscriber
 
     public String getDoB()
     {   return DoB; }
+
+    public String getDisplayPicture()
+    {   return DisplayPicture; }
+
+    public String getCoverPhoto()
+    {   return CoverPhoto; }
 }

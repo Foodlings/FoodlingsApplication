@@ -8,11 +8,12 @@ public class Comment
 {
 
     // Fields
-    int CommentID;
-    int SubscriberID;
-    int PostID;
+    String CommentID;
+    String SubscriberID;
+    String PostID;
     String CommentText;
     String TimeStamp;
+    String SubscriberName;
 
 
     // Constructor-1
@@ -20,10 +21,11 @@ public class Comment
     {}
 
     // Constructor-2
-    public Comment(int commentID, int subscriberID, int postID, String commentText, String timeStamp)
+    public Comment(String commentID, String subscriberID, String SubscriberName, String postID, String commentText, String timeStamp)
     {
         this.CommentID = commentID;
         this.SubscriberID = subscriberID;
+        this.SubscriberName = SubscriberName;
         this.PostID = postID;
         this.CommentText = commentText;
         this.TimeStamp = timeStamp;
@@ -31,13 +33,13 @@ public class Comment
 
 
     // Setters
-    public void setCommentID(int CommentID)
+    public void setCommentID(String CommentID)
     {   this.CommentID = CommentID; }
 
-    public void setSubscriberID(int SubscriberID)
+    public void setSubscriberID(String SubscriberID)
     {   this.SubscriberID = SubscriberID;   }
 
-    public void setPostID(int PostID)
+    public void setPostID(String PostID)
     {   this.PostID = PostID;    }
 
     public void setCommentText(String CommentText)
@@ -45,6 +47,9 @@ public class Comment
 
     public void setTimeStamp(String TimeStamp)
     {   this.TimeStamp = TimeStamp;  }
+
+    public void setSubscriberName(String SubscriberName)
+    {   this.SubscriberName = SubscriberName;  }
 
 
     // Getters
@@ -54,12 +59,15 @@ public class Comment
     public String getCommentText()
     {   return CommentText; }
 
-    public int getPostID()
+    public String getPostID()
     {   return PostID;  }
 
-    public int getSubscriberID()
+    public String getSubscriberID()
     {   return SubscriberID;    }
 
-    public int getCommentID()
+    public String getCommentID()
     {   return CommentID;   }
+
+    public String getSubscriberName()
+    {   return SubscriberName;   }
 }

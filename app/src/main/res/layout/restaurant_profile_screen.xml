@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--tools:context="com.example.sheharyararif.foodlings.RestaurantProfile"-->
+<!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+
+<!--<ListView-->
+<!--android:id="@+id/Posts_ListView"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"/>-->
+
+<!--</RelativeLayout>-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.example.sheharyararif.foodlings.RestaurantProfile">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:layout_marginBottom="-20dp"
+            android:weightSum="4"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/CoverPhoto"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/post_image_placeholder"
+                    android:layout_marginBottom="100dp"></LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DisplayPictureLayout"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/border_display_picture"
+                    android:layout_alignBottom="@id/CoverPhoto"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="-55dp">
+
+
+                    <ImageView
+                        android:id="@+id/DisplayPictureImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/portfolio_image" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/AboutLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/about_layout_profile"
+                    android:layout_alignBottom="@id/CoverPhoto"
+                    android:layout_marginLeft="102dp"
+                    android:layout_marginBottom="-45dp"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight=".40"
+                        android:background="@drawable/right_border_only">
+
+                        <TextView
+                            android:id="@+id/AboutText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="12dp"
+                            android:text="About"
+                            android:textColor="@color/colorBlack"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight=".30"
+                        android:background="@drawable/right_border_only">
+
+                        <TextView
+                            android:id="@+id/LocationText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="12dp"
+                            android:text="Location"
+                            android:textColor="@color/colorBlack"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight=".30">
+
+                        <TextView
+                            android:id="@+id/TimingsText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="12dp"
+                            android:text="Timings"
+                            android:textColor="@color/colorBlack"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/RestaurantName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Restaurant Name"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginBottom="-32dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_alignBottom="@id/DisplayPictureLayout"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".10"
+            android:weightSum="1"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/MenuButton"
+                android:text="Menu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/profile_menu_buttons"
+                android:layout_weight=".25" />
+
+            <Button
+                android:id="@+id/GalleryButton"
+                android:text="Gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/profile_menu_buttons"
+                android:layout_weight=".25" />
+
+            <Button
+                android:id="@+id/ReviewsButton"
+                android:text="Reviews"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/profile_menu_buttons"
+                android:layout_weight=".25" />
+
+            <Button
+                android:id="@+id/FollowersButton"
+                android:text="Followers"
+                android:background="@drawable/profile_menu_buttons"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:layout_weight=".25" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/Posts_ListView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".55">
+
+
+        </ListView>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

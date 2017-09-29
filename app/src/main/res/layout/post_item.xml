@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingRight="12dp"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="false"
+        android:padding="7dp"
+        android:background="@drawable/post_borders">
+
+        <RelativeLayout
+            android:id="@+id/particulars"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingTop="7dp"
+            android:paddingLeft="5dp">
+
+            <ImageView
+                android:id="@+id/DisplayPicture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/user_placeholder" />
+
+            <TextView
+                android:id="@+id/NameLabel"
+                android:text="Sheharyar Arif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/DisplayPicture"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/TimeLabel"
+                android:text="6:00 pm"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/NameLabel"
+                android:layout_toRightOf="@id/DisplayPicture"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_alignParentBottom="false" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/DescriptionText"
+            android:text="Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@id/particulars"/>
+
+        <ImageView
+            android:id="@+id/DescriptionImage"
+            android:src="@drawable/post_image_placeholder"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/DescriptionText" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/DescriptionImage"
+            android:layout_marginTop="15dp">
+
+            <!--<ImageView-->
+                <!--android:id="@+id/CommentsImage"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:src="@drawable/comment_icon"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerVertical="true" />-->
+
+            <TextView
+                android:id="@+id/CommentLabel"
+                android:text="Comments: "
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/CommentCount"
+                android:text="20"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/CommentLabel"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="3dp"/>
+
+            <!--<ImageView-->
+                <!--android:id="@+id/LikesImage"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:src="@drawable/like_icon"-->
+                <!--android:layout_toRightOf="@+id/CommentCount"-->
+                <!--android:layout_marginLeft="15dp"/>-->
+
+
+            <TextView
+                android:id="@+id/LikeLabel"
+                android:text="Likes: "
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/CommentCount"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/LikesCount"
+                android:layout_toRightOf="@id/LikeLabel"
+                android:text="30"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="3dp"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

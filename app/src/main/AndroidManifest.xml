@@ -3,6 +3,8 @@
     package="com.example.sheharyararif.foodlings">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +23,13 @@
         <activity
             android:name=".HomeScreen"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".LoginScreen"
@@ -52,7 +56,10 @@
         <activity android:name=".CategoryScreen" />
         <activity android:name=".CommunityScreen" />
         <activity android:name=".SubscriberProfileScreen" />
-        <activity android:name=".RestaurantProfile"></activity>
+        <activity android:name=".RestaurantProfile" />
+        <activity android:name=".NewsFeed" />
+        <activity android:name=".WriteTextPost" />
+        <activity android:name=".CommentsScreen"></activity>
     </application>
 
 </manifest>

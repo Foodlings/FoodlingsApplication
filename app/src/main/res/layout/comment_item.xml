@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/DisplayPicture"
+        android:layout_height="60dp"
+        android:layout_width="60dp"
+        android:src="@drawable/logo"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/NameTextView"
+        android:text="Sheharyar Arif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/DisplayPicture"
+        android:layout_toEndOf="@+id/DisplayPicture"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <TextView
+
+        android:id="@+id/CommentText"
+        android:text="Best place to eat! The ambiance was perfect and the service was up to the mark. Highly recommended."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NameTextView"
+        android:layout_toRightOf="@+id/DisplayPicture"
+        android:layout_toEndOf="@+id/DisplayPicture"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/CommentTime"
+        android:text="Yesterday at 8:53 PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CommentText"
+        android:layout_toRightOf="@+id/DisplayPicture"
+        android:layout_toEndOf="@+id/DisplayPicture"
+        android:layout_marginTop="5dp" />
+</RelativeLayout>

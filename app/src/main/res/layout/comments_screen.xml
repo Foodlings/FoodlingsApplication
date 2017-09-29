@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
+    tools:context="com.example.sheharyararif.foodlings.CommentsScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.13"
+        android:background="@color/colorPurple">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Comments"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.87"
+        android:weightSum="1"
+        android:padding="1dp">
+
+        <ListView
+            android:id="@+id/Comments_ListView"
+            android:layout_width="match_parent"
+            android:layout_weight="0.7"
+            android:layout_height="0dp">
+
+        </ListView>
+
+        <EditText
+            android:id="@+id/CommentTextBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:layout_marginTop="50px"
+            android:hint="Write Comment"
+            android:padding="5dp"
+            android:background="@drawable/edit_text_shape">
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/ReplyButton"
+            android:text="Reply"
+            android:background="#000000"
+            android:textColor="#FFFFFF"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:layout_marginTop="20px"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+</LinearLayout>

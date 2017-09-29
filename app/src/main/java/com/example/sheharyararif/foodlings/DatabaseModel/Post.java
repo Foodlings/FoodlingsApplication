@@ -1,22 +1,26 @@
 package com.example.sheharyararif.foodlings.DatabaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by Sheharyar Arif on 2/21/2017.
  */
 
-public class Post
+@SuppressWarnings("serial")
+public class Post implements Serializable
 {
 
     // Fields
-    int PostID;
-    int SubscriberID;
-    int ImagePresence;
-    int ImageAlbumID;
-    int ReviewPresence;
-    int CheckinPresence;
+    String PostID;
+    String SubscriberID;
+    String ImagePresence;
+    String ImageAlbumID;
+    String ReviewPresence;
+    String CheckinPresence;
     String Privacy;
     String TimeStamp;
     String PostDescription;
+    String ImageString;
 
 
     // Constructor-1
@@ -24,7 +28,7 @@ public class Post
     {}
 
     // Constructor-2
-    public Post(int PostID, int SubscriberID, int ImagePresence, int ImageAlbumID, int ReviewPresence, int CheckinPresence, String Privacy, String TimeStamp, String PostDescription)
+    public Post(String PostID, String SubscriberID, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString)
     {
         this.PostID = PostID;
         this.SubscriberID = SubscriberID;
@@ -35,26 +39,27 @@ public class Post
         this.Privacy = Privacy;
         this.TimeStamp = TimeStamp;
         this.PostDescription = PostDescription;
+        this.ImageString = ImageString;
     }
 
 
     // Setters
-    public void setPostID(int PostID)
+    public void setPostID(String PostID)
     {   this.PostID = PostID;   }
 
-    public void setSubscriberID(int SubscriberID)
+    public void setSubscriberID(String SubscriberID)
     {   this.SubscriberID = SubscriberID;   }
 
-    public void setImagePresence(int ImagePresence)
+    public void setImagePresence(String ImagePresence)
     {   this.ImagePresence = ImagePresence;   }
 
-    public void setImageAlbumID(int ImageAlbumID)
+    public void setImageAlbumID(String ImageAlbumID)
     {   this.ImageAlbumID = ImageAlbumID;   }
 
-    public void setReviewPresence(int ReviewPresence)
+    public void setReviewPresence(String ReviewPresence)
     {   this.ReviewPresence = ReviewPresence;   }
 
-    public void setCheckinPresence(int CheckinPresence)
+    public void setCheckinPresence(String CheckinPresence)
     {   this.CheckinPresence = CheckinPresence;   }
 
     public void setPrivacy(String Privacy)
@@ -66,24 +71,27 @@ public class Post
     public void setPostDescription(String PostDescription)
     {   this.PostDescription = PostDescription;   }
 
+    public void setImageString(String ImageString)
+    {   this.ImageString = ImageString;   }
+
 
     // Getters
-    public int getPostID()
+    public String getPostID()
     {   return PostID; }
 
-    public int getSubscriberID()
+    public String getSubscriberID()
     {   return SubscriberID; }
 
-    public int getImagePresence()
+    public String getImagePresence()
     {   return ImagePresence;   }
 
-    public int getReviewPresence()
+    public String getReviewPresence()
     {   return ReviewPresence;   }
 
-    public int getCheckinPresence()
+    public String getCheckinPresence()
     {   return CheckinPresence;   }
 
-    public int getImageAlbumID()
+    public String getImageAlbumID()
     {   return ImageAlbumID; }
 
     public String getPrivacy()
@@ -94,4 +102,7 @@ public class Post
 
     public String getPostDescription()
     {   return PostDescription; }
+
+    public String getImageString()
+    {   return ImageString; }
 }

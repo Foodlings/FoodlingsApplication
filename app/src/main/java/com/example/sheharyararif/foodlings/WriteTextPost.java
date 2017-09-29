@@ -15,69 +15,118 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
+import android.widget.TextView;
+
+import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PictureUploadScreen extends AppCompatActivity {
+public class WriteTextPost extends AppCompatActivity
+{
+    EditText PostTextBox;
+    Button SubmitButton;
+    String PostDescription;
+    String encodedImage = "none";
+    Post postObject;
 
-    Button NextButton;
-    ImageButton ProfilePictureUpload, CoverPhotoUpload;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private String userChoosenTask, displayPicture = "none", coverPhoto = "none", buttonClicked = "none";
-    Subscriber subscriberObject;
+    private ImageButton PostImageButton;
+    private TextView ImageTextView;
+    private String userChoosenTask;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingswebapi.azurewebsites.net/api/FoodlingDatabase/createDisplayPicture";
+    private static String url = "http://foodlingswebapi.azurewebsites.net/api/FoodlingDatabase/createPost/";
+
+    JSONArray post = null;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.picture_upload_screen);
+        setContentView(R.layout.write_text_post_screen);
 
-        ProfilePictureUpload = (ImageButton) findViewById(R.id.ProfilePictureUpload);
-        ProfilePictureUpload.setOnClickListener(new View.OnClickListener() {
+        //Post TextBox
+        PostTextBox = (EditText) findViewById(R.id.PostTextBox);
+        
+        //Post Image
+        ImageTextView = (TextView) findViewById(R.id.ImageTextView);
+
+        //Post Image Button Event
+        PostImageButton = (ImageButton) findViewById(R.id.PostImageButton);
+        PostImageButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                buttonClicked = "Display Picture";
                 selectImage();
             }
         });
 
-        CoverPhotoUpload = (ImageButton) findViewById(R.id.CoverPhotoUpload);
-        CoverPhotoUpload.setOnClickListener(new View.OnClickListener() {
+        //Submit Button Event
+        SubmitButton = (Button)findViewById(R.id.SubmitButton);
+        SubmitButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                buttonClicked = "Cover Photo";
-                selectImage();
+                PostDescription = PostTextBox.getText().toString();
+                new JSONParse().execute();
             }
         });
+    }
 
-        //Login Button's Click Event
-        NextButton = (Button)findViewById(R.id.NextButton);
-        NextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            { startActivity(new Intent(PictureUploadScreen.this, DashboardScreen.class)); }
-        });
+    private class JSONParse extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(WriteTextPost.this);
+            pDialog.setMessage("Sending Data ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            postObject = new Post("2","1","0","1000","0","0","Privacy","TimeStamp",PostDescription,encodedImage);
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+        }
     }
 
     private void selectImage()
     {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(PictureUploadScreen.this);
-        builder.setTitle("Add Display Picture");
+        AlertDialog.Builder builder = new AlertDialog.Builder(WriteTextPost.this);
+        builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= Utility.checkPermission(PictureUploadScreen.this);
+                boolean result= Utility.checkPermission(WriteTextPost.this);
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask="Take Photo";
                     if(result)
@@ -153,16 +202,8 @@ public class PictureUploadScreen extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
-
-        if(buttonClicked.equals("Display Picture")){
-            displayPicture = Base64.encodeToString(b, Base64.DEFAULT);
-            coverPhoto = "none";
-        }
-        else{
-            coverPhoto = Base64.encodeToString(b, Base64.DEFAULT);
-            displayPicture = "none";
-        }
-        new JSONParse().execute();
+        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        ImageTextView.setText(encodedImage);
     }
 
     private void onCaptureImageResult(Intent data)
@@ -186,61 +227,10 @@ public class PictureUploadScreen extends AppCompatActivity {
         //ImageTextView.setImageBitmap(thumbnail);
 
         byte[] b = bytes.toByteArray();
-
-        if(buttonClicked.equals("Display Picture")){
-            displayPicture = Base64.encodeToString(b, Base64.DEFAULT);
-            coverPhoto = "none";
-        }
-        else{
-            coverPhoto = Base64.encodeToString(b, Base64.DEFAULT);
-            displayPicture = "none";
-        }
-        new JSONParse().execute();
-    }
-
-    private class JSONParse extends AsyncTask<String, String, JSONObject>
-    {
-        private ProgressDialog pDialog;
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(PictureUploadScreen.this);
-            if(buttonClicked.equals("Display Picture")){
-                pDialog.setMessage("Setting Display Picture");
-            }
-            else{
-                pDialog.setMessage("Setting Cover Photo");
-            }
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... args)
-        {
-            JSONParser jParser = new JSONParser();
-
-            subscriberObject = new Subscriber();
-            subscriberObject.setSubscriberID(GlobalData.SubscriberID);
-
-            if(!displayPicture.equals("none")){
-                subscriberObject.setDisplayPicture(displayPicture);
-            }
-            else if(!coverPhoto.equals("none")){
-                subscriberObject.setCoverPhoto(coverPhoto);
-            }
-
-            //Posting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, subscriberObject);
-            return json;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json)
-        {
-            pDialog.dismiss();
-        }
+        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        ImageTextView.setText(encodedImage);
     }
 }
+
+
+

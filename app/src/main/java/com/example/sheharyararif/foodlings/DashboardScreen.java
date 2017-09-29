@@ -11,7 +11,7 @@ import android.widget.ImageView;
 public class DashboardScreen extends AppCompatActivity {
 
     ImageButton SettingsButton;
-    Button PortalButton, ProfileButton;
+    Button PortalButton, ProfileButton, NewsFeedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,14 @@ public class DashboardScreen extends AppCompatActivity {
             @Override
             public void onClick(View v)
             { startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class)); }
+        });
+
+        //NewsFeed Button's Click Event
+        NewsFeedButton = (android.widget.Button)findViewById(R.id.NewsfeedButton);
+        NewsFeedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(DashboardScreen.this, NewsFeed.class)); }
         });
     }
 }
