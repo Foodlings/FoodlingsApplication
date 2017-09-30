@@ -71,15 +71,6 @@
                 android:src="@drawable/camera_black"
                 android:background="@null"/>
 
-            <TextView
-                android:id="@+id/ImageTextView"
-                android:text="Nothing"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_below="@+id/PostImageButton"
-                android:layout_marginTop="20dp"
-                />
-
         </RelativeLayout>
 
     </LinearLayout>

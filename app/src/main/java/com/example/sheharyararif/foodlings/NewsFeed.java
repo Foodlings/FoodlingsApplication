@@ -106,9 +106,9 @@ public class NewsFeed extends AppCompatActivity
         {
             super.onPreExecute();
             pDialog = new ProgressDialog(NewsFeed.this);
-            pDialog.setMessage("Loading Posts...");
+            pDialog.setMessage("Loading Posts");
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 

@@ -213,7 +213,7 @@ public class PictureUploadScreen extends AppCompatActivity {
                 pDialog.setMessage("Setting Cover Photo");
             }
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -227,9 +227,11 @@ public class PictureUploadScreen extends AppCompatActivity {
 
             if(!displayPicture.equals("none")){
                 subscriberObject.setDisplayPicture(displayPicture);
+                subscriberObject.setCoverPhoto("DisplayPicture");
             }
             else if(!coverPhoto.equals("none")){
                 subscriberObject.setCoverPhoto(coverPhoto);
+                subscriberObject.setDisplayPicture("CoverPhoto");
             }
 
             //Posting JSON from URL

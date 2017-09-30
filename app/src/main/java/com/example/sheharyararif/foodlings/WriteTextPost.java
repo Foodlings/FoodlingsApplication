@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
@@ -41,11 +42,10 @@ public class WriteTextPost extends AppCompatActivity
 
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private ImageButton PostImageButton;
-    private TextView ImageTextView;
     private String userChoosenTask;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingswebapi.azurewebsites.net/api/FoodlingDatabase/createPost/";
+    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createPost/";
 
     JSONArray post = null;
 
@@ -58,9 +58,6 @@ public class WriteTextPost extends AppCompatActivity
 
         //Post TextBox
         PostTextBox = (EditText) findViewById(R.id.PostTextBox);
-        
-        //Post Image
-        ImageTextView = (TextView) findViewById(R.id.ImageTextView);
 
         //Post Image Button Event
         PostImageButton = (ImageButton) findViewById(R.id.PostImageButton);
@@ -92,9 +89,9 @@ public class WriteTextPost extends AppCompatActivity
         {
             super.onPreExecute();
             pDialog = new ProgressDialog(WriteTextPost.this);
-            pDialog.setMessage("Sending Data ...");
+            pDialog.setMessage("Publishing Post");
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -103,7 +100,7 @@ public class WriteTextPost extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            postObject = new Post("2","1","0","1000","0","0","Privacy","TimeStamp",PostDescription,encodedImage);
+            postObject = new Post("4","1","0","0","0","0","Privacy","TimeStamp",PostDescription,encodedImage);
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null);
@@ -203,7 +200,6 @@ public class WriteTextPost extends AppCompatActivity
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-        ImageTextView.setText(encodedImage);
     }
 
     private void onCaptureImageResult(Intent data)
@@ -228,7 +224,6 @@ public class WriteTextPost extends AppCompatActivity
 
         byte[] b = bytes.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-        ImageTextView.setText(encodedImage);
     }
 }
 

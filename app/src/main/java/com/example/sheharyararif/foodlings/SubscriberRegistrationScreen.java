@@ -48,7 +48,7 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                url = url + SubscriberNameTextBox.getText().toString() + "&Password=" + PasswordTextBox.getText().toString() + "&Type=Subscriber&Email=" + EmailTextBox.getText().toString() + "&DisplayPictureID=0&PhoneNumber=Phone&Bio=" + AboutTextBox.getText().toString() + "&Gender=Gender&DoB=Date";
+                url = url + SubscriberNameTextBox.getText().toString() + "&Password=" + PasswordTextBox.getText().toString() + "&Type=Subscriber&Email=" + EmailTextBox.getText().toString() + "&PhoneNumber=Phone&Bio=" + AboutTextBox.getText().toString() + "&Gender=Gender&DoB=Date";
                 new JSONParse().execute();
             }
         });
@@ -86,7 +86,7 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             pDialog = new ProgressDialog(SubscriberRegistrationScreen.this);
             pDialog.setMessage("Registering Subscriber");
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -135,23 +135,18 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             {
                 Toast.makeText(SubscriberRegistrationScreen.this, "Subscriber Registered Successfully.",
                         Toast.LENGTH_LONG).show();
-                Toast.makeText(SubscriberRegistrationScreen.this, "Pehle",
-                        Toast.LENGTH_LONG).show();
+
                 // Getting JSON Array
                 dataArray = json.getJSONArray("Subscriber");
-                Toast.makeText(SubscriberRegistrationScreen.this, "Darmian",
-                        Toast.LENGTH_LONG).show();
                 JSONObject c = dataArray.getJSONObject(0);
 
-                //GlobalData.SubscriberID = c.getString("SubscriberID");
-                Toast.makeText(SubscriberRegistrationScreen.this, "Bad",
-                        Toast.LENGTH_LONG).show();
-                //startActivity(new Intent(SubscriberRegistrationScreen.this, PictureUploadScreen.class));
+                GlobalData.SubscriberID = c.getString("SubscriberID");
+                startActivity(new Intent(SubscriberRegistrationScreen.this, PictureUploadScreen.class));
             }
             catch (JSONException e)
             {
-                Toast.makeText(SubscriberRegistrationScreen.this, "Here",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(SubscriberRegistrationScreen.this, "Something went wrong..",
+                        Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }

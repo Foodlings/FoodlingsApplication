@@ -93,7 +93,7 @@ public class LoginScreen extends AppCompatActivity {
             pDialog = new ProgressDialog(LoginScreen.this);
             pDialog.setIndeterminate(false);
             pDialog.setMessage("Verifying Credentials");
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
