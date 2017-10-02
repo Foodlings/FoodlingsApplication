@@ -27,6 +27,7 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     //URL to get JSON Array
+    private static String emailValidationURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/validateEmail?SubscriberEmail=";
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createSubscriber?SubscriberName=";
     private static String getSubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
 
@@ -49,7 +50,8 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             public void onClick(View v)
             {
                 url = url + SubscriberNameTextBox.getText().toString() + "&Password=" + PasswordTextBox.getText().toString() + "&Type=Subscriber&Email=" + EmailTextBox.getText().toString() + "&PhoneNumber=Phone&Bio=" + AboutTextBox.getText().toString() + "&Gender=Gender&DoB=Date";
-                new JSONParse().execute();
+                emailValidationURL = emailValidationURL + EmailTextBox.getText().toString();
+                new JSONEmailValidator().execute();
             }
         });
 
@@ -77,7 +79,7 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
         return height;
     }
 
-    private class JSONParse extends AsyncTask<String, String, JSONObject>
+    private class JSONEmailValidator extends AsyncTask<String, String, JSONObject>
     {
         @Override
         protected void onPreExecute()
@@ -88,6 +90,57 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(emailValidationURL, "GET", null, null);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            emailValidationURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/validateEmail?SubscriberEmail=";
+            try
+            {
+                // Getting JSON Array
+                dataArray = json.getJSONArray("Subscriber");
+                JSONObject c = dataArray.getJSONObject(0);
+
+                String emailValidator = c.getString("Email");
+
+                if(emailValidator.equals("Available"))
+                {
+                    new JSONParse().execute();
+                }
+                else
+                {
+                    pDialog.dismiss();
+                    Toast.makeText(SubscriberRegistrationScreen.this, "Email Address already registered.",
+                            Toast.LENGTH_LONG).show();
+                    url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createSubscriber?SubscriberName=";
+                }
+            }
+            catch (JSONException e)
+            {
+                pDialog.dismiss();
+                url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createSubscriber?SubscriberName=";
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class JSONParse extends AsyncTask<String, String, JSONObject>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
         }
 
         @Override
