@@ -34,7 +34,7 @@ public class PictureUploadScreen extends AppCompatActivity {
     Subscriber subscriberObject;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingswebapi.azurewebsites.net/api/FoodlingDatabase/createDisplayPicture";
+    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createDisplayPicture";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,10 +157,12 @@ public class PictureUploadScreen extends AppCompatActivity {
         if(buttonClicked.equals("Display Picture")){
             displayPicture = Base64.encodeToString(b, Base64.DEFAULT);
             coverPhoto = "none";
+            ProfilePictureUpload.setImageBitmap(bm);
         }
         else{
             coverPhoto = Base64.encodeToString(b, Base64.DEFAULT);
             displayPicture = "none";
+            CoverPhotoUpload.setImageBitmap(bm);
         }
         new JSONParse().execute();
     }
@@ -190,10 +192,12 @@ public class PictureUploadScreen extends AppCompatActivity {
         if(buttonClicked.equals("Display Picture")){
             displayPicture = Base64.encodeToString(b, Base64.DEFAULT);
             coverPhoto = "none";
+            ProfilePictureUpload.setImageBitmap(thumbnail);
         }
         else{
             coverPhoto = Base64.encodeToString(b, Base64.DEFAULT);
             displayPicture = "none";
+            CoverPhotoUpload.setImageBitmap(thumbnail);
         }
         new JSONParse().execute();
     }
@@ -242,6 +246,9 @@ public class PictureUploadScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject json)
         {
+            displayPicture = "none";
+            coverPhoto = "none";
+
             pDialog.dismiss();
         }
     }

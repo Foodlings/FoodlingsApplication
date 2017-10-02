@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 
 import java.io.Serializable;
@@ -26,7 +27,7 @@ public class CustomAdapter extends ArrayAdapter
 
     private ArrayList<Post> dataSet;
     Context mContext;
-    TextView SubscriberName, Timestamp, PostDescription;
+    TextView SubscriberName, Timestamp, PostDescription, CommentCount, LikesCount;
     ImageView DescriptionImage;
 
     public CustomAdapter(ArrayList<Post> data, Context context)
@@ -60,10 +61,14 @@ public class CustomAdapter extends ArrayAdapter
         Timestamp = (TextView) row.findViewById(R.id.TimeLabel);
         PostDescription = (TextView) row.findViewById(R.id.DescriptionText);
         DescriptionImage = (ImageView) row.findViewById(R.id.DescriptionImage);
+        CommentCount = (TextView) row.findViewById(R.id.CommentCount);
+        LikesCount = (TextView) row.findViewById(R.id.LikesCount);
 
-        SubscriberName.setText(dataSet.get(i).getPostID());
+        SubscriberName.setText(dataSet.get(i).getSubscriberName());
         Timestamp.setText(dataSet.get(i).getTimeStamp());
         PostDescription.setText(dataSet.get(i).getPostDescription());
+        CommentCount.setText(dataSet.get(i).getCommentsCount());
+        LikesCount.setText(dataSet.get(i).getLikesCount());
 
         byte[] decodedString = Base64.decode(dataSet.get(i).getImageString(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

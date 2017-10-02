@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class WriteTextPost extends AppCompatActivity
     String PostDescription;
     String encodedImage = "none";
     Post postObject;
+    ImageView PostImage;
 
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private ImageButton PostImageButton;
@@ -68,6 +70,8 @@ public class WriteTextPost extends AppCompatActivity
                 selectImage();
             }
         });
+
+        PostImage = (ImageView) findViewById(R.id.PostImage);
 
         //Submit Button Event
         SubmitButton = (Button)findViewById(R.id.SubmitButton);
@@ -100,7 +104,7 @@ public class WriteTextPost extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            postObject = new Post("4","1","0","0","0","0","Privacy","TimeStamp",PostDescription,encodedImage);
+            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public","TimeStamp",PostDescription,encodedImage, "0", "0");
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null);
@@ -111,6 +115,9 @@ public class WriteTextPost extends AppCompatActivity
         protected void onPostExecute(JSONObject json)
         {
             pDialog.dismiss();
+            Toast.makeText(WriteTextPost.this, "Post Published",
+                    Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
@@ -200,6 +207,7 @@ public class WriteTextPost extends AppCompatActivity
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        PostImage.setImageBitmap(bm);
     }
 
     private void onCaptureImageResult(Intent data)
@@ -224,6 +232,7 @@ public class WriteTextPost extends AppCompatActivity
 
         byte[] b = bytes.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        PostImage.setImageBitmap(thumbnail);
     }
 }
 

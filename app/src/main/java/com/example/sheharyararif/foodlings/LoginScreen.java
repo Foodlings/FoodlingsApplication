@@ -92,7 +92,7 @@ public class LoginScreen extends AppCompatActivity {
         { super.onPreExecute();
             pDialog = new ProgressDialog(LoginScreen.this);
             pDialog.setIndeterminate(false);
-            pDialog.setMessage("Verifying Credentials");
+            pDialog.setMessage("Signing in");
             pDialog.setCancelable(false);
             pDialog.show();
         }
@@ -102,9 +102,8 @@ public class LoginScreen extends AppCompatActivity {
         {
             JSONParser jsonParser = new JSONParser();
 
-            Post post = null;
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", post, null);
+            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", null, null);
             return json;
         }
 
@@ -125,6 +124,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 if((EmailTextBox.getText().toString().equals(EmailAddress))&&(PasswordTextBox.getText().toString().equals(Password)))
                 {
+                    GlobalData.SubscriberID = c.getString("SubscriberID");
                     startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                 }
                 else

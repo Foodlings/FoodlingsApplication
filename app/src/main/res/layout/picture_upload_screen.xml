@@ -32,7 +32,8 @@
                 android:id="@+id/ProfilePictureUpload"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@android:drawable/ic_input_add"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_input_add"
                 android:background="@drawable/border"/>
 
             <TextView
@@ -59,7 +60,8 @@
                 android:id="@+id/CoverPhotoUpload"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@android:drawable/ic_input_add"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_input_add"
                 android:background="@drawable/border"/>
 
             <TextView

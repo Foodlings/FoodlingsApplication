@@ -40,6 +40,7 @@ public class NewsFeed extends AppCompatActivity
     //JSON Node Names
     private static final String TAG_PostID = "PostID";
     private static final String TAG_SubscriberID = "SubscriberID";
+    private static final String TAG_SubscriberName = "SubscriberName";
     private static final String TAG_ImagePresence = "ImagePresence";
     private static final String TAG_ImageAlbumID = "ImageAlbumID";
     private static final String TAG_ReviewPresence = "ReviewPresence";
@@ -48,6 +49,8 @@ public class NewsFeed extends AppCompatActivity
     private static final String TAG_TimeStamp = "TimeStamp";
     private static final String TAG_PostDescription = "PostDescription";
     private static final String TAG_ImageString = "ImageString";
+    private static final String TAG_CommentsCount = "CommentsCount";
+    private static final String TAG_LikesCount = "LikesCount";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +65,31 @@ public class NewsFeed extends AppCompatActivity
         //Post Icon
         PostIcon = (ImageView) findViewById(R.id.PostIcon);
         PostIcon.setOnClickListener(clickListener);
+
+        //Initializing Posts Array
+        post = new ArrayList<>();
+
+        //Initializing Serialzied Intent
+        serializedIntent = new Intent(this, CommentsScreen.class);
+
+        //Posts List Event Listener
+        PostsList = (ListView) findViewById(R.id.Posts_ListView1);
+        PostsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long id) {
+                //postData = new Post("1","1","1","1","1","1","Public","Time","Descripto","Image Stringer");
+                postData = (Post) PostsList.getItemAtPosition(position);
+                serializedIntent.putExtra("PostData", postData);
+                startActivity(serializedIntent);
+            }
+        });
+
+        new JSONParse().execute();
+    }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
 
         //Initializing Posts Array
         post = new ArrayList<>();
@@ -138,16 +166,19 @@ public class NewsFeed extends AppCompatActivity
 
                     String PostID = fetchedData.getString(TAG_PostID);
                     String SubscriberID = fetchedData.getString(TAG_SubscriberID);
+                    String SubscriberName = fetchedData.getString(TAG_SubscriberName);
                     String ImagePresence = fetchedData.getString(TAG_ImagePresence);
-                    String ImageAlbumID = "1000";
+                    String ImageAlbumID = fetchedData.getString(TAG_ImageAlbumID);
                     String ReviewPresence = fetchedData.getString(TAG_ReviewPresence);
                     String CheckinPresence = fetchedData.getString(TAG_CheckinPresence);
                     String Privacy = fetchedData.getString(TAG_Privacy);
                     String Timestamp = fetchedData.getString(TAG_TimeStamp);
                     String PostDescription = fetchedData.getString(TAG_PostDescription);
                     String ImageString = fetchedData.getString(TAG_ImageString);
+                    String CommentsCount = fetchedData.getString(TAG_CommentsCount);
+                    String LikesCount = fetchedData.getString(TAG_LikesCount);
 
-                    post.add(new Post(PostID, SubscriberID, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString));
+                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount));
                 }
 
                 //Adapter

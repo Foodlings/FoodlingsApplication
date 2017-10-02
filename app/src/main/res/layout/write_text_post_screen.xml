@@ -71,6 +71,16 @@
                 android:src="@drawable/camera_black"
                 android:background="@null"/>
 
+            <ImageView
+                android:id="@+id/PostImage"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_below="@+id/PostImageButton"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/post_image_placeholder"/>
+
         </RelativeLayout>
 
     </LinearLayout>

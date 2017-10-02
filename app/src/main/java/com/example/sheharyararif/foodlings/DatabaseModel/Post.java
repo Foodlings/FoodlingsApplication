@@ -13,6 +13,7 @@ public class Post implements Serializable
     // Fields
     String PostID;
     String SubscriberID;
+    String SubscriberName;
     String ImagePresence;
     String ImageAlbumID;
     String ReviewPresence;
@@ -21,6 +22,8 @@ public class Post implements Serializable
     String TimeStamp;
     String PostDescription;
     String ImageString;
+    String CommentsCount;
+    String LikesCount;
 
 
     // Constructor-1
@@ -28,10 +31,11 @@ public class Post implements Serializable
     {}
 
     // Constructor-2
-    public Post(String PostID, String SubscriberID, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString)
+    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount)
     {
         this.PostID = PostID;
         this.SubscriberID = SubscriberID;
+        this.SubscriberName = SubscriberName;
         this.ImagePresence = ImagePresence;
         this.ImageAlbumID = ImageAlbumID;
         this.ReviewPresence = ReviewPresence;
@@ -40,6 +44,8 @@ public class Post implements Serializable
         this.TimeStamp = TimeStamp;
         this.PostDescription = PostDescription;
         this.ImageString = ImageString;
+        this.CommentsCount = CommentsCount;
+        this.LikesCount = LikesCount;
     }
 
 
@@ -74,6 +80,15 @@ public class Post implements Serializable
     public void setImageString(String ImageString)
     {   this.ImageString = ImageString;   }
 
+    public void setSubscriberName(String SubscriberName)
+    {   this.SubscriberName = SubscriberName;   }
+
+    public void setCommentsCount(String CommentsCount)
+    {   this.CommentsCount = CommentsCount;   }
+
+    public void setLikesCount(String LikesCount)
+    {   this.LikesCount = LikesCount;   }
+
 
     // Getters
     public String getPostID()
@@ -105,4 +120,13 @@ public class Post implements Serializable
 
     public String getImageString()
     {   return ImageString; }
+
+    public String getSubscriberName()
+    {   return SubscriberName; }
+
+    public String getCommentsCount()
+    {   return CommentsCount; }
+
+    public String getLikesCount()
+    {   return LikesCount; }
 }
