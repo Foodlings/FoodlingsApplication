@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--tools:context="com.example.sheharyararif.foodlings.RestaurantProfile"-->
-<!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-
-<!--<ListView-->
-<!--android:id="@+id/Posts_ListView"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"/>-->
-
-<!--</RelativeLayout>-->
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,10 +28,18 @@
                 <LinearLayout
                     android:id="@+id/CoverPhoto"
                     android:orientation="horizontal"
+                    android:layout_height="360dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/post_image_placeholder"
-                    android:layout_marginBottom="100dp" />
+                    android:layout_marginBottom="100dp">
+
+                    <ImageView
+                        android:id="@+id/CoverPhotoImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/post_image_placeholder" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/DisplayPictureLayout"
@@ -56,6 +48,7 @@
                     android:background="@drawable/border_display_picture"
                     android:layout_alignBottom="@id/CoverPhoto"
                     android:layout_marginLeft="2dp"
+                    android:padding="3dp"
                     android:layout_marginBottom="-55dp">
 
 
@@ -64,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/portfolio_image" />
+                        app:srcCompat="@drawable/user_placeholder" />
 
                 </LinearLayout>
 
@@ -148,7 +141,7 @@
                     android:text="Restaurant Name"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginBottom="-32dp"
+                    android:layout_marginBottom="-30dp"
                     android:layout_marginLeft="2dp"
                     android:layout_alignBottom="@id/DisplayPictureLayout"
                     />
