@@ -77,6 +77,9 @@ public class JSONParser
                     nameValuePair.add(new BasicNameValuePair("DoB", subscriber.getDoB()));
                     nameValuePair.add(new BasicNameValuePair("DisplayPicture", subscriber.getDisplayPicture()));
                     nameValuePair.add(new BasicNameValuePair("CoverPhoto", subscriber.getCoverPhoto()));
+                    nameValuePair.add(new BasicNameValuePair("Address", subscriber.getAddress()));
+                    nameValuePair.add(new BasicNameValuePair("Timing", subscriber.getTiming()));
+                    nameValuePair.add(new BasicNameValuePair("Category", subscriber.getCategory()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 } else if (comment != null) {
                     List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
