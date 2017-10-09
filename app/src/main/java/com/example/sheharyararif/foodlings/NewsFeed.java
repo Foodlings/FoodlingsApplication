@@ -37,7 +37,7 @@ public class NewsFeed extends AppCompatActivity
     String postID;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts";
+    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=";
     private static String likeURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createLike";
     private static String likeDeleteURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/deleteLike?SubscriberID=";
 
@@ -56,6 +56,7 @@ public class NewsFeed extends AppCompatActivity
     private static final String TAG_CommentsCount = "CommentsCount";
     private static final String TAG_LikesCount = "LikesCount";
     private static final String TAG_DisplayPicture = "DisplayPicture";
+    private static final String TAG_CurrentUsersLike = "CurrentUsersLike";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -147,9 +148,9 @@ public class NewsFeed extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            Post post = null;
+            url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + GlobalData.SubscriberID + "&Scope=NewsFeed";
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", post, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null);
             return json;
         }
 
@@ -180,8 +181,9 @@ public class NewsFeed extends AppCompatActivity
                     String CommentsCount = fetchedData.getString(TAG_CommentsCount);
                     String LikesCount = fetchedData.getString(TAG_LikesCount);
                     String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
+                    String CurrentUsersLike = fetchedData.getString(TAG_CurrentUsersLike);
 
-                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture));
+                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike));
                 }
                 //Adapter
                 adapter = new CustomAdapter(post, NewsFeed.this);
@@ -263,5 +265,4 @@ public class NewsFeed extends AppCompatActivity
             pDialog.dismiss();
         }
     }
-
 }

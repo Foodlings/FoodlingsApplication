@@ -85,7 +85,6 @@ public class LoginScreen extends AppCompatActivity {
         return height;
     }
 
-
     private class JSONParse extends AsyncTask<String, String, JSONObject>
     {
         private ProgressDialog pDialog;
@@ -127,6 +126,7 @@ public class LoginScreen extends AppCompatActivity {
                 if((EmailTextBox.getText().toString().equals(EmailAddress))&&(PasswordTextBox.getText().toString().equals(Password)))
                 {
                     GlobalData.SubscriberID = c.getString("SubscriberID");
+                    GlobalData.Type = c.getString("Type");
                     startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                 }
                 else

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class DashboardScreen extends AppCompatActivity {
 
@@ -42,7 +43,7 @@ public class DashboardScreen extends AppCompatActivity {
             {
                 if(GlobalData.Type.equals("Subscriber"))
                 {
-                    startActivity(new Intent(DashboardScreen.this, SubscriberProfileScreen.class));
+                    startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class));
                 }
                 else
                 {

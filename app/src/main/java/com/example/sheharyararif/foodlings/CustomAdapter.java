@@ -17,8 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sheharyararif.foodlings.DatabaseModel.Like;
-import com.example.sheharyararif.foodlings.DatabaseModel.Post;
+import com.example.sheharyararif.foodlings.DatabaseModel.*;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -135,7 +134,7 @@ public class CustomAdapter extends ArrayAdapter<Post> {
         DescriptionText.setText(post.getPostDescription());
         CommentCount.setText(post.getCommentsCount());
         LikesCount.setText(post.getLikesCount());
-        if (dataSet.get(i).getLikeCheck()) {
+        if (dataSet.get(i).getCurrentUsersLike().equals("Yes")) {
             holder.LikesImage.setImageResource(R.drawable.like_red_icon);
         } else {
             holder.LikesImage.setImageResource(R.drawable.like_icon);
@@ -166,25 +165,33 @@ public class CustomAdapter extends ArrayAdapter<Post> {
 
         LikesImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (mContext instanceof NewsFeed) {
+            public void onClick(View v)
+            {
+
                     int likesCount;
 
-                    if (dataSet.get(i).getLikeCheck()) {
-                        dataSet.get(i).setLikeCheck(false);
+                    if (dataSet.get(i).getCurrentUsersLike().equals("Yes")) {
+                        dataSet.get(i).setCurrentUsersLike("No");
                         holder.LikesImage.setImageResource(R.drawable.like_icon);
                         likesCount = Integer.parseInt(holder.LikesCount.getText().toString()) - 1;
-                        ((NewsFeed)mContext).LikeDelete(dataSet.get(i).getPostID());
+                        if(mContext instanceof NewsFeed){
+                            ((NewsFeed)mContext).LikeDelete(dataSet.get(i).getPostID());
+                        } else if(mContext instanceof RestaurantProfile){
+                            ((RestaurantProfile)mContext).LikeDelete(dataSet.get(i).getPostID());
+                        }
                     } else {
-                        dataSet.get(i).setLikeCheck(true);
+                        dataSet.get(i).setCurrentUsersLike("Yes");
                         holder.LikesImage.setImageResource(R.drawable.like_red_icon);
                         likesCount = Integer.parseInt(holder.LikesCount.getText().toString()) + 1;
-                        ((NewsFeed)mContext).LikePost(dataSet.get(i).getPostID());
+                        if(mContext instanceof NewsFeed){
+                            ((NewsFeed)mContext).LikePost(dataSet.get(i).getPostID());
+                        } else if(mContext instanceof RestaurantProfile){
+                            ((RestaurantProfile)mContext).LikePost(dataSet.get(i).getPostID());
+                        }
                     }
 
                     holder.LikesCount.setText(Integer.toString(likesCount));
                     dataSet.get(i).setLikesCount(Integer.toString(likesCount));
-                }
             }
         });
 

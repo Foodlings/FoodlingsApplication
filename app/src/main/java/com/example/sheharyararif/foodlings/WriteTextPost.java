@@ -110,7 +110,7 @@ public class WriteTextPost extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,PostDescription,encodedImage, "0", "0", "");
+            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,PostDescription,encodedImage, "0", "0", "", "");
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null, null, null);

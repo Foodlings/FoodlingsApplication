@@ -27,6 +27,7 @@ public class Post implements Serializable
     String ImageString;
     String CommentsCount;
     String LikesCount;
+    String CurrentUsersLike;
     boolean LikeCheck;
 
 
@@ -35,7 +36,7 @@ public class Post implements Serializable
     {}
 
     // Constructor-2
-    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount, String DisplayPicture)
+    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount, String DisplayPicture, String CurrentUsersLike)
     {
         this.PostID = PostID;
         this.SubscriberID = SubscriberID;
@@ -51,6 +52,7 @@ public class Post implements Serializable
         this.CommentsCount = CommentsCount;
         this.LikesCount = LikesCount;
         this.DisplayPicture = DisplayPicture;
+        this.CurrentUsersLike = CurrentUsersLike;
     }
 
 
@@ -100,6 +102,9 @@ public class Post implements Serializable
     public void setLikeCheck(boolean LikeCheck)
     {   this.LikeCheck = LikeCheck;   }
 
+    public void setCurrentUsersLike(String CurrentUsersLike)
+    {   this.CurrentUsersLike = CurrentUsersLike;   }
+
 
     // Getters
     public String getPostID()
@@ -146,4 +151,7 @@ public class Post implements Serializable
 
     public boolean getLikeCheck()
     {   return LikeCheck; }
+
+    public String getCurrentUsersLike()
+    {   return CurrentUsersLike; }
 }
