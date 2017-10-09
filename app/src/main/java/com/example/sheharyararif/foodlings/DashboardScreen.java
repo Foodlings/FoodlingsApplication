@@ -39,7 +39,16 @@ public class DashboardScreen extends AppCompatActivity {
         ProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            { startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class)); }
+            {
+                if(GlobalData.Type.equals("Subscriber"))
+                {
+                    startActivity(new Intent(DashboardScreen.this, SubscriberProfileScreen.class));
+                }
+                else
+                {
+                    startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class));
+                }
+            }
         });
 
         //NewsFeed Button's Click Event

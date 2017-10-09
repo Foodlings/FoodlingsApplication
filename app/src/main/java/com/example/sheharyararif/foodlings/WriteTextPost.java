@@ -3,42 +3,46 @@ package com.example.sheharyararif.foodlings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class WriteTextPost extends AppCompatActivity
 {
     EditText PostTextBox;
     Button SubmitButton;
-    String PostDescription;
-    String encodedImage = "none";
+    String PostDescription, encodedImage = "none", TimeStamp;
     Post postObject;
     ImageView PostImage;
 
@@ -60,6 +64,7 @@ public class WriteTextPost extends AppCompatActivity
 
         //Post TextBox
         PostTextBox = (EditText) findViewById(R.id.PostTextBox);
+        PostTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         //Post Image Button Event
         PostImageButton = (ImageButton) findViewById(R.id.PostImageButton);
@@ -80,6 +85,7 @@ public class WriteTextPost extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 PostDescription = PostTextBox.getText().toString();
+                TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
                 new JSONParse().execute();
             }
         });
@@ -104,10 +110,10 @@ public class WriteTextPost extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public","TimeStamp",PostDescription,encodedImage, "0", "0");
+            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,PostDescription,encodedImage, "0", "0", "");
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null, null, null);
             return json;
         }
 
@@ -201,12 +207,11 @@ public class WriteTextPost extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-        //ImageTextView.setImageBitmap(bm);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        byte[] myByteArray = baos.toByteArray();
+        encodedImage = Base64.encodeToString(myByteArray, Base64.DEFAULT);
         PostImage.setImageBitmap(bm);
     }
 
@@ -235,6 +240,8 @@ public class WriteTextPost extends AppCompatActivity
         PostImage.setImageBitmap(thumbnail);
     }
 }
+
+
 
 
 

@@ -20,6 +20,9 @@ public class Subscriber
     String DoB;
     String DisplayPicture;
     String CoverPhoto;
+    String Address;
+    String Timing;
+    String Category;
 
 
     // Constructor-1
@@ -79,6 +82,15 @@ public class Subscriber
     public void setCoverPhoto(String CoverPhoto)
     {   this.CoverPhoto = CoverPhoto;   }
 
+    public void setAddress(String Address)
+    {   this.Address = Address;   }
+
+    public void setTiming(String Timing)
+    {   this.Timing = Timing;   }
+
+    public void setCategory(String Category)
+    {   this.Category = Category;   }
+
 
     // Getters
     public String getSubscriberID()
@@ -116,4 +128,13 @@ public class Subscriber
 
     public String getCoverPhoto()
     {   return CoverPhoto; }
+
+    public String getAddress()
+    {   return Address; }
+
+    public String getTiming()
+    {   return Timing; }
+
+    public String getCategory()
+    {   return Category; }
 }

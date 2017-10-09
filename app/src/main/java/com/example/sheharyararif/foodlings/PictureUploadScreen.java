@@ -16,6 +16,8 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 import org.json.JSONObject;
@@ -239,17 +241,16 @@ public class PictureUploadScreen extends AppCompatActivity {
             }
 
             //Posting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, subscriberObject);
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, subscriberObject, null, null);
             return json;
         }
 
         @Override
         protected void onPostExecute(JSONObject json)
         {
+            pDialog.dismiss();
             displayPicture = "none";
             coverPhoto = "none";
-
-            pDialog.dismiss();
         }
     }
 }

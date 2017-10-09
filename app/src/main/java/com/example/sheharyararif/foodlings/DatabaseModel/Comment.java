@@ -14,6 +14,7 @@ public class Comment
     String CommentText;
     String TimeStamp;
     String SubscriberName;
+    String DisplayPicture;
 
 
     // Constructor-1
@@ -21,14 +22,15 @@ public class Comment
     {}
 
     // Constructor-2
-    public Comment(String commentID, String subscriberID, String SubscriberName, String postID, String commentText, String timeStamp)
+    public Comment(String CommentID, String subscriberID, String SubscriberName, String postID, String commentText, String timeStamp, String DisplayPicture)
     {
-        this.CommentID = commentID;
+        this.CommentID = CommentID;
         this.SubscriberID = subscriberID;
         this.SubscriberName = SubscriberName;
         this.PostID = postID;
         this.CommentText = commentText;
         this.TimeStamp = timeStamp;
+        this.DisplayPicture = DisplayPicture;
     }
 
 
@@ -51,6 +53,9 @@ public class Comment
     public void setSubscriberName(String SubscriberName)
     {   this.SubscriberName = SubscriberName;  }
 
+    public void setDisplayPicture(String DisplayPicture)
+    {   this.DisplayPicture = DisplayPicture;  }
+
 
     // Getters
     public String getTimeStamp()
@@ -70,4 +75,7 @@ public class Comment
 
     public String getSubscriberName()
     {   return SubscriberName;   }
+
+    public String getDisplayPicture()
+    {   return DisplayPicture;   }
 }

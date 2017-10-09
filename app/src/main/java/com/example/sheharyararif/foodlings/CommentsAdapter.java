@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.sheharyararif.foodlings.DatabaseModel.Comment;
 import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,7 @@ public class CommentsAdapter extends ArrayAdapter
     TextView SubscriberName, CommentText, TimeStamp;
     JSONArray jsonArray = null;
     String Name;
+    ImageView DisplayPicture;
 
     //URL to get JSON Array
     private static String subscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=";
@@ -69,6 +71,7 @@ public class CommentsAdapter extends ArrayAdapter
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.comment_item, null, false);
 
+        DisplayPicture = (ImageView) row.findViewById(R.id.DisplayPicture);
         SubscriberName = (TextView) row.findViewById(R.id.NameTextView);
         CommentText = (TextView) row.findViewById(R.id.CommentText);
         TimeStamp = (TextView) row.findViewById(R.id.CommentTime);
@@ -76,6 +79,11 @@ public class CommentsAdapter extends ArrayAdapter
         SubscriberName.setText(dataSet.get(i).getSubscriberName());
         CommentText.setText(dataSet.get(i).getCommentText());
         TimeStamp.setText(dataSet.get(i).getTimeStamp());
+
+        if (!dataSet.get(i).getDisplayPicture().equals("none"))
+        {
+            Picasso.with(mContext).load(dataSet.get(i).getDisplayPicture()).into(DisplayPicture);
+        }
 
         return row;
     }

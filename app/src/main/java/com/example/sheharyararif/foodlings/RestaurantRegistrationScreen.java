@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 
 import org.json.JSONArray;
@@ -22,10 +23,11 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
     EditText RestaurantNameTextBox, EmailTextBox, PasswordTextBox, LocationTextBox, AboutTextBox;
     JSONArray dataArray = null;
     private ProgressDialog pDialog;
+    Subscriber restaurantProfile;
 
     //URL to get JSON Array
     private static String emailValidationURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/validateEmail?SubscriberEmail=";
-    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createRestaurant?SubscriberName=";
+    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createRestaurant";
     private static String getSubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
 
     @Override
@@ -45,7 +47,18 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                url = url + RestaurantNameTextBox.getText().toString() + "&Password=" + PasswordTextBox.getText().toString() + "&Type=Restaurant&Email=" + EmailTextBox.getText().toString() + "&PhoneNumber=Phone&Bio=" + AboutTextBox.getText().toString() + "&Address=" + LocationTextBox.getText().toString() + "&Timing=Time&Category=Category";
+
+                restaurantProfile = new Subscriber();
+                restaurantProfile.setSubscriberName(RestaurantNameTextBox.getText().toString());
+                restaurantProfile.setPassword(PasswordTextBox.getText().toString());
+                restaurantProfile.setType("Restaurant");
+                restaurantProfile.setEmail(EmailTextBox.getText().toString());
+                restaurantProfile.setPhoneNumber("Phone");
+                restaurantProfile.setBio(AboutTextBox.getText().toString());
+                restaurantProfile.setAddress(LocationTextBox.getText().toString());
+                restaurantProfile.setTiming("Time");
+                restaurantProfile.setCategory("Category");
+
                 emailValidationURL = emailValidationURL + EmailTextBox.getText().toString();
                 new JSONEmailValidator().execute();
             }
@@ -71,7 +84,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(emailValidationURL, "GET", null, null);
+            JSONObject json = jParser.getJSONFromUrl(emailValidationURL, "GET", null, null, null, null);
             return json;
         }
 
@@ -96,7 +109,6 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
                     pDialog.dismiss();
                     Toast.makeText(RestaurantRegistrationScreen.this, "Email Address already registered.",
                             Toast.LENGTH_LONG).show();
-                    url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createRestaurant?SubscriberName=";
                 }
             }
             catch (JSONException e)
@@ -122,7 +134,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, restaurantProfile, null, null);
             return json;
         }
 
@@ -148,7 +160,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(getSubscriberURL, "GET", null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(getSubscriberURL, "GET", null, null, null, null);
             return json;
         }
 
@@ -167,6 +179,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
                 JSONObject c = dataArray.getJSONObject(0);
 
                 GlobalData.SubscriberID = c.getString("SubscriberID");
+                GlobalData.Type = c.getString("Type");
                 startActivity(new Intent(RestaurantRegistrationScreen.this, PictureUploadScreen.class));
             }
             catch (JSONException e)

@@ -8,9 +8,9 @@ public class Like
 {
 
     //Fields
-    int LikeID;
-    int SubscriberID;
-    int PostID;
+    String LikeID;
+    String SubscriberID;
+    String PostID;
     String TimeStamp;
 
 
@@ -19,7 +19,7 @@ public class Like
     {}
 
     //Constructor-2
-    public Like(int LikeID, int SubscriberID, int PostID, String TimeStamp)
+    public Like(String LikeID, String SubscriberID, String PostID, String TimeStamp)
     {
         this.LikeID = LikeID;
         this.SubscriberID = SubscriberID;
@@ -29,27 +29,27 @@ public class Like
 
 
     // Setters
-    public void setLikeID(int LikeID)
+    public void setLikeID(String LikeID)
     {  this.LikeID = LikeID;  }
 
-    public void setSubscriberID(int SubscriberID)
+    public void setSubscriberID(String SubscriberID)
     {  this.SubscriberID = SubscriberID;  }
 
-    public void setPostID(int PostID)
+    public void setPostID(String PostID)
     { this. PostID = PostID;  }
 
     public void setTimeStamp(String TimeStamp)
-    {  TimeStamp = TimeStamp;  }
+    {  this.TimeStamp = TimeStamp;  }
 
 
     // Getters
-    public int getLikeID()
+    public String getLikeID()
     {  return LikeID;  }
 
-    public int getSubscriberID()
+    public String getSubscriberID()
     {  return SubscriberID;  }
 
-    public int getPostID()
+    public String getPostID()
     {  return PostID;  }
 
     public String getTimeStamp()

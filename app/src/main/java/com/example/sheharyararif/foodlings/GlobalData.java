@@ -6,4 +6,5 @@ package com.example.sheharyararif.foodlings;
 
 public class GlobalData {
     public static String SubscriberID;
+    public static String Type;
 }

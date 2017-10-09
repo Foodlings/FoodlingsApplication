@@ -95,7 +95,9 @@
         android:padding="10dp">
 
         <ListView
-            android:id="@+id/Posts_ListView1"
+            android:id="@+id/Posts_ListView"
+            android:divider="@null"
+            android:dividerHeight="0dip"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

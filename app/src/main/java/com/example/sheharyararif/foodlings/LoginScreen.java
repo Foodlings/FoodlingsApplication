@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -56,7 +57,9 @@ public class LoginScreen extends AppCompatActivity {
 
         //TextBox initialization
         EmailTextBox = (EditText) findViewById(R.id.EmailTextBox);
+        EmailTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         PasswordTextBox = (EditText) findViewById(R.id.PasswordTextBox);
+        PasswordTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber/?SubscriberName=EmailNone&SubscriberEmail=";
 
         //Signin Button's Click Event
@@ -66,7 +69,6 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v)
             {
                 url = url + EmailTextBox.getText();
-                //startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                 new JSONParse().execute();
             }
         });
@@ -103,7 +105,7 @@ public class LoginScreen extends AppCompatActivity {
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", null, null, null, null);
             return json;
         }
 

@@ -24,6 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.sheharyararif.foodlings.DatabaseModel.Comment;
+import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 
@@ -38,7 +41,7 @@ public class JSONParser
     public JSONParser()
     { }
 
-    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber)
+    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber, Comment comment, Like like)
     {
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -74,6 +77,20 @@ public class JSONParser
                     nameValuePair.add(new BasicNameValuePair("DoB", subscriber.getDoB()));
                     nameValuePair.add(new BasicNameValuePair("DisplayPicture", subscriber.getDisplayPicture()));
                     nameValuePair.add(new BasicNameValuePair("CoverPhoto", subscriber.getCoverPhoto()));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                } else if (comment != null) {
+                    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+                    nameValuePair.add(new BasicNameValuePair("SubscriberID", comment.getSubscriberID()));
+                    nameValuePair.add(new BasicNameValuePair("PostID", comment.getPostID()));
+                    nameValuePair.add(new BasicNameValuePair("CommentText", comment.getCommentText()));
+                    nameValuePair.add(new BasicNameValuePair("Timestamp", comment.getTimeStamp()));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                } else if (like != null) {
+                    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+                    nameValuePair.add(new BasicNameValuePair("LikeID", like.getLikeID()));
+                    nameValuePair.add(new BasicNameValuePair("SubscriberID", like.getSubscriberID()));
+                    nameValuePair.add(new BasicNameValuePair("PostID", like.getPostID()));
+                    nameValuePair.add(new BasicNameValuePair("Timestamp", like.getTimeStamp()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 }
 

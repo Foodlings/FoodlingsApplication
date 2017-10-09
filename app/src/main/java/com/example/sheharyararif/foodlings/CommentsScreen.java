@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CommentsScreen extends AppCompatActivity {
 
@@ -33,13 +37,13 @@ public class CommentsScreen extends AppCompatActivity {
     ListView CommentsListView;
     EditText CommentTextBox;
     Button ReplyButton;
-    String CommentText, postID;
+    String CommentText, postID, TimeStamp;
     Comment commentObject;
     Intent serializedIntent;
 
     //URL to get JSON Array
     private static String commentsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllComments?PostID=";
-    private static String writeCommentURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createComment?SubscriberID=1&PostID=";
+    private static String writeCommentURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createComment";
 
     private static final String TAG_CommentID = "CommentID";
     private static final String TAG_SubscriberID = "SubscriberID";
@@ -47,6 +51,7 @@ public class CommentsScreen extends AppCompatActivity {
     private static final String TAG_PostID = "PostID";
     private static final String TAG_CommentText = "CommentText";
     private static final String TAG_TimeStamp = "TimeStamp";
+    private static final String TAG_DisplayPicture = "DisplayPicture";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +69,13 @@ public class CommentsScreen extends AppCompatActivity {
         commentsList = new ArrayList<>();
 
         CommentTextBox = (EditText) findViewById(R.id.CommentTextBox);
+        CommentTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         ReplyButton = (Button)findViewById(R.id.ReplyButton);
         ReplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CommentText = CommentTextBox.getText().toString();
-                writeCommentURL = writeCommentURL + CommentText + "&Timestamp=Time";
+                TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
                 new JSONParseComment().execute();
             }
         });
@@ -77,8 +83,7 @@ public class CommentsScreen extends AppCompatActivity {
         postID = postData.getPostID();
         commentsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllComments?PostID=";
         commentsURL = commentsURL + postID;
-        writeCommentURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createComment?SubscriberID=1&PostID=";
-        writeCommentURL = writeCommentURL + postID + "&CommentText=";
+        writeCommentURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createComment";
         new JSONParse().execute();
     }
 
@@ -102,7 +107,7 @@ public class CommentsScreen extends AppCompatActivity {
 
             Comment comment = null;
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(commentsURL, "GET", null, null);
+            JSONObject json = jParser.getJSONFromUrl(commentsURL, "GET", null, null, null, null);
             return json;
         }
 
@@ -122,8 +127,9 @@ public class CommentsScreen extends AppCompatActivity {
                     String PostID = fetchedData.getString(TAG_PostID);
                     String CommentText = fetchedData.getString(TAG_CommentText);
                     String Timestamp = fetchedData.getString(TAG_TimeStamp);
+                    String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
 
-                    commentsList.add(new Comment(CommentID, SubscriberID, SubscriberName, PostID, CommentText, Timestamp));
+                    commentsList.add(new Comment(CommentID, SubscriberID, SubscriberName, PostID, CommentText, Timestamp, DisplayPicture));
                 }
 
                 //Adapter
@@ -156,8 +162,10 @@ public class CommentsScreen extends AppCompatActivity {
         {
             JSONParser jParser = new JSONParser();
 
+            commentObject = new Comment("IDplaceholder", GlobalData.SubscriberID, "NamePlaceholder", postID, CommentText, TimeStamp, "DPplaceholder");
+
             // Posting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(writeCommentURL, "POST", null, null);
+            JSONObject json = jParser.getJSONFromUrl(writeCommentURL, "POST", null, null, commentObject, null);
             return json;
         }
 

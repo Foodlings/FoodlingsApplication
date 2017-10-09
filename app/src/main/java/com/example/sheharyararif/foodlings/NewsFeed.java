@@ -3,6 +3,7 @@ package com.example.sheharyararif.foodlings;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 
@@ -21,7 +23,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewsFeed extends AppCompatActivity
 {
@@ -29,13 +33,13 @@ public class NewsFeed extends AppCompatActivity
     CustomAdapter adapter;
     ListView PostsList;
     ArrayList<Post> post;
-    Post postData;
-    Intent serializedIntent;
     JSONArray user = null;
-
+    String postID;
 
     //URL to get JSON Array
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts";
+    private static String likeURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createLike";
+    private static String likeDeleteURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/deleteLike?SubscriberID=";
 
     //JSON Node Names
     private static final String TAG_PostID = "PostID";
@@ -51,6 +55,7 @@ public class NewsFeed extends AppCompatActivity
     private static final String TAG_ImageString = "ImageString";
     private static final String TAG_CommentsCount = "CommentsCount";
     private static final String TAG_LikesCount = "LikesCount";
+    private static final String TAG_DisplayPicture = "DisplayPicture";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,19 +74,8 @@ public class NewsFeed extends AppCompatActivity
         //Initializing Posts Array
         post = new ArrayList<>();
 
-        //Initializing Serialzied Intent
-        serializedIntent = new Intent(this, CommentsScreen.class);
-
         //Posts List Event Listener
-        PostsList = (ListView) findViewById(R.id.Posts_ListView1);
-        PostsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long id) {
-                //postData = new Post("1","1","1","1","1","1","Public","Time","Descripto","Image Stringer");
-                postData = (Post) PostsList.getItemAtPosition(position);
-                serializedIntent.putExtra("PostData", postData);
-                startActivity(serializedIntent);
-            }
-        });
+        PostsList = (ListView) findViewById(R.id.Posts_ListView);
 
         new JSONParse().execute();
     }
@@ -94,19 +88,8 @@ public class NewsFeed extends AppCompatActivity
         //Initializing Posts Array
         post = new ArrayList<>();
 
-        //Initializing Serialzied Intent
-        serializedIntent = new Intent(this, CommentsScreen.class);
-
         //Posts List Event Listener
-        PostsList = (ListView) findViewById(R.id.Posts_ListView1);
-        PostsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long id) {
-                //postData = new Post("1","1","1","1","1","1","Public","Time","Descripto","Image Stringer");
-                postData = (Post) PostsList.getItemAtPosition(position);
-                serializedIntent.putExtra("PostData", postData);
-                startActivity(serializedIntent);
-            }
-        });
+        PostsList = (ListView) findViewById(R.id.Posts_ListView);
 
         new JSONParse().execute();
     }
@@ -117,7 +100,14 @@ public class NewsFeed extends AppCompatActivity
         {
             if (v.equals(ProfileIcon))
             {
-                startActivity(new Intent(NewsFeed.this, RestaurantProfile.class));
+                if(GlobalData.Type.equals("Subscriber"))
+                {
+                    startActivity(new Intent(NewsFeed.this, SubscriberProfileScreen.class));
+                }
+                else
+                {
+                    startActivity(new Intent(NewsFeed.this, RestaurantProfile.class));
+                }
             }
             else if (v.equals(PostIcon))
             {
@@ -125,6 +115,18 @@ public class NewsFeed extends AppCompatActivity
             }
         }
     };
+
+    public void LikePost(String postID)
+    {
+        this.postID = postID;
+        new JSONParseLikePost().execute();
+    }
+
+    public void LikeDelete(String postID)
+    {
+        likeDeleteURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/deleteLike?SubscriberID=" + GlobalData.SubscriberID + "&PostID=" + postID;
+        new JSONParseLikeDelete().execute();
+    }
 
     private class JSONParse extends AsyncTask<String, String, JSONObject>
     {
@@ -147,7 +149,7 @@ public class NewsFeed extends AppCompatActivity
 
             Post post = null;
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", post, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", post, null, null, null);
             return json;
         }
 
@@ -177,10 +179,10 @@ public class NewsFeed extends AppCompatActivity
                     String ImageString = fetchedData.getString(TAG_ImageString);
                     String CommentsCount = fetchedData.getString(TAG_CommentsCount);
                     String LikesCount = fetchedData.getString(TAG_LikesCount);
+                    String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
 
-                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount));
+                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture));
                 }
-
                 //Adapter
                 adapter = new CustomAdapter(post, NewsFeed.this);
 
@@ -194,4 +196,72 @@ public class NewsFeed extends AppCompatActivity
 
         }
     }
+
+    private class JSONParseLikePost extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(NewsFeed.this);
+            pDialog.setMessage("Liking Post");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            Like like = new Like();
+            like.setSubscriberID(GlobalData.SubscriberID);
+            like.setPostID(postID);
+            like.setTimeStamp(new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString());
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+        }
+    }
+
+    private class JSONParseLikeDelete extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(NewsFeed.this);
+            pDialog.setMessage("Unliking Post");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+        }
+    }
+
 }

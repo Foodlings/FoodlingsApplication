@@ -45,6 +45,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:padding="5dp"
+                android:inputType="textCapSentences"
                 android:background="@drawable/edit_text_shape">
                 <requestFocus />
             </EditText>
@@ -78,8 +79,7 @@
                 android:layout_below="@+id/PostImageButton"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/post_image_placeholder"/>
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 

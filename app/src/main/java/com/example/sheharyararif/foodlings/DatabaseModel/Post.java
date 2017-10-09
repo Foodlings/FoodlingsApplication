@@ -1,5 +1,7 @@
 package com.example.sheharyararif.foodlings.DatabaseModel;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ public class Post implements Serializable
     String PostID;
     String SubscriberID;
     String SubscriberName;
+    String DisplayPicture;
     String ImagePresence;
     String ImageAlbumID;
     String ReviewPresence;
@@ -24,6 +27,7 @@ public class Post implements Serializable
     String ImageString;
     String CommentsCount;
     String LikesCount;
+    boolean LikeCheck;
 
 
     // Constructor-1
@@ -31,7 +35,7 @@ public class Post implements Serializable
     {}
 
     // Constructor-2
-    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount)
+    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount, String DisplayPicture)
     {
         this.PostID = PostID;
         this.SubscriberID = SubscriberID;
@@ -46,6 +50,7 @@ public class Post implements Serializable
         this.ImageString = ImageString;
         this.CommentsCount = CommentsCount;
         this.LikesCount = LikesCount;
+        this.DisplayPicture = DisplayPicture;
     }
 
 
@@ -89,6 +94,12 @@ public class Post implements Serializable
     public void setLikesCount(String LikesCount)
     {   this.LikesCount = LikesCount;   }
 
+    public void setDisplayPicture(String DisplayPicture)
+    {   this.DisplayPicture = DisplayPicture;   }
+
+    public void setLikeCheck(boolean LikeCheck)
+    {   this.LikeCheck = LikeCheck;   }
+
 
     // Getters
     public String getPostID()
@@ -129,4 +140,10 @@ public class Post implements Serializable
 
     public String getLikesCount()
     {   return LikesCount; }
+
+    public String getDisplayPicture()
+    {   return DisplayPicture; }
+
+    public boolean getLikeCheck()
+    {   return LikeCheck; }
 }
