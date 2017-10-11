@@ -1,10 +1,12 @@
 package com.example.sheharyararif.foodlings.DatabaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by Sheharyar Arif on 10/10/2017.
  */
 
-public class SearchResult
+public class SearchResult implements Serializable
 {
     String DisplayPicture, Name, Email;
 

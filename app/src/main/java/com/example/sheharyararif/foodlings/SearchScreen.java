@@ -3,6 +3,8 @@ package com.example.sheharyararif.foodlings;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
@@ -36,5 +38,13 @@ public class SearchScreen extends AppCompatActivity
             SearchListView.setAdapter(adapter);
         }
 
+//        SearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+//
+//                SearchResult searchResult = (SearchResult) adapter.getSelectedItem(); //
+//
+//            }
+//        }
     }
 }
