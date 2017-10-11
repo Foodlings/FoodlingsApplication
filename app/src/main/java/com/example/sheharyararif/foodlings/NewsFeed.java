@@ -150,7 +150,7 @@ public class NewsFeed extends AppCompatActivity
 
             url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + GlobalData.SubscriberID + "&Scope=NewsFeed";
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null);
             return json;
         }
 
@@ -224,7 +224,7 @@ public class NewsFeed extends AppCompatActivity
             like.setTimeStamp(new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString());
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like);
+            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null);
             return json;
         }
 
@@ -255,7 +255,7 @@ public class NewsFeed extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null);
             return json;
         }
 

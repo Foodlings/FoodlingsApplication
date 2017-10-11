@@ -95,7 +95,7 @@ public class CommentsScreen extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(CommentsScreen.this);
-            pDialog.setMessage("Loading Comments...");
+            pDialog.setMessage("Loading Comments");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -107,7 +107,7 @@ public class CommentsScreen extends AppCompatActivity {
 
             Comment comment = null;
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(commentsURL, "GET", null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(commentsURL, "GET", null, null, null, null, null);
             return json;
         }
 
@@ -165,7 +165,7 @@ public class CommentsScreen extends AppCompatActivity {
             commentObject = new Comment("IDplaceholder", GlobalData.SubscriberID, "NamePlaceholder", postID, CommentText, TimeStamp, "DPplaceholder");
 
             // Posting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(writeCommentURL, "POST", null, null, commentObject, null);
+            JSONObject json = jParser.getJSONFromUrl(writeCommentURL, "POST", null, null, commentObject, null, null);
             return json;
         }
 

@@ -59,7 +59,8 @@
         <activity android:name=".RestaurantProfile" />
         <activity android:name=".NewsFeed" />
         <activity android:name=".WriteTextPost" />
-        <activity android:name=".CommentsScreen"></activity>
+        <activity android:name=".CommentsScreen" />
+        <activity android:name=".SearchScreen"></activity>
     </application>
 
 </manifest>

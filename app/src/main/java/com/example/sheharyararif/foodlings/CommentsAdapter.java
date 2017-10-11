@@ -33,16 +33,12 @@ import java.util.ArrayList;
 
 public class CommentsAdapter extends ArrayAdapter
 {
-
     private ArrayList<Comment> dataSet;
     Context mContext;
     TextView SubscriberName, CommentText, TimeStamp;
     JSONArray jsonArray = null;
     String Name;
     ImageView DisplayPicture;
-
-    //URL to get JSON Array
-    private static String subscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=";
 
     public CommentsAdapter(ArrayList<Comment> data, Context context)
     {
