@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
 
@@ -38,13 +39,14 @@ public class SearchScreen extends AppCompatActivity
             SearchListView.setAdapter(adapter);
         }
 
-//        SearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-//
-//                SearchResult searchResult = (SearchResult) adapter.getSelectedItem(); //
-//
-//            }
-//        }
+        SearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+
+                SearchResult searchResult = (SearchResult) adapter.getSelectedItem();
+                Toast.makeText(SearchScreen.this, searchResult.getEmail(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
