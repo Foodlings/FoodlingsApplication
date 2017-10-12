@@ -8,17 +8,25 @@ import java.io.Serializable;
 
 public class SearchResult implements Serializable
 {
-    String DisplayPicture, Name, Email;
+    String DisplayPicture, Name, Email, Type, SubscriberID;
 
-    public SearchResult(String Name, String Email, String DisplayPicture)
+    public SearchResult(String SubscriberID, String Name, String Type, String Email, String DisplayPicture)
     {
+        this.SubscriberID = SubscriberID;
         this.Name = Name;
+        this.Type = Type;
         this.Email = Email;
         this.DisplayPicture = DisplayPicture;
     }
 
+    public void setSubscriberID(String SubscriberID)
+    {   this.SubscriberID = SubscriberID;   }
+
     public void setName(String Name)
     {   this.Name = Name;   }
+
+    public void setType(String Type)
+    {   this.Type = Type;   }
 
     public void setEmail(String Email)
     {   this.Email = Email;   }
@@ -26,8 +34,14 @@ public class SearchResult implements Serializable
     public void setDisplayPicture(String DisplayPicture)
     {   this.DisplayPicture = DisplayPicture;   }
 
+    public String getSubscriberID()
+    {   return SubscriberID; }
+
     public String getName()
     {   return Name; }
+
+    public String getType()
+    {   return Type; }
 
     public String getEmail()
     {   return Email; }

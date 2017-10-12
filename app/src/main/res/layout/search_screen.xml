@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+    android:windowSoftInputMode="adjustPan|adjustResize"
     android:orientation="vertical"
     tools:context="com.example.sheharyararif.foodlings.SearchScreen">
 
@@ -65,10 +66,20 @@
                 android:layout_marginRight="10dp"/>
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/ResultLabel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.055"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="0.65"
             android:padding="10dp">
 
             <ListView

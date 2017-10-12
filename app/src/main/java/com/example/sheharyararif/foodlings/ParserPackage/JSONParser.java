@@ -98,7 +98,9 @@ public class JSONParser
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 } else if(searchResult != null){
                     List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+                    nameValuePair.add(new BasicNameValuePair("SubscriberID", searchResult.getSubscriberID()));
                     nameValuePair.add(new BasicNameValuePair("Name", searchResult.getName()));
+                    nameValuePair.add(new BasicNameValuePair("Type", searchResult.getType()));
                     nameValuePair.add(new BasicNameValuePair("Email", searchResult.getEmail()));
                     nameValuePair.add(new BasicNameValuePair("DisplayPicture", searchResult.getDisplayPicture()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));

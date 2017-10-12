@@ -13,22 +13,22 @@ public class Post implements Serializable
 {
 
     // Fields
-    String PostID;
-    String SubscriberID;
-    String SubscriberName;
-    String DisplayPicture;
-    String ImagePresence;
-    String ImageAlbumID;
-    String ReviewPresence;
-    String CheckinPresence;
-    String Privacy;
-    String TimeStamp;
-    String PostDescription;
-    String ImageString;
-    String CommentsCount;
-    String LikesCount;
-    String CurrentUsersLike;
-    boolean LikeCheck;
+    public String PostID;
+    public String SubscriberID;
+    public String SubscriberName;
+    public String DisplayPicture;
+    public String ImagePresence;
+    public String ImageAlbumID;
+    public String ReviewPresence;
+    public String CheckinPresence;
+    public String Privacy;
+    public String TimeStamp;
+    public String PostDescription;
+    public String ImageString;
+    public String CommentsCount;
+    public String LikesCount;
+    public String CurrentUsersLike;
+    public boolean LikeCheck;
 
 
     // Constructor-1

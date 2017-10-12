@@ -47,6 +47,10 @@ public class SearchAdapter extends ArrayAdapter
         return 0;
     }
 
+    public void clearData() {
+        dataSet.clear();
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {

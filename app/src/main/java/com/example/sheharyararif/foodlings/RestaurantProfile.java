@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
+import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
+import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +43,11 @@ public class RestaurantProfile extends AppCompatActivity
     ImageView DisplayPictureImageView, CoverPhotoImageView;
     private ProgressDialog pDialog;
     TextView RestaurantName , AboutText, LocationText, TimingsText;
-    String postID;
+    String postID, SubscriberID;
+    Intent intent;
+    Bundle args;
+    SearchResult searchResult;
+    Button ReviewsButton;
 
     //URL to get JSON Array
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=";
@@ -82,10 +89,35 @@ public class RestaurantProfile extends AppCompatActivity
         LocationText = (TextView) findViewById(R.id.LocationText);
         TimingsText = (TextView) findViewById(R.id.TimingsText);
 
-        //Posts List Event Listener
         PostsList = (ListView) findViewById(R.id.Posts_ListView);
 
-        SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+        try
+        {
+            intent = getIntent();
+            args = intent.getBundleExtra("BUNDLE");
+            searchResult = (SearchResult) args.getSerializable("searchResult");
+            SubscriberID = "";
+        }
+        catch (Exception ex)
+        { }
+
+
+        if(searchResult != null)
+        {
+            SubscriberID = searchResult.getSubscriberID();
+            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
+        }
+        else
+        {
+            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+        }
+
+        ReviewsButton = (Button) findViewById(R.id.ReviewsButton);
+        ReviewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            { startActivity(new Intent(RestaurantProfile.this, ReviewsScreen.class)); }
+        });
 
         new JSONParseSubscriber().execute();
     }
@@ -101,7 +133,14 @@ public class RestaurantProfile extends AppCompatActivity
         //Posts List Event Listener
         PostsList = (ListView) findViewById(R.id.Posts_ListView);
 
-        SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+        if(!SubscriberID.equals(""))
+        {
+            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
+        }
+        else
+        {
+            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+        }
 
         new JSONParseSubscriber().execute();
     }
@@ -132,7 +171,15 @@ public class RestaurantProfile extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + GlobalData.SubscriberID + "&Scope=Profile";
+            if(searchResult != null)
+            {
+                SubscriberID = searchResult.getSubscriberID();
+                url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + SubscriberID + "&Scope=Profile";
+            }
+            else
+            {
+                url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + GlobalData.SubscriberID + "&Scope=Profile";
+            }
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null);
@@ -211,7 +258,6 @@ public class RestaurantProfile extends AppCompatActivity
         @Override
         protected void onPostExecute(JSONObject json)
         {
-            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=";
             try
             {
                 // Getting JSON Array

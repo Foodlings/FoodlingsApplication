@@ -209,7 +209,7 @@ public class WriteTextPost extends AppCompatActivity
         }
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] myByteArray = baos.toByteArray();
         encodedImage = Base64.encodeToString(myByteArray, Base64.DEFAULT);
         PostImage.setImageBitmap(bm);
@@ -219,7 +219,7 @@ public class WriteTextPost extends AppCompatActivity
     {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;

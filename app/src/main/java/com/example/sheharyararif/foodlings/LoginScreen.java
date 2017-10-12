@@ -25,6 +25,9 @@ import org.json.JSONObject;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginScreen extends AppCompatActivity {
 
     Button SigninButton;
@@ -69,10 +72,19 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v)
             {
                 url = url + EmailTextBox.getText();
+
+//                if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+//                {
+//                    EmailTextBox.setError("Invalid Email");
+//                }
+//                else
+//                {
+//                    new JSONParse().execute();
+//                }
+
                 new JSONParse().execute();
             }
         });
-
     }
 
     private static int getScreenHeight(Context context)

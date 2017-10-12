@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:windowSoftInputMode="adjustPan|adjustResize"
+    android:orientation="vertical"
+    tools:context="com.example.sheharyararif.foodlings.ReviewsScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.13"
+        android:background="@color/colorPurple">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Reviews"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.77"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ListView
+                android:id="@+id/Reviews_ListView"
+                android:divider="@null"
+                android:dividerHeight="0dip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/AddReviewButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Add Review"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="17dp"
+            android:background="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
