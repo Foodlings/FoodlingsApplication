@@ -61,7 +61,10 @@
         <activity android:name=".WriteTextPost" />
         <activity android:name=".CommentsScreen" />
         <activity android:name=".SearchScreen" />
-        <activity android:name=".ReviewsScreen"></activity>
+        <activity android:name=".ReviewsScreen" />
+        <activity android:name=".MenuScreen" />
+        <activity android:name=".AddReviewScreen" />
+        <activity android:name=".ReviewDetailScreen"></activity>
     </application>
 
 </manifest>

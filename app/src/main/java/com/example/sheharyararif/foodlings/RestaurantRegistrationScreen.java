@@ -84,7 +84,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(emailValidationURL, "GET", null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(emailValidationURL, "GET", null, null, null, null, null, null);
             return json;
         }
 
@@ -134,7 +134,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, restaurantProfile, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, restaurantProfile, null, null, null, null);
             return json;
         }
 
@@ -160,7 +160,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(getSubscriberURL, "GET", null, null, null, null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(getSubscriberURL, "GET", null, null, null, null, null, null);
             return json;
         }
 

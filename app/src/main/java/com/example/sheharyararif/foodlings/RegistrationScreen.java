@@ -32,6 +32,5 @@ public class RegistrationScreen extends AppCompatActivity {
             public void onClick(View v)
             { startActivity(new Intent(RegistrationScreen.this, SubscriberRegistrationScreen.class)); }
         });
-
     }
 }

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:windowSoftInputMode="adjustPan|adjustResize"
+    android:orientation="vertical"
+    tools:context="com.example.sheharyararif.foodlings.AddReviewScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.13"
+        android:background="@color/colorPurple">
+
+        <TextView
+            android:id="@+id/TitleLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Review By"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.88"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Taste"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.38"/>
+
+            <RatingBar
+                android:id="@+id/TasteRating"
+                android:layout_gravity="start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.63"
+                android:scaleY="0.6"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_weight="0.72" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Ambience"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.38"/>
+
+            <RatingBar
+                android:id="@+id/AmbienceRating"
+                android:isIndicator="true"
+                android:layout_gravity="start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.63"
+                android:scaleY="0.6"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_weight="0.72" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Service"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.38"/>
+
+            <RatingBar
+                android:id="@+id/ServiceRating"
+                android:isIndicator="true"
+                android:layout_gravity="start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.63"
+                android:scaleY="0.6"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_weight="0.72" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Order Time"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.38"/>
+
+            <RatingBar
+                android:id="@+id/OrderTimeRating"
+                android:isIndicator="true"
+                android:layout_gravity="start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.63"
+                android:scaleY="0.6"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_weight="0.72" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Price"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.38"/>
+
+            <RatingBar
+                android:id="@+id/PriceRating"
+                android:isIndicator="true"
+                android:layout_gravity="start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.63"
+                android:scaleY="0.6"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_weight="0.72" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:weightSum="1"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="Comments"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_weight="0.3"/>
+
+            <TextView
+                android:id="@+id/ReviewCommentTextBox"
+                android:layout_width="match_parent"
+                android:text=""
+                android:textSize="20sp"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                android:padding="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/edit_text_shape">
+                <requestFocus />
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class RestaurantProfile extends AppCompatActivity
     Intent intent;
     Bundle args;
     SearchResult searchResult;
-    Button ReviewsButton;
+    Button ReviewsButton, MenuButton;
 
     //URL to get JSON Array
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=";
@@ -71,6 +72,7 @@ public class RestaurantProfile extends AppCompatActivity
     private static final String TAG_LikesCount = "LikesCount";
     private static final String TAG_DisplayPicture = "DisplayPicture";
     private static final String TAG_CurrentUsersLike = "CurrentUsersLike";
+    private static final String TAG_MenuPresence = "MenuPresence";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -116,34 +118,60 @@ public class RestaurantProfile extends AppCompatActivity
         ReviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            { startActivity(new Intent(RestaurantProfile.this, ReviewsScreen.class)); }
+            {
+                intent = new Intent(RestaurantProfile.this, ReviewsScreen.class);
+                args = new Bundle();
+                args.putSerializable("searchResult", (Serializable) searchResult);
+                intent.putExtra("BUNDLE", args);
+                startActivity(intent);
+            }
+        });
+
+        MenuButton = (Button) findViewById(R.id.MenuButton);
+        MenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(searchResult != null)
+                {
+                    intent = new Intent(RestaurantProfile.this, MenuScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(RestaurantProfile.this, MenuScreen.class));
+                }
+            }
         });
 
         new JSONParseSubscriber().execute();
     }
 
-    @Override
-    public void onRestart()
-    {
-        super.onRestart();
-
-        //Initializing Posts Array
-        post = new ArrayList<>();
-
-        //Posts List Event Listener
-        PostsList = (ListView) findViewById(R.id.Posts_ListView);
-
-        if(!SubscriberID.equals(""))
-        {
-            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
-        }
-        else
-        {
-            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
-        }
-
-        new JSONParseSubscriber().execute();
-    }
+//    @Override
+//    public void onRestart()
+//    {
+//        super.onRestart();
+//
+//        //Initializing Posts Array
+//        post = new ArrayList<>();
+//
+//        //Posts List Event Listener
+//        PostsList = (ListView) findViewById(R.id.Posts_ListView);
+//
+//        if(!SubscriberID.equals(""))
+//        {
+//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
+//        }
+//        else
+//        {
+//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+//        }
+//
+//        new JSONParseSubscriber().execute();
+//    }
 
     public void LikePost(String postID)
     {
@@ -182,7 +210,7 @@ public class RestaurantProfile extends AppCompatActivity
             }
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
             return json;
         }
 
@@ -214,8 +242,9 @@ public class RestaurantProfile extends AppCompatActivity
                     String LikesCount = fetchedData.getString(TAG_LikesCount);
                     String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
                     String CurrentUsersLike = fetchedData.getString(TAG_CurrentUsersLike);
+                    String MenuPresence = fetchedData.getString(TAG_MenuPresence);
 
-                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike));
+                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike, MenuPresence));
                 }
 
                 //Adapter
@@ -251,7 +280,7 @@ public class RestaurantProfile extends AppCompatActivity
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(SubscriberURL, "GET", null, null, null, null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(SubscriberURL, "GET", null, null, null, null, null, null);
             return json;
         }
 
@@ -323,7 +352,7 @@ public class RestaurantProfile extends AppCompatActivity
             like.setTimeStamp(new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString());
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null);
+            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null, null);
             return json;
         }
 
@@ -354,7 +383,7 @@ public class RestaurantProfile extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null, null);
             return json;
         }
 

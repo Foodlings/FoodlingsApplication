@@ -29,6 +29,7 @@ public class Post implements Serializable
     public String LikesCount;
     public String CurrentUsersLike;
     public boolean LikeCheck;
+    public String MenuPresence;
 
 
     // Constructor-1
@@ -36,7 +37,7 @@ public class Post implements Serializable
     {}
 
     // Constructor-2
-    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount, String DisplayPicture, String CurrentUsersLike)
+    public Post(String PostID, String SubscriberID, String SubscriberName, String ImagePresence, String ImageAlbumID, String ReviewPresence, String CheckinPresence, String Privacy, String TimeStamp, String PostDescription, String ImageString, String CommentsCount, String LikesCount, String DisplayPicture, String CurrentUsersLike, String MenuPresence)
     {
         this.PostID = PostID;
         this.SubscriberID = SubscriberID;
@@ -53,6 +54,7 @@ public class Post implements Serializable
         this.LikesCount = LikesCount;
         this.DisplayPicture = DisplayPicture;
         this.CurrentUsersLike = CurrentUsersLike;
+        this.MenuPresence = MenuPresence;
     }
 
 
@@ -105,6 +107,9 @@ public class Post implements Serializable
     public void setCurrentUsersLike(String CurrentUsersLike)
     {   this.CurrentUsersLike = CurrentUsersLike;   }
 
+    public void setMenuPresence(String MenuPresence)
+    {   this.MenuPresence = MenuPresence;   }
+
 
     // Getters
     public String getPostID()
@@ -154,4 +159,7 @@ public class Post implements Serializable
 
     public String getCurrentUsersLike()
     {   return CurrentUsersLike; }
+
+    public String getMenuPresence()
+    {   return MenuPresence; }
 }

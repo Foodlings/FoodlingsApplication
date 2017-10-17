@@ -116,7 +116,7 @@ public class LoginScreen extends AppCompatActivity {
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", null, null, null, null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
             return json;
         }
 

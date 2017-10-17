@@ -6,6 +6,8 @@
     android:weightSum="1"
     android:windowSoftInputMode="adjustPan|adjustResize"
     android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="com.example.sheharyararif.foodlings.SearchScreen">
 
     <LinearLayout
@@ -50,7 +52,6 @@
                 android:padding="5dp"
                 android:inputType="textCapSentences"
                 android:background="@drawable/edit_text_shape">
-                <requestFocus />
             </EditText>
 
             <Button

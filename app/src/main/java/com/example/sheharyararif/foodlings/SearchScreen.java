@@ -56,7 +56,7 @@ public class SearchScreen extends AppCompatActivity
         {
             adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
             SearchListView.setAdapter(adapter);
-            ResultLabel.setText("");
+            ResultLabel.setText("Search Results");
         }
         else
         {
@@ -117,10 +117,10 @@ public class SearchScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             searchResultsList = new ArrayList<>();
-            SearchResult searchResult = new SearchResult("", searchText, "", "", "");
+            SearchResult searchResult = new SearchResult("", "",searchText, "", "", "");
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(searchURL, "POST", null, null, null, null, searchResult);
+            JSONObject json = jParser.getJSONFromUrl(searchURL, "POST", null, null, null, null, searchResult, null);
             return json;
         }
 
@@ -138,19 +138,20 @@ public class SearchScreen extends AppCompatActivity
                     JSONObject fetchedData = jsonArray.getJSONObject(i);
 
                     String SubscriberID = fetchedData.getString("SubscriberID");
+                    String RestaurantID = fetchedData.getString("RestaurantID");
                     String Name = fetchedData.getString("Name");
                     String Type = fetchedData.getString("Type");
                     String Email = fetchedData.getString("Email");
                     String DisplayPicture = fetchedData.getString("DisplayPicture");
 
-                    searchResultsList.add(new SearchResult(SubscriberID, Name, Type, Email, DisplayPicture));
+                    searchResultsList.add(new SearchResult(SubscriberID, RestaurantID,Name, Type, Email, DisplayPicture));
                 }
 
                 if(jsonArray.length() > 0)
                 {
+                    ResultLabel.setText("Search Results");
                     adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
                     SearchListView.setAdapter(adapter);
-                    ResultLabel.setText("");
                 }
                 else
                 {

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.example.sheharyararif.foodlings.DatabaseModel.Comment;
 import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
+import com.example.sheharyararif.foodlings.DatabaseModel.Review;
 import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
 import com.example.sheharyararif.foodlings.DatabaseModel.Subscriber;
 
@@ -42,7 +43,7 @@ public class JSONParser
     public JSONParser()
     { }
 
-    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber, Comment comment, Like like, SearchResult searchResult)
+    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber, Comment comment, Like like, SearchResult searchResult, Review review)
     {
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -63,6 +64,7 @@ public class JSONParser
                     nameValuePair.add(new BasicNameValuePair("Timestamp", post.getTimeStamp()));
                     nameValuePair.add(new BasicNameValuePair("PostDescription", post.getPostDescription()));
                     nameValuePair.add(new BasicNameValuePair("ImageString", post.getImageString()));
+                    nameValuePair.add(new BasicNameValuePair("MenuPresence", post.getMenuPresence()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 } else if (subscriber != null) {
                     List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
@@ -103,6 +105,20 @@ public class JSONParser
                     nameValuePair.add(new BasicNameValuePair("Type", searchResult.getType()));
                     nameValuePair.add(new BasicNameValuePair("Email", searchResult.getEmail()));
                     nameValuePair.add(new BasicNameValuePair("DisplayPicture", searchResult.getDisplayPicture()));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                } else if(review != null){
+                    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+                    nameValuePair.add(new BasicNameValuePair("ReviewID", review.getReviewID()));
+                    nameValuePair.add(new BasicNameValuePair("PostID", review.getPostID()));
+                    nameValuePair.add(new BasicNameValuePair("SubscriberID", review.getSubscriberID()));
+                    nameValuePair.add(new BasicNameValuePair("RestaurantID", review.getRestaurantID()));
+                    nameValuePair.add(new BasicNameValuePair("ReviewText", review.getReviewText()));
+                    nameValuePair.add(new BasicNameValuePair("Timestamp", review.getTimeStamp()));
+                    nameValuePair.add(new BasicNameValuePair("Taste", review.getTaste()));
+                    nameValuePair.add(new BasicNameValuePair("Ambience", review.getAmbience()));
+                    nameValuePair.add(new BasicNameValuePair("Service", review.getService()));
+                    nameValuePair.add(new BasicNameValuePair("OrderTime", review.getOrderTime()));
+                    nameValuePair.add(new BasicNameValuePair("Price", review.getPrice()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 }
 

@@ -3,92 +3,104 @@ package com.example.sheharyararif.foodlings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
+import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class WriteTextPost extends AppCompatActivity
+public class MenuScreen extends AppCompatActivity
 {
-    EditText PostTextBox;
-    Button SubmitButton;
-    String PostDescription, encodedImage = "none", TimeStamp;
+    GridView MenuGridView;
+    MenuGridAdapter adapter;
+    ArrayList<Post> post;
+    JSONArray posts = null;
+    Button AddMenuButton;
+    String encodedImage = "none", TimeStamp;
     Post postObject;
-    ImageView PostImage;
-
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private ImageButton PostImageButton;
     private String userChoosenTask;
+    String SubscriberID;
+    Intent intent;
+    Bundle args;
+    SearchResult searchResult;
+    TextView MenuResultLabel;
 
     //URL to get JSON Array
-    private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createPost/";
-
-    JSONArray post = null;
-
+    private static String url = "http://foodlingsapi.azurewebsites.net//api/FoodlingDatabase/getMenu?SubscriberID=";
+    private static String postMenuURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createPost/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.write_text_post_screen);
+        setContentView(R.layout.menu_screen);
 
-        //Post TextBox
-        PostTextBox = (EditText) findViewById(R.id.PostTextBox);
-        PostTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        //Initializing Posts Array
+        post = new ArrayList<>();
 
-        //Post Image Button Event
-        PostImageButton = (ImageButton) findViewById(R.id.PostImageButton);
-        PostImageButton.setOnClickListener(new View.OnClickListener() {
+        //Initializing GridView
+        MenuGridView = (GridView) findViewById(R.id.MenuGridView);
+
+        MenuResultLabel = (TextView) findViewById(R.id.MenuResultLabel);
+
+        //AddMenuButton Event
+        AddMenuButton = (Button)findViewById(R.id.AddMenuButton);
+        AddMenuButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+                TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
                 selectImage();
             }
         });
 
-        PostImage = (ImageView) findViewById(R.id.PostImage);
+        try
+        {
+            intent = getIntent();
+            args = intent.getBundleExtra("BUNDLE");
+            searchResult = (SearchResult) args.getSerializable("searchResult");
+            SubscriberID = searchResult.getSubscriberID();
+            url = "http://foodlingsapi.azurewebsites.net//api/FoodlingDatabase/getMenu?SubscriberID=" + SubscriberID;
+            AddMenuButton.setVisibility(View.GONE);
+        }
+        catch (Exception ex)
+        {
+            url = "http://foodlingsapi.azurewebsites.net//api/FoodlingDatabase/getMenu?SubscriberID=" + GlobalData.SubscriberID;
+            AddMenuButton.setVisibility(View.VISIBLE);
+        }
 
-        //Submit Button Event
-        SubmitButton = (Button)findViewById(R.id.SubmitButton);
-        SubmitButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                PostDescription = PostTextBox.getText().toString();
-                TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
-                new JSONParse().execute();
-            }
-        });
+        new JSONParse().execute();
     }
 
     private class JSONParse extends AsyncTask<String, String, JSONObject>
@@ -98,8 +110,8 @@ public class WriteTextPost extends AppCompatActivity
         protected void onPreExecute()
         {
             super.onPreExecute();
-            pDialog = new ProgressDialog(WriteTextPost.this);
-            pDialog.setMessage("Publishing Post");
+            pDialog = new ProgressDialog(MenuScreen.this);
+            pDialog.setMessage("Loading Menu");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -110,10 +122,8 @@ public class WriteTextPost extends AppCompatActivity
         {
             JSONParser jParser = new JSONParser();
 
-            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,PostDescription,encodedImage, "0", "0", "", "", "0");
-
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", postObject, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
             return json;
         }
 
@@ -121,9 +131,83 @@ public class WriteTextPost extends AppCompatActivity
         protected void onPostExecute(JSONObject json)
         {
             pDialog.dismiss();
-            Toast.makeText(WriteTextPost.this, "Post Published",
+            try
+            {
+                //Initializing Posts Array
+                post = new ArrayList<>();
+
+                // Getting JSON Array
+                posts = json.getJSONArray("Post");
+
+                for(int i=0; i<posts.length(); i++) {
+                    JSONObject fetchedData = posts.getJSONObject(i);
+
+                    String ImageString = fetchedData.getString("ImageString");
+
+                    Post postObject = new Post();
+                    postObject.ImageString = ImageString;
+
+                    post.add(postObject);
+                }
+
+                if(posts.length() > 0)
+                {
+                    if(adapter != null)
+                    {
+                        adapter.clearData();
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    adapter = new MenuGridAdapter(MenuScreen.this, post);
+                    MenuGridView.setAdapter(adapter);
+                    MenuResultLabel.setText("");
+                }
+                else
+                {
+                    MenuResultLabel.setText("Menu Not Added Yet.");
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class JSONParseMenu extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MenuScreen.this);
+            pDialog.setMessage("Adding Menu");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,"none",encodedImage, "0", "0", "", "", "1");
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(postMenuURL, "POST", postObject, null, null, null, null, null);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+            Toast.makeText(MenuScreen.this, "Menu Posted",
                     Toast.LENGTH_SHORT).show();
-            finish();
+
+            new JSONParse().execute();
         }
     }
 
@@ -131,12 +215,12 @@ public class WriteTextPost extends AppCompatActivity
     {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(WriteTextPost.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuScreen.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= Utility.checkPermission(WriteTextPost.this);
+                boolean result= Utility.checkPermission(MenuScreen.this);
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask="Take Photo";
                     if(result)
@@ -205,6 +289,7 @@ public class WriteTextPost extends AppCompatActivity
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
+                return;
             }
         }
 
@@ -212,7 +297,7 @@ public class WriteTextPost extends AppCompatActivity
         bm.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] myByteArray = baos.toByteArray();
         encodedImage = Base64.encodeToString(myByteArray, Base64.DEFAULT);
-        PostImage.setImageBitmap(bm);
+        new JSONParseMenu().execute();
     }
 
     private void onCaptureImageResult(Intent data)
@@ -230,18 +315,14 @@ public class WriteTextPost extends AppCompatActivity
             fo.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return;
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
-        //ImageTextView.setImageBitmap(thumbnail);
 
         byte[] b = bytes.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-        PostImage.setImageBitmap(thumbnail);
+        new JSONParseMenu().execute();
     }
 }
-
-
-
-
-

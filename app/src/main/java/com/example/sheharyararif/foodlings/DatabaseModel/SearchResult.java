@@ -8,11 +8,12 @@ import java.io.Serializable;
 
 public class SearchResult implements Serializable
 {
-    String DisplayPicture, Name, Email, Type, SubscriberID;
+    String DisplayPicture, Name, Email, Type, SubscriberID, RestaurantID;
 
-    public SearchResult(String SubscriberID, String Name, String Type, String Email, String DisplayPicture)
+    public SearchResult(String SubscriberID, String RestaurantID, String Name, String Type, String Email, String DisplayPicture)
     {
         this.SubscriberID = SubscriberID;
+        this.RestaurantID = RestaurantID;
         this.Name = Name;
         this.Type = Type;
         this.Email = Email;
@@ -21,6 +22,9 @@ public class SearchResult implements Serializable
 
     public void setSubscriberID(String SubscriberID)
     {   this.SubscriberID = SubscriberID;   }
+
+    public void setRestaurantID(String RestaurantID)
+    {   this.RestaurantID = RestaurantID;   }
 
     public void setName(String Name)
     {   this.Name = Name;   }
@@ -48,4 +52,7 @@ public class SearchResult implements Serializable
 
     public String getDisplayPicture()
     {   return DisplayPicture; }
+
+    public String getRestaurantID()
+    {   return RestaurantID; }
 }

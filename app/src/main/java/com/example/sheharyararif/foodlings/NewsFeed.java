@@ -33,7 +33,7 @@ public class NewsFeed extends AppCompatActivity
     CustomAdapter adapter;
     ListView PostsList;
     ArrayList<Post> post;
-    JSONArray user = null;
+    JSONArray posts = null;
     String postID;
 
     //URL to get JSON Array
@@ -57,6 +57,7 @@ public class NewsFeed extends AppCompatActivity
     private static final String TAG_LikesCount = "LikesCount";
     private static final String TAG_DisplayPicture = "DisplayPicture";
     private static final String TAG_CurrentUsersLike = "CurrentUsersLike";
+    private static final String TAG_MenuPresence = "MenuPresence";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -150,7 +151,7 @@ public class NewsFeed extends AppCompatActivity
 
             url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=" + GlobalData.SubscriberID + "&Scope=NewsFeed";
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
             return json;
         }
 
@@ -161,11 +162,11 @@ public class NewsFeed extends AppCompatActivity
             try
             {
                 // Getting JSON Array
-                user = json.getJSONArray("Post");
+                posts = json.getJSONArray("Post");
 
-                for(int i=0; i<user.length(); i++)
+                for(int i=0; i<posts.length(); i++)
                 {
-                    JSONObject fetchedData = user.getJSONObject(i);
+                    JSONObject fetchedData = posts.getJSONObject(i);
 
                     String PostID = fetchedData.getString(TAG_PostID);
                     String SubscriberID = fetchedData.getString(TAG_SubscriberID);
@@ -182,8 +183,9 @@ public class NewsFeed extends AppCompatActivity
                     String LikesCount = fetchedData.getString(TAG_LikesCount);
                     String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
                     String CurrentUsersLike = fetchedData.getString(TAG_CurrentUsersLike);
+                    String MenuPresence = fetchedData.getString(TAG_MenuPresence);
 
-                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike));
+                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike, MenuPresence));
                 }
                 //Adapter
                 adapter = new CustomAdapter(post, NewsFeed.this);
@@ -224,7 +226,7 @@ public class NewsFeed extends AppCompatActivity
             like.setTimeStamp(new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString());
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null);
+            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null, null);
             return json;
         }
 
@@ -255,7 +257,7 @@ public class NewsFeed extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null, null);
             return json;
         }
 
