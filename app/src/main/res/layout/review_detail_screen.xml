@@ -55,6 +55,7 @@
 
             <RatingBar
                 android:id="@+id/TasteRating"
+                android:isIndicator="true"
                 android:layout_gravity="start"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

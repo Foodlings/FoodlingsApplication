@@ -58,6 +58,12 @@ public class NewsFeed extends AppCompatActivity
     private static final String TAG_DisplayPicture = "DisplayPicture";
     private static final String TAG_CurrentUsersLike = "CurrentUsersLike";
     private static final String TAG_MenuPresence = "MenuPresence";
+    private static final String TAG_Taste = "Taste";
+    private static final String TAG_Ambience = "Ambience";
+    private static final String TAG_Service = "Service";
+    private static final String TAG_OrderTime = "OrderTime";
+    private static final String TAG_Price = "Price";
+    private static final String TAG_RestaurantName = "RestaurantName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -168,24 +174,31 @@ public class NewsFeed extends AppCompatActivity
                 {
                     JSONObject fetchedData = posts.getJSONObject(i);
 
-                    String PostID = fetchedData.getString(TAG_PostID);
-                    String SubscriberID = fetchedData.getString(TAG_SubscriberID);
-                    String SubscriberName = fetchedData.getString(TAG_SubscriberName);
-                    String ImagePresence = fetchedData.getString(TAG_ImagePresence);
-                    String ImageAlbumID = fetchedData.getString(TAG_ImageAlbumID);
-                    String ReviewPresence = fetchedData.getString(TAG_ReviewPresence);
-                    String CheckinPresence = fetchedData.getString(TAG_CheckinPresence);
-                    String Privacy = fetchedData.getString(TAG_Privacy);
-                    String Timestamp = fetchedData.getString(TAG_TimeStamp);
-                    String PostDescription = fetchedData.getString(TAG_PostDescription);
-                    String ImageString = fetchedData.getString(TAG_ImageString);
-                    String CommentsCount = fetchedData.getString(TAG_CommentsCount);
-                    String LikesCount = fetchedData.getString(TAG_LikesCount);
-                    String DisplayPicture = fetchedData.getString(TAG_DisplayPicture);
-                    String CurrentUsersLike = fetchedData.getString(TAG_CurrentUsersLike);
-                    String MenuPresence = fetchedData.getString(TAG_MenuPresence);
+                    Post postObject = new Post();
+                    postObject.setPostID(fetchedData.getString(TAG_PostID));
+                    postObject.setSubscriberID(fetchedData.getString(TAG_SubscriberID));
+                    postObject.setSubscriberName(fetchedData.getString(TAG_SubscriberName));
+                    postObject.setImagePresence(fetchedData.getString(TAG_ImagePresence));
+                    postObject.setImageAlbumID(fetchedData.getString(TAG_ImageAlbumID));
+                    postObject.setReviewPresence(fetchedData.getString(TAG_ReviewPresence));
+                    postObject.setCheckinPresence(fetchedData.getString(TAG_CheckinPresence));
+                    postObject.setPrivacy(fetchedData.getString(TAG_Privacy));
+                    postObject.setTimeStamp(fetchedData.getString(TAG_TimeStamp));
+                    postObject.setPostDescription(fetchedData.getString(TAG_PostDescription));
+                    postObject.setImageString(fetchedData.getString(TAG_ImageString));
+                    postObject.setCommentsCount(fetchedData.getString(TAG_CommentsCount));
+                    postObject.setLikesCount(fetchedData.getString(TAG_LikesCount));
+                    postObject.setDisplayPicture(fetchedData.getString(TAG_DisplayPicture));
+                    postObject.setCurrentUsersLike(fetchedData.getString(TAG_CurrentUsersLike));
+                    postObject.setMenuPresence(fetchedData.getString(TAG_MenuPresence));
+                    postObject.setTaste(fetchedData.getString(TAG_Taste));
+                    postObject.setAmbience(fetchedData.getString(TAG_Ambience));
+                    postObject.setService(fetchedData.getString(TAG_Service));
+                    postObject.setOrderTime(fetchedData.getString(TAG_OrderTime));
+                    postObject.setPrice(fetchedData.getString(TAG_Price));
+                    postObject.setRestaurantName(fetchedData.getString(TAG_RestaurantName));
 
-                    post.add(new Post(PostID, SubscriberID, SubscriberName, ImagePresence, ImageAlbumID, ReviewPresence, CheckinPresence, Privacy, Timestamp, PostDescription, ImageString, CommentsCount, LikesCount, DisplayPicture, CurrentUsersLike, MenuPresence));
+                    post.add(postObject);
                 }
                 //Adapter
                 adapter = new CustomAdapter(post, NewsFeed.this);

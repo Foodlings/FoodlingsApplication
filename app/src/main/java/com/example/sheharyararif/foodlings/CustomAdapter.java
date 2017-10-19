@@ -6,11 +6,15 @@ package com.example.sheharyararif.foodlings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -224,6 +228,13 @@ public class CustomAdapter extends ArrayAdapter<Post> {
             final ImageView LikesImage = (ImageView) row.findViewById(R.id.LikesImage);
             final TextView CommentCount = (TextView) row.findViewById(R.id.CommentCount);
             final TextView LikesCount = (TextView) row.findViewById(R.id.LikesCount);
+            RatingBar TasteRating = (RatingBar) row.findViewById(R.id.TasteRating);
+            RatingBar AmbienceRating = (RatingBar) row.findViewById(R.id.AmbienceRating);
+            RatingBar ServiceRating = (RatingBar) row.findViewById(R.id.ServiceRating);
+            RatingBar OrderTimeRating = (RatingBar) row.findViewById(R.id.OrderTimeRating);
+            RatingBar PriceRating = (RatingBar) row.findViewById(R.id.PriceRating);
+            LinearLayout RatingsLayout = (LinearLayout) row.findViewById(R.id.RatingsLayout);
+            RelativeLayout PostDescriptionLayout = (RelativeLayout) row.findViewById(R.id.PostDescriptionLayout);
 
             SubscriberName.setText(dataSet.get(i).getSubscriberName());
             Timestamp.setText(dataSet.get(i).getTimeStamp());
@@ -246,14 +257,31 @@ public class CustomAdapter extends ArrayAdapter<Post> {
                     Glide.with(mContext).load(dataSet.get(i).DisplayPicture).into(DisplayPicture);
                 }
 
-                if (!dataSet.get(i).ImageString.equals("none"))
+                if(Integer.parseInt(dataSet.get(i).getReviewPresence()) == 1)
                 {
-                    Glide.with(mContext).load(dataSet.get(i).ImageString).into(DescriptionImage);
+                    TasteRating.setRating(Float.parseFloat(dataSet.get(i).getTaste()));
+                    AmbienceRating.setRating(Float.parseFloat(dataSet.get(i).getAmbience()));
+                    ServiceRating.setRating(Float.parseFloat(dataSet.get(i).getService()));
+                    OrderTimeRating.setRating(Float.parseFloat(dataSet.get(i).getOrderTime()));
+                    PriceRating.setRating(Float.parseFloat(dataSet.get(i).getPrice()));
+                    DescriptionImage.setVisibility(View.GONE);
+                    PostDescription.setGravity(Gravity.CENTER);
+                    PostDescription.setTextSize(20);
+                    PostDescription.setText("Restaurant: " + dataSet.get(i).getRestaurantName());
                 }
                 else
+                {
+                    RatingsLayout.setVisibility(View.GONE);
+
+                    if (!dataSet.get(i).ImageString.equals("none"))
                     {
-                    DescriptionImage.getLayoutParams().height = 0;
-                    DescriptionImage.requestLayout();
+                        Glide.with(mContext).load(dataSet.get(i).ImageString).into(DescriptionImage);
+                    }
+                    else
+                    {
+                        PostDescriptionLayout.getLayoutParams().height = 0;
+                        PostDescriptionLayout.requestLayout();
+                    }
                 }
             }
             catch (Exception e)
@@ -295,6 +323,10 @@ public class CustomAdapter extends ArrayAdapter<Post> {
                         {
                             ((RestaurantProfile) mContext).LikeDelete(dataSet.get(i).getPostID());
                         }
+                        else if (mContext instanceof SubscriberProfileScreen)
+                        {
+                            ((SubscriberProfileScreen) mContext).LikeDelete(dataSet.get(i).getPostID());
+                        }
                     }
                     else
                     {
@@ -308,6 +340,10 @@ public class CustomAdapter extends ArrayAdapter<Post> {
                         else if (mContext instanceof RestaurantProfile)
                         {
                             ((RestaurantProfile) mContext).LikePost(dataSet.get(i).getPostID());
+                        }
+                        else if (mContext instanceof SubscriberProfileScreen)
+                        {
+                            ((SubscriberProfileScreen) mContext).LikePost(dataSet.get(i).getPostID());
                         }
                     }
 

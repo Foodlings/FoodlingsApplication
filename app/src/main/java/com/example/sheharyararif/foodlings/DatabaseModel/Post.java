@@ -30,6 +30,12 @@ public class Post implements Serializable
     public String CurrentUsersLike;
     public boolean LikeCheck;
     public String MenuPresence;
+    public String Taste;
+    public String Ambience;
+    public String Service;
+    public String OrderTime;
+    public String Price;
+    public String RestaurantName;
 
 
     // Constructor-1
@@ -110,6 +116,24 @@ public class Post implements Serializable
     public void setMenuPresence(String MenuPresence)
     {   this.MenuPresence = MenuPresence;   }
 
+    public void setTaste(String Taste)
+    {   this.Taste = Taste;   }
+
+    public void setAmbience(String Ambience)
+    {   this.Ambience = Ambience;   }
+
+    public void setService(String Service)
+    {   this.Service = Service;   }
+
+    public void setOrderTime(String OrderTime)
+    {   this.OrderTime = OrderTime;   }
+
+    public void setPrice(String Price)
+    {   this.Price = Price;   }
+
+    public void setRestaurantName(String RestaurantName)
+    {   this.RestaurantName = RestaurantName;   }
+
 
     // Getters
     public String getPostID()
@@ -162,4 +186,22 @@ public class Post implements Serializable
 
     public String getMenuPresence()
     {   return MenuPresence; }
+
+    public String getTaste()
+    {   return Taste; }
+
+    public String getAmbience()
+    {   return Ambience; }
+
+    public String getService()
+    {   return Service; }
+
+    public String getOrderTime()
+    {   return OrderTime; }
+
+    public String getPrice()
+    {   return Price; }
+
+    public String getRestaurantName()
+    {   return RestaurantName; }
 }

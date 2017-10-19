@@ -69,7 +69,7 @@ public class DashboardScreen extends AppCompatActivity {
             {
                 if(GlobalData.Type.equals("Subscriber"))
                 {
-                    startActivity(new Intent(DashboardScreen.this, RestaurantProfile.class));
+                    startActivity(new Intent(DashboardScreen.this, SubscriberProfileScreen.class));
                 }
                 else
                 {
