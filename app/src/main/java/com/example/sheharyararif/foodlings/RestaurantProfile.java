@@ -48,7 +48,7 @@ public class RestaurantProfile extends AppCompatActivity
     Intent intent;
     Bundle args;
     SearchResult searchResult;
-    Button ReviewsButton, MenuButton;
+    Button ReviewsButton, MenuButton, GalleryButton;
 
     //URL to get JSON Array
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=";
@@ -125,11 +125,19 @@ public class RestaurantProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                intent = new Intent(RestaurantProfile.this, ReviewsScreen.class);
-                args = new Bundle();
-                args.putSerializable("searchResult", (Serializable) searchResult);
-                intent.putExtra("BUNDLE", args);
-                startActivity(intent);
+
+                if(searchResult!=null)
+                {
+                    intent = new Intent(RestaurantProfile.this, ReviewsScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(RestaurantProfile.this, ReviewsScreen.class));
+                }
             }
         });
 
@@ -153,31 +161,44 @@ public class RestaurantProfile extends AppCompatActivity
             }
         });
 
+        GalleryButton = (Button) findViewById(R.id.GalleryButton);
+        GalleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(searchResult != null)
+                {
+                    intent = new Intent(RestaurantProfile.this, GalleryScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(RestaurantProfile.this, GalleryScreen.class));
+                }
+            }
+        });
+
         new JSONParseSubscriber().execute();
     }
 
-//    @Override
-//    public void onRestart()
-//    {
-//        super.onRestart();
-//
-//        //Initializing Posts Array
-//        post = new ArrayList<>();
-//
-//        //Posts List Event Listener
-//        PostsList = (ListView) findViewById(R.id.Posts_ListView);
-//
-//        if(!SubscriberID.equals(""))
-//        {
-//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
-//        }
-//        else
-//        {
-//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
-//        }
-//
-//        new JSONParseSubscriber().execute();
-//    }
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        pDialog = new ProgressDialog(RestaurantProfile.this);
+        pDialog.setMessage("Loading Posts");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        //Initializing Posts Array
+        post = new ArrayList<>();
+
+        new JSONParse().execute();
+    }
 
     public void LikePost(String postID)
     {
@@ -258,6 +279,11 @@ public class RestaurantProfile extends AppCompatActivity
                     postObject.setRestaurantName(fetchedData.getString(TAG_RestaurantName));
 
                     post.add(postObject);
+                }
+
+                if(adapter != null){
+                    adapter.clearData();
+                    adapter.notifyDataSetChanged();
                 }
 
                 //Adapter

@@ -63,21 +63,6 @@ public class ReviewsScreen extends AppCompatActivity
 
         reviewsList = new ArrayList<>();
 
-        try
-        {
-            intent = getIntent();
-            args = intent.getBundleExtra("BUNDLE");
-            searchResult = (SearchResult) args.getSerializable("searchResult");
-            RestaurantID = searchResult.getRestaurantID();
-            reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=" + RestaurantID;
-        }
-        catch (Exception ex)
-        {
-            reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=" + GlobalData.SubscriberID;
-            AddReview.setVisibility(View.GONE);
-        }
-
-
         AddReview = (Button)findViewById(R.id.AddReviewButton);
         AddReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +75,25 @@ public class ReviewsScreen extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        try
+        {
+            intent = getIntent();
+            args = intent.getBundleExtra("BUNDLE");
+            searchResult = (SearchResult) args.getSerializable("searchResult");
+            RestaurantID = searchResult.getRestaurantID();
+            reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=" + RestaurantID + "&SubscriberID=0&Scope=Restaurant";
+
+            if(searchResult.Type.equals("Subscriber")){
+                reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=0&SubscriberID=" + searchResult.getSubscriberID() + "&Scope=" + searchResult.Type;
+                AddReview.setVisibility(View.GONE);
+            }
+        }
+        catch (Exception ex)
+        {
+            reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=0&SubscriberID=" + GlobalData.SubscriberID + "&Scope=" + GlobalData.Type;
+            AddReview.setVisibility(View.GONE);
+        }
 
         new JSONParse().execute();
     }
@@ -154,8 +158,9 @@ public class ReviewsScreen extends AppCompatActivity
                     String Price = fetchedData.getString("Price");
                     String SubscriberName = fetchedData.getString("SubscriberName");
                     String DisplayPicture = fetchedData.getString("DisplayPicture");
+                    String RestaurantName = fetchedData.getString("RestaurantName");
 
-                    reviewsList.add(new Review(ReviewID, PostID, SubscriberID, RestaurantID, ReviewText, TimeStamp, Taste, Ambience, Service, OrderTime, Price, SubscriberName, DisplayPicture));
+                    reviewsList.add(new Review(ReviewID, PostID, SubscriberID, RestaurantID, ReviewText, TimeStamp, Taste, Ambience, Service, OrderTime, Price, SubscriberName, DisplayPicture, RestaurantName));
                 }
 
                 if(jsonArray.length() > 0)

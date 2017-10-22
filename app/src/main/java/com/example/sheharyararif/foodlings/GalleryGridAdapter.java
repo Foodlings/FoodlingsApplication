@@ -19,17 +19,17 @@ import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import java.util.ArrayList;
 
 /**
- * Created by Sheharyar Arif on 10/14/2017.
+ * Created by Sheharyar Arif on 10/22/2017.
  */
 
-public class MenuGridAdapter extends ArrayAdapter
+public class GalleryGridAdapter extends ArrayAdapter
 {
     private Context context;
     private ArrayList<Post> dataSet;
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
 
-    public MenuGridAdapter(Context context, ArrayList<Post> data){
+    public GalleryGridAdapter(Context context, ArrayList<Post> data){
         super(context, R.layout.menu_gridview, data);
         this.context = context;
         this.dataSet = data;

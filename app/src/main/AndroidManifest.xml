@@ -64,7 +64,8 @@
         <activity android:name=".ReviewsScreen" />
         <activity android:name=".MenuScreen" />
         <activity android:name=".AddReviewScreen" />
-        <activity android:name=".ReviewDetailScreen"></activity>
+        <activity android:name=".ReviewDetailScreen" />
+        <activity android:name=".GalleryScreen"></activity>
     </application>
 
 </manifest>

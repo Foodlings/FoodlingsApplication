@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
     Bundle args;
     SearchResult searchResult;
     Button FriendsButton, ReviewsButton, GalleryButton;
+    LinearLayout AddFriendLayout, AboutTextLayout;
 
     //URL to get JSON Array
     private static String url = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllPosts?SubscriberID=";
@@ -86,6 +88,9 @@ public class SubscriberProfileScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subscriber_profile_screen);
 
+        AddFriendLayout = (LinearLayout) findViewById(R.id.AddFriendLayout);
+        AboutTextLayout = (LinearLayout) findViewById(R.id.AboutTextLayout);
+
         //Initializing Posts Array
         post = new ArrayList<>();
 
@@ -112,70 +117,88 @@ public class SubscriberProfileScreen extends AppCompatActivity
         {
             SubscriberID = searchResult.getSubscriberID();
             SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
+
+            if(GlobalData.Type.equals("Restaurant")){
+                AddFriendLayout.setVisibility(View.GONE);
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1.0f
+                );
+                AboutTextLayout.setLayoutParams(param);
+            }
         }
         else
         {
             SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
+            AddFriendLayout.setVisibility(View.GONE);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    1.0f
+            );
+            AboutTextLayout.setLayoutParams(param);
         }
 
-//        ReviewsButton = (Button) findViewById(R.id.ReviewsButton);
-//        ReviewsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                intent = new Intent(SubscriberProfileScreen.this, ReviewsScreen.class);
-//                args = new Bundle();
-//                args.putSerializable("searchResult", (Serializable) searchResult);
-//                intent.putExtra("BUNDLE", args);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        GalleryButton = (Button) findViewById(R.id.MenuButton);
-//        GalleryButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if(searchResult != null)
-//                {
-//                    intent = new Intent(SubscriberProfileScreen.this, MenuScreen.class);
-//                    args = new Bundle();
-//                    args.putSerializable("searchResult", (Serializable) searchResult);
-//                    intent.putExtra("BUNDLE", args);
-//                    startActivity(intent);
-//                }
-//                else
-//                {
-//                    startActivity(new Intent(SubscriberProfileScreen.this, MenuScreen.class));
-//                }
-//            }
-//        });
+        ReviewsButton = (Button) findViewById(R.id.ReviewsButton);
+        ReviewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                if(searchResult!=null)
+                {
+                    intent = new Intent(SubscriberProfileScreen.this, ReviewsScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(SubscriberProfileScreen.this, ReviewsScreen.class));
+                }
+            }
+        });
+
+        GalleryButton = (Button) findViewById(R.id.GalleryButton);
+        GalleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(searchResult != null)
+                {
+                    intent = new Intent(SubscriberProfileScreen.this, GalleryScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(SubscriberProfileScreen.this, GalleryScreen.class));
+                }
+            }
+        });
 
         new JSONParseSubscriber().execute();
     }
 
-//    @Override
-//    public void onRestart()
-//    {
-//        super.onRestart();
-//
-//        //Initializing Posts Array
-//        post = new ArrayList<>();
-//
-//        //Posts List Event Listener
-//        PostsList = (ListView) findViewById(R.id.Posts_ListView);
-//
-//        if(!SubscriberID.equals(""))
-//        {
-//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + SubscriberID;
-//        }
-//        else
-//        {
-//            SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=" + GlobalData.SubscriberID;
-//        }
-//
-//        new JSONParseSubscriber().execute();
-//    }
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        pDialog = new ProgressDialog(SubscriberProfileScreen.this);
+        pDialog.setMessage("Loading Posts");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        //Initializing Posts Array
+        post = new ArrayList<>();
+
+        new JSONParse().execute();
+    }
 
     public void LikePost(String postID)
     {
@@ -256,6 +279,11 @@ public class SubscriberProfileScreen extends AppCompatActivity
                     postObject.setRestaurantName(fetchedData.getString(TAG_RestaurantName));
 
                     post.add(postObject);
+                }
+
+                if(adapter != null){
+                    adapter.clearData();
+                    adapter.notifyDataSetChanged();
                 }
 
                 //Adapter

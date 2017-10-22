@@ -90,7 +90,7 @@ public class AddReviewScreen extends AppCompatActivity {
         {
             JSONParser jParser = new JSONParser();
 
-            Review review = new Review("0","0",GlobalData.SubscriberID,RestaurantID,ReviewText,TimeStamp,TasteValue,AmbienceValue,ServiceValue,OrderTimeValue,PriceValue, "", "");
+            Review review = new Review("0","0",GlobalData.SubscriberID,RestaurantID,ReviewText,TimeStamp,TasteValue,AmbienceValue,ServiceValue,OrderTimeValue,PriceValue, "", "", "");
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(url, "POST", null, null, null, null, null, review);

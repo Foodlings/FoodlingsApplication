@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class SearchResult implements Serializable
 {
-    String DisplayPicture, Name, Email, Type, SubscriberID, RestaurantID;
+    public String DisplayPicture, Name, Email, Type, SubscriberID, RestaurantID;
 
     public SearchResult(String SubscriberID, String RestaurantID, String Name, String Type, String Email, String DisplayPicture)
     {

@@ -40,12 +40,6 @@
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/post_image_placeholder" />
 
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Button" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -81,6 +75,7 @@
                     android:weightSum="1">
 
                     <LinearLayout
+                        android:id="@+id/AboutTextLayout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.55"
@@ -101,6 +96,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/AddFriendLayout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.44"

@@ -88,8 +88,15 @@ public class SearchScreen extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id)
             {
                 SearchResult searchResult = (SearchResult) adapter.getItemAtPosition(position);
+                if(searchResult.Type.equals("Subscriber"))
+                {
+                    intent = new Intent(SearchScreen.this, SubscriberProfileScreen.class);
+                }
+                else
+                {
+                    intent = new Intent(SearchScreen.this, RestaurantProfile.class);
+                }
 
-                intent = new Intent(SearchScreen.this, RestaurantProfile.class);
                 args = new Bundle();
                 args.putSerializable("searchResult",(Serializable)searchResult);
                 intent.putExtra("BUNDLE",args);

@@ -60,11 +60,13 @@ public class ReviewsAdapter extends ArrayAdapter<Review> {
         try
         {
             TextView SubscriberName = (TextView) row.findViewById(R.id.NameTextView);
+            TextView RestaurantName = (TextView) row.findViewById(R.id.RestaurantName);
             TextView Timestamp = (TextView) row.findViewById(R.id.TimeStamp);
             RatingBar RatingStars = (RatingBar) row.findViewById(R.id.RatingStars);
             final ImageView DisplayPicture = (ImageView) row.findViewById(R.id.DisplayPicture);
 
             SubscriberName.setText(dataSet.get(i).getSubscriberName());
+            RestaurantName.setText("Restaurant: " + dataSet.get(i).getRestaurantName());
             Timestamp.setText(dataSet.get(i).getTimeStamp());
 
             Float averageRating = Math.round((((Float.parseFloat(dataSet.get(i).getTaste()) + Float.parseFloat(dataSet.get(i).getAmbience()) + Float.parseFloat(dataSet.get(i).getOrderTime()) + Float.parseFloat(dataSet.get(i).getService()) + Float.parseFloat(dataSet.get(i).getPrice()))/5)/0.5f))*0.5f;

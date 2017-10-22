@@ -165,17 +165,7 @@
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/profile_menu_buttons"
-                android:layout_weight=".25" />
-
-            <Button
-                android:id="@+id/GalleryButton"
-                android:text="Gallery"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/profile_menu_buttons"
-                android:layout_weight=".25" />
+                android:layout_weight=".333" />
 
             <Button
                 android:id="@+id/ReviewsButton"
@@ -185,17 +175,17 @@
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/profile_menu_buttons"
-                android:layout_weight=".25" />
+                android:layout_weight=".333" />
 
             <Button
-                android:id="@+id/FollowersButton"
-                android:text="Followers"
-                android:background="@drawable/profile_menu_buttons"
+                android:id="@+id/GalleryButton"
+                android:text="Gallery"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
-                android:layout_weight=".25" />
+                android:background="@drawable/profile_menu_buttons"
+                android:layout_weight=".333" />
 
         </LinearLayout>
 

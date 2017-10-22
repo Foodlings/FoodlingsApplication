@@ -57,6 +57,10 @@ public class CustomAdapter extends ArrayAdapter<Post> {
         return true;
     }
 
+    public void clearData() {
+        dataSet.clear();
+    }
+
 //    @Override
 //    public View getView(int i, View view, ViewGroup viewGroup) {
 //        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -238,7 +242,15 @@ public class CustomAdapter extends ArrayAdapter<Post> {
 
             SubscriberName.setText(dataSet.get(i).getSubscriberName());
             Timestamp.setText(dataSet.get(i).getTimeStamp());
-            PostDescription.setText(dataSet.get(i).getPostDescription());
+
+            if(!dataSet.get(i).getPostDescription().equals("none"))
+            {
+                PostDescription.setText(dataSet.get(i).getPostDescription());
+            }
+            else{
+                PostDescription.setText("");
+            }
+
             CommentCount.setText(dataSet.get(i).getCommentsCount());
             LikesCount.setText(dataSet.get(i).getLikesCount());
             if (dataSet.get(i).getCurrentUsersLike().equals("Yes"))

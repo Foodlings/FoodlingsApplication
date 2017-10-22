@@ -22,6 +22,7 @@ public class Review implements Serializable
     public String Price ;
     public String SubscriberName ;
     public String DisplayPicture ;
+    public String RestaurantName ;
 
 
     // Constructor-1
@@ -29,7 +30,7 @@ public class Review implements Serializable
     {}
 
     // Constructor-2
-    public Review(String ReviewID, String PostID, String SubscriberID, String RestaurantID, String ReviewText, String TimeStamp, String Taste, String Ambience, String Service, String OrderTime, String Price, String SubsriberName, String DisplayPicture)
+    public Review(String ReviewID, String PostID, String SubscriberID, String RestaurantID, String ReviewText, String TimeStamp, String Taste, String Ambience, String Service, String OrderTime, String Price, String SubsriberName, String DisplayPicture, String RestaurantName)
     {
         this.ReviewID = ReviewID;
         this.PostID = PostID;
@@ -44,6 +45,7 @@ public class Review implements Serializable
         this.Price = Price;
         this.SubscriberName = SubsriberName;
         this.DisplayPicture = DisplayPicture;
+        this.RestaurantName = RestaurantName;
     }
 
 
@@ -87,6 +89,9 @@ public class Review implements Serializable
     public void setDisplayPicture(String DisplayPicture)
     {   this.DisplayPicture = DisplayPicture;  }
 
+    public void setRestaurantName(String RestaurantName)
+    {   this.RestaurantName = RestaurantName;  }
+
 
     // Getters
     public String getReviewID()
@@ -127,4 +132,7 @@ public class Review implements Serializable
 
     public String getDisplayPicture()
     {   return DisplayPicture;   }
+
+    public String getRestaurantName()
+    {   return RestaurantName;   }
 }
