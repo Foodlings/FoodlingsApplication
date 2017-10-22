@@ -9,14 +9,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/login_background_image"
     tools:context="com.example.sheharyararif.foodlings.LoginScreen">
 
     <ImageView
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/logo_foodlings"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/LogoImage" />
 
@@ -53,7 +55,7 @@
                 android:layout_height="3dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="#b8b8b8" />
+                android:background="#FFFFFF" />
 
             <TextView
                 android:id="@+id/EmailText"
@@ -61,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="#525252"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <View
@@ -70,17 +72,20 @@
                 android:layout_height="3dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="#b8b8b8" />
+                android:background="#FFFFFF" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/EmailTextBox"
+            android:textColor="#FFFFFF"
             android:layout_below="@id/LegendSeparator"
             android:hint="Email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
+            android:textColorHint="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
@@ -91,6 +96,9 @@
             android:id="@+id/PasswordTextBox"
             android:layout_below="@id/EmailTextBox"
             android:hint="Password"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -105,7 +113,7 @@
             android:id="@+id/SigninButton"
             android:layout_below="@id/PasswordTextBox"
             android:text="Sign-in"
-            android:background="#000000"
+            android:background="#ffffbb33"
             android:textColor="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="60dp"

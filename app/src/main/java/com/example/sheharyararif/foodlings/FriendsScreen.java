@@ -71,6 +71,7 @@ public class FriendsScreen extends AppCompatActivity {
             args = intent.getBundleExtra("BUNDLE");
             searchResult = (SearchResult) args.getSerializable("searchResult");
             getAllFriendsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllFriends?SubscriberID=" + searchResult.SubscriberID;
+            FriendsListView.setOnItemClickListener(null);
         }
         catch (Exception ex)
         {

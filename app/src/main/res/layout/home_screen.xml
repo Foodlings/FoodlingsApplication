@@ -10,6 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:clipToPadding="false"
+    android:background="@drawable/home_background_image"
     tools:context="com.example.sheharyararif.foodlings.HomeScreen">
 
 
@@ -18,8 +19,9 @@
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/logo_foodlings"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
 
     <View
@@ -40,7 +42,7 @@
         <Button
             android:id="@+id/LoginButton"
             android:text="Login"
-            android:background="#000000"
+            android:background="#ffffbb33"
             android:textColor="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -51,33 +53,33 @@
         <Button
             android:id="@+id/RegisterButton"
             android:text="Register"
-            android:background="#000000"
+            android:background="#ffffbb33"
             android:textColor="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"/>
 
         <Button
             android:id="@+id/VisitorButton"
             android:text="Visitor"
-            android:background="#000000"
+            android:background="#ffffbb33"
             android:textColor="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"/>
     </LinearLayout>
 
     <View
         android:id="@+id/BottomHorizontal"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@android:color/black"
+        android:background="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"/>
@@ -85,7 +87,7 @@
     <TextView
         android:id="@+id/CopyrightText"
         android:text="Copyright © Foodlings"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
