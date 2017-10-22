@@ -241,7 +241,7 @@ public class PictureUploadScreen extends AppCompatActivity {
             }
 
             //Posting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, subscriberObject, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "POST", null, subscriberObject, null, null, null, null, null);
             return json;
         }
 

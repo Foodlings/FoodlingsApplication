@@ -120,7 +120,7 @@ public class GalleryScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null, null);
             return json;
         }
 
@@ -193,7 +193,7 @@ public class GalleryScreen extends AppCompatActivity
             postObject = new Post("0",GlobalData.SubscriberID, "SubscriberName","0","0","0","0","Public",TimeStamp,"none",encodedImage, "0", "0", "", "", "0");
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(postGalleryURL, "POST", postObject, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(postGalleryURL, "POST", postObject, null, null, null, null, null, null);
             return json;
         }
 

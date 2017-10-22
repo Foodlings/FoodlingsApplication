@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sheharyararif.foodlings.DatabaseModel.Friend;
 import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
@@ -45,11 +47,11 @@ public class SubscriberProfileScreen extends AppCompatActivity
     ImageView DisplayPictureImageView, CoverPhotoImageView;
     private ProgressDialog pDialog;
     TextView SubscriberName, AboutText;
-    String postID, SubscriberID;
+    String postID, SubscriberID, TimeStamp;
     Intent intent;
     Bundle args;
     SearchResult searchResult;
-    Button FriendsButton, ReviewsButton, GalleryButton;
+    Button FriendsButton, ReviewsButton, GalleryButton, AddFriend;
     LinearLayout AddFriendLayout, AboutTextLayout;
 
     //URL to get JSON Array
@@ -57,6 +59,8 @@ public class SubscriberProfileScreen extends AppCompatActivity
     private static String SubscriberURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getSubscriber?SubscriberID=";
     private static String likeURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createLike";
     private static String likeDeleteURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/deleteLike?SubscriberID=";
+    private static String addFriendURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/createFriend";
+    private static String unFriendURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/deleteFriend";
 
     //JSON Node Names
     private static final String TAG_PostID = "PostID";
@@ -88,6 +92,28 @@ public class SubscriberProfileScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subscriber_profile_screen);
 
+        AddFriend = (Button) findViewById(R.id.AddFriend);
+        AddFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                if(AddFriend.getText().toString().equals("Add Friend"))
+                {
+                    AddFriend.setText("UnFriend");
+                    AddFriend.setBackgroundColor(Color.parseColor("#1a5ecc"));
+                    TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
+                    new JSONParseAddFriend().execute();
+                }
+                else
+                {
+                    AddFriend.setText("Add Friend");
+                    AddFriend.setBackgroundColor(Color.parseColor("#22ba18"));
+                    new JSONParseUnFriend().execute();
+                }
+            }
+        });
+
         AddFriendLayout = (LinearLayout) findViewById(R.id.AddFriendLayout);
         AboutTextLayout = (LinearLayout) findViewById(R.id.AboutTextLayout);
 
@@ -107,6 +133,16 @@ public class SubscriberProfileScreen extends AppCompatActivity
             intent = getIntent();
             args = intent.getBundleExtra("BUNDLE");
             searchResult = (SearchResult) args.getSerializable("searchResult");
+            if(searchResult.FriendCheck.equals("Friend"))
+            {
+                AddFriend.setText("UnFriend");
+                AddFriend.setBackgroundColor(Color.parseColor("#1a5ecc"));
+            }
+            else
+            {
+                AddFriend.setText("Add Friend");
+                AddFriend.setBackgroundColor(Color.parseColor("#22ba18"));
+            }
             SubscriberID = "";
         }
         catch (Exception ex)
@@ -181,6 +217,26 @@ public class SubscriberProfileScreen extends AppCompatActivity
             }
         });
 
+        FriendsButton = (Button) findViewById(R.id.FriendsButton);
+        FriendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(searchResult != null)
+                {
+                    intent = new Intent(SubscriberProfileScreen.this, FriendsScreen.class);
+                    args = new Bundle();
+                    args.putSerializable("searchResult", (Serializable) searchResult);
+                    intent.putExtra("BUNDLE", args);
+                    startActivity(intent);
+                }
+                else
+                {
+                    startActivity(new Intent(SubscriberProfileScreen.this, FriendsScreen.class));
+                }
+            }
+        });
+
         new JSONParseSubscriber().execute();
     }
 
@@ -237,7 +293,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
             }
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(url, "GET", null, null, null, null, null, null, null);
             return json;
         }
 
@@ -319,7 +375,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
             JSONParser jsonParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jsonParser.getJSONFromUrl(SubscriberURL, "GET", null, null, null, null, null, null);
+            JSONObject json = jsonParser.getJSONFromUrl(SubscriberURL, "GET", null, null, null, null, null, null, null);
             return json;
         }
 
@@ -384,7 +440,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
             like.setTimeStamp(new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString());
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null, null);
+            JSONObject json = jParser.getJSONFromUrl(likeURL, "POST", null, null, null, like, null, null, null);
             return json;
         }
 
@@ -415,7 +471,73 @@ public class SubscriberProfileScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(likeDeleteURL, "POST", null, null, null, null, null, null, null);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+        }
+    }
+
+    private class JSONParseAddFriend extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(SubscriberProfileScreen.this);
+            pDialog.setMessage("Adding Friend");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            Friend friend = new Friend("0", GlobalData.SubscriberID, SubscriberID, TimeStamp, "", "");
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(addFriendURL, "POST", null, null, null, null, null, null, friend);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json)
+        {
+            pDialog.dismiss();
+        }
+    }
+
+    private class JSONParseUnFriend extends AsyncTask<String, String, JSONObject>
+    {
+        private ProgressDialog pDialog;
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(SubscriberProfileScreen.this);
+            pDialog.setMessage("UnFriending");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args)
+        {
+            JSONParser jParser = new JSONParser();
+
+            Friend friend = new Friend("0", GlobalData.SubscriberID, SubscriberID, "", "", "");
+
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(unFriendURL, "POST", null, null, null, null, null, null, friend);
             return json;
         }
 

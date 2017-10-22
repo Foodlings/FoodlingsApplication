@@ -26,6 +26,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.sheharyararif.foodlings.DatabaseModel.Comment;
+import com.example.sheharyararif.foodlings.DatabaseModel.Friend;
 import com.example.sheharyararif.foodlings.DatabaseModel.Like;
 import com.example.sheharyararif.foodlings.DatabaseModel.Post;
 import com.example.sheharyararif.foodlings.DatabaseModel.Review;
@@ -43,7 +44,7 @@ public class JSONParser
     public JSONParser()
     { }
 
-    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber, Comment comment, Like like, SearchResult searchResult, Review review)
+    public JSONObject getJSONFromUrl(String url, String method, Post post, Subscriber subscriber, Comment comment, Like like, SearchResult searchResult, Review review, Friend friend)
     {
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -119,6 +120,13 @@ public class JSONParser
                     nameValuePair.add(new BasicNameValuePair("Service", review.getService()));
                     nameValuePair.add(new BasicNameValuePair("OrderTime", review.getOrderTime()));
                     nameValuePair.add(new BasicNameValuePair("Price", review.getPrice()));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                } else if(friend != null){
+                    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+                    nameValuePair.add(new BasicNameValuePair("ListID", friend.getListID()));
+                    nameValuePair.add(new BasicNameValuePair("SubscriberID", friend.getSubscriberID()));
+                    nameValuePair.add(new BasicNameValuePair("FriendID", friend.getFriendID()));
+                    nameValuePair.add(new BasicNameValuePair("Since", friend.getSince()));
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
                 }
 

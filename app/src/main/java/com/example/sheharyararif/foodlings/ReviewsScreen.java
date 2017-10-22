@@ -131,7 +131,7 @@ public class ReviewsScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(reviewsURL, "GET", null, null, null, null, null, null);
+            JSONObject json = jParser.getJSONFromUrl(reviewsURL, "GET", null, null, null, null, null, null, null);
             return json;
         }
 

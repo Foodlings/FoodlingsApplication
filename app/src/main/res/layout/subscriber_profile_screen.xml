@@ -108,8 +108,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="end"
-                            android:background="@android:color/holo_green_light"
+                            android:background="#22ba18"
                             android:text="Add Friend"
+                            android:textColor="#FFFFFF"
                             android:textAlignment="center"/>
 
                     </LinearLayout>

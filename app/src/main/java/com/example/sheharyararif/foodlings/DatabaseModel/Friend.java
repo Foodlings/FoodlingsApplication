@@ -7,10 +7,7 @@ package com.example.sheharyararif.foodlings.DatabaseModel;
 public class Friend
 {
     //Fields
-    int ListID;
-    int SubscriberID;
-    int FriendID;
-    String Since;
+    public String ListID, SubscriberID, FriendID, Since, SubscriberName, DisplayPicture;
 
 
     //Constructor-1
@@ -18,40 +15,53 @@ public class Friend
     {}
 
     //Constructor-2
-    public Friend(int ListID, int SubscriebrID, int FriendID, String Since)
+    public Friend(String ListID, String SubscriberID, String FriendID, String Since, String SubscriberName, String DisplayPicture)
     {
         this.ListID = ListID;
-        this.SubscriberID = SubscriebrID;
+        this.SubscriberID = SubscriberID;
         this.FriendID = FriendID;
         this.Since = Since;
+        this.SubscriberName = SubscriberName;
+        this.DisplayPicture = DisplayPicture;
     }
 
 
     //Setters
-    public void setListID(int ListID)
+    public void setListID(String ListID)
     { this.ListID = ListID; }
 
-    public void setSubscriberID(int SubscriberID)
+    public void setSubscriberID(String SubscriberID)
     { this.SubscriberID = SubscriberID; }
 
-    public void setFriendID(int FriendID)
+    public void setFriendID(String FriendID)
     { this.FriendID = FriendID; }
 
-    public void setSinsce(String Since)
+    public void setSince(String Since)
     { this.Since = Since; }
+
+    public void setSubscriberName(String SubscriberName)
+    { this.SubscriberName = SubscriberName; }
+
+    public void setDisplayPicture(String DisplayPicture)
+    { this.DisplayPicture = DisplayPicture; }
 
 
     //Getters
-    public int getListID()
+    public String getListID()
     { return ListID; }
 
-    public int getSubscriberID()
+    public String getSubscriberID()
     { return SubscriberID; }
 
-    public int setFriendID()
+    public String getFriendID()
     { return FriendID; }
 
-    public String setSince()
+    public String getSince()
     { return Since; }
 
+    public String getSubscriberName()
+    { return SubscriberName; }
+
+    public String getDisplayPicture()
+    { return DisplayPicture; }
 }
