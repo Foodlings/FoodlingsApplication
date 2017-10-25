@@ -5,6 +5,7 @@
     android:id="@+id/dashboard_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dashboard_background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sheharyararif.foodlings.DashboardScreen">
@@ -13,8 +14,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:weightSum="5">
 
         <RelativeLayout
@@ -26,9 +25,9 @@
 
             <ImageView
                 android:contentDescription="@string/app_name"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                app:srcCompat="@drawable/logo"
+                android:layout_width="230dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/logo_black"
                 android:layout_centerInParent="true"/>
 
             <ImageButton
@@ -58,7 +57,7 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginBottom="40dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/text_heading_border"/>
 
@@ -66,12 +65,14 @@
 
         <LinearLayout
             android:id="@+id/SearchTextBoxLayout"
-            android:layout_below="@id/DashboardLabelLayout"
+            android:layout_below="@id/LogoImageLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:weightSum="2"
+            android:layout_marginTop="-10dp"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal">
 
             <EditText
@@ -84,20 +85,21 @@
                 android:ems="10"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_shape"/>
 
             <Button
                 android:id="@+id/SearchButton"
-                android:text="Search"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:textColor="#FFFFFF"
+                android:layout_height="40dp"
                 android:layout_gravity="right"
+                android:layout_marginBottom="15dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"/>
+                android:layout_weight="1"
+                android:background="#abafb6"
+                android:text="Search"
+                android:textColor="#000" />
 
         </LinearLayout>
 
@@ -113,6 +115,9 @@
 
             <Button
                 android:id="@+id/PortalButton"
+                android:paddingTop="25dp"
+                android:drawableTop="@drawable/portal_icon"
+                android:drawablePadding="-10dp"
                 android:text="Portal"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -124,6 +129,7 @@
 
             <Button
                 android:id="@+id/NewsfeedButton"
+                android:paddingTop="25dp"
                 android:text="Newsfeed"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -131,7 +137,9 @@
                 android:textColor="#FFFFFF"
                 android:background="@drawable/tiles_border"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:drawableTop="@drawable/newsfeed_icon"
+                android:drawablePadding="-10dp"/>
 
         </LinearLayout>
 
@@ -147,6 +155,9 @@
 
             <Button
                 android:id="@+id/ProfileButton"
+                android:paddingLeft="115dp"
+                android:drawableLeft="@drawable/profile"
+                android:drawablePadding="-110dp"
                 android:text="Profile"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"

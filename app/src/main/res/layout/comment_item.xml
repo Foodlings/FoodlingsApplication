@@ -10,6 +10,7 @@
         android:layout_height="60dp"
         android:layout_width="60dp"
         android:src="@drawable/user_placeholder"
+        android:background="@drawable/border_display_picture"
         android:layout_marginRight="10dp" />
 
     <TextView

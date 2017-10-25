@@ -48,20 +48,23 @@ public class SearchScreen extends AppCompatActivity
         SearchListView = (ListView) findViewById(R.id.Search_ListView);
         ResultLabel = (TextView) findViewById(R.id.ResultLabel);
 
-        intent = getIntent();
-        args = intent.getBundleExtra("BUNDLE");
-        ArrayList<SearchResult> searchResultsList = (ArrayList<SearchResult>) args.getSerializable("searchResultsList");
 
-        if(searchResultsList.size() > 0)
+        try
         {
-            adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
-            SearchListView.setAdapter(adapter);
-            ResultLabel.setText("Search Results");
+            intent = getIntent();
+            args = intent.getBundleExtra("BUNDLE");
+            ArrayList<SearchResult> searchResultsList = (ArrayList<SearchResult>) args.getSerializable("searchResultsList");
+
+            if(searchResultsList.size() > 0)
+            {
+                adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
+                SearchListView.setAdapter(adapter);
+                ResultLabel.setText("Search Results");
+            }
         }
-        else
-        {
-            ResultLabel.setText("No Results Found.");
-        }
+        catch (Exception ex)
+        { ResultLabel.setText("No Results Found."); }
+
 
         SearchTextBox = (EditText) findViewById(R.id.SearchTextBox);
 

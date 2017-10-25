@@ -29,7 +29,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:background="@drawable/text_heading_border"/>
+                android:background="#ffffbb33"/>
         </LinearLayout>
 
         <LinearLayout

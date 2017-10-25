@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.09"
-        android:background="@color/colorPurple"
+        android:background="#ffffbb33"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -89,6 +89,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.82"

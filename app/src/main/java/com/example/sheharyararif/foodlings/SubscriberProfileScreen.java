@@ -98,16 +98,16 @@ public class SubscriberProfileScreen extends AppCompatActivity
             public void onClick(View v)
             {
 
-                if(AddFriend.getText().toString().equals("Add Friend"))
+                if(AddFriend.getText().toString().equals("Follow"))
                 {
-                    AddFriend.setText("UnFriend");
+                    AddFriend.setText("UnFollow");
                     AddFriend.setBackgroundColor(Color.parseColor("#1a5ecc"));
                     TimeStamp = new SimpleDateFormat("d-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime()).toString();
                     new JSONParseAddFriend().execute();
                 }
                 else
                 {
-                    AddFriend.setText("Add Friend");
+                    AddFriend.setText("Follow");
                     AddFriend.setBackgroundColor(Color.parseColor("#22ba18"));
                     new JSONParseUnFriend().execute();
                 }
@@ -135,12 +135,12 @@ public class SubscriberProfileScreen extends AppCompatActivity
             searchResult = (SearchResult) args.getSerializable("searchResult");
             if(searchResult.FriendCheck.equals("Friend"))
             {
-                AddFriend.setText("UnFriend");
+                AddFriend.setText("UnFollow");
                 AddFriend.setBackgroundColor(Color.parseColor("#1a5ecc"));
             }
             else
             {
-                AddFriend.setText("Add Friend");
+                AddFriend.setText("Follow");
                 AddFriend.setBackgroundColor(Color.parseColor("#22ba18"));
             }
             SubscriberID = "";
@@ -490,7 +490,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
         {
             super.onPreExecute();
             pDialog = new ProgressDialog(SubscriberProfileScreen.this);
-            pDialog.setMessage("Adding Friend");
+            pDialog.setMessage("Following");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -523,7 +523,7 @@ public class SubscriberProfileScreen extends AppCompatActivity
         {
             super.onPreExecute();
             pDialog = new ProgressDialog(SubscriberProfileScreen.this);
-            pDialog.setMessage("UnFriending");
+            pDialog.setMessage("UnFollowing");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();

@@ -20,7 +20,7 @@
             android:layout_height="3dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:background="#b8b8b8" />
+            android:background="#ffffbb33" />
 
         <TextView
             android:id="@+id/EmailText"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="#525252"
+            android:textColor="#000000"
             android:textSize="30sp" />
 
         <View
@@ -37,7 +37,7 @@
             android:layout_height="3dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:background="#b8b8b8" />
+            android:background="#ffffbb33" />
     </LinearLayout>
 
     <LinearLayout
