@@ -9,8 +9,9 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        //setContentView(R.layout.splash_screen);
 
         Thread timerThread = new Thread(){
             public void run(){

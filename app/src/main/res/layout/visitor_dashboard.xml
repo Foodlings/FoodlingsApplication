@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ffffbb33"
+    android:background="@drawable/visitor_dashboard_background"
     tools:context="com.example.sheharyararif.foodlings.VisitorDashboard">
 
     <ImageView
@@ -17,7 +17,7 @@
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo_black"
+        app:srcCompat="@drawable/logo_white"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -53,12 +53,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:ems="10"
+                android:textColor="#FFF"
+                android:textColorHint="#FFF"
                 android:layout_marginLeft="17dp"
                 android:layout_marginRight="17dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0.1"
-                android:background="@drawable/edit_text_shape"/>
+                android:background="@drawable/edit_text_shape_white"/>
 
             <Button
                 android:id="@+id/SearchButton"
@@ -134,7 +136,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                style="@style/LightFont" />
+                android:textColor="#FFF" />
 
             <Button
                 android:id="@+id/RegisterButton"
@@ -161,7 +163,7 @@
         android:id="@+id/BottomHorizontal"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@android:color/black"
+        android:background="#FFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"/>
@@ -169,7 +171,7 @@
     <TextView
         android:id="@+id/CopyrightText"
         android:text="Copyright © Foodlings"
-        android:textColor="#000000"
+        android:textColor="#FFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
