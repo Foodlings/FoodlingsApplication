@@ -88,6 +88,9 @@
 
             <Button
                 android:id="@+id/PortalButton"
+                android:paddingTop="25dp"
+                android:drawableTop="@drawable/portal_icon"
+                android:drawablePadding="-10dp"
                 android:text="Portal"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -99,6 +102,9 @@
 
             <Button
                 android:id="@+id/CommunityButton"
+                android:paddingTop="25dp"
+                android:drawableTop="@drawable/community_icon"
+                android:drawablePadding="-10dp"
                 android:text="Community"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"

@@ -110,6 +110,9 @@
 
             <Button
                 android:id="@+id/TopRestaurantButton"
+                android:paddingTop="25dp"
+                android:drawableTop="@drawable/top_restaurant_icon"
+                android:drawablePadding="-10dp"
                 android:text="Top Restaurants"
                 android:layout_width="wrap_content"
                 android:lineSpacingMultiplier="1.2"
@@ -122,6 +125,9 @@
 
             <Button
                 android:id="@+id/NearbyButton"
+                android:paddingTop="25dp"
+                android:drawableTop="@drawable/nearby_restaurant_icon"
+                android:drawablePadding="-10dp"
                 android:text="Nearby Restaurants"
                 android:lineSpacingMultiplier="1.2"
                 android:layout_width="wrap_content"
@@ -146,6 +152,9 @@
 
             <Button
                 android:id="@+id/CategoryButton"
+                android:paddingLeft="115dp"
+                android:drawableLeft="@drawable/category_icon"
+                android:drawablePadding="-110dp"
                 android:text="Category"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
