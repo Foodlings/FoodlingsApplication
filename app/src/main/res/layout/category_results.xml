@@ -8,7 +8,7 @@
     android:windowSoftInputMode="adjustPan|adjustResize"
     android:orientation="vertical"
     android:background="#FFF"
-    tools:context="com.example.sheharyararif.foodlings.MenuScreen">
+    tools:context="com.example.sheharyararif.foodlings.CategoryResults">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
         android:background="#ffffbb33">
 
         <TextView
+            android:id="@+id/CategoryLabel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Menu"
+            android:text="Category Results"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -30,7 +31,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.77"
+        android:layout_weight="0.87"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:orientation="vertical">
@@ -39,59 +40,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="1"
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/MenuResultLabel"
+                android:id="@+id/CategoryResultLabel"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:text=""
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:layout_marginLeft="10dp"/>
 
-            <GridView
-                android:id="@+id/MenuGridView"
-                android:layout_below="@+id/MenuResultLabel"
+            <ListView
+                android:id="@+id/Category_ListView"
+                android:layout_below="@+id/CategoryResultLabel"
+                android:divider="@null"
+                android:dividerHeight="0dip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:columnWidth="100dp"
-                android:drawSelectorOnTop="true"
-                android:gravity="center"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="5dp"
-                android:focusable="true"
-                android:clickable="true"/>
-
-            <ImageView
-                android:id="@+id/expanded_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible" />
+                android:layout_height="match_parent">
+            </ListView>
 
         </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_weight="0.1">
-
-        <Button
-            android:id="@+id/AddMenuButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="Add Menu"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="17dp"
-            android:background="@color/colorBlack"
-            />
 
     </LinearLayout>
 

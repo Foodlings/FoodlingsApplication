@@ -1,6 +1,8 @@
 package com.example.sheharyararif.foodlings;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -106,6 +108,21 @@ public class DashboardScreen extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Log-out Confirmation")
+                .setMessage("Do you want to Log-out?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Toast.makeText(DashboardScreen.this, "Logged-out", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     private class JSONParse extends AsyncTask<String, String, JSONObject>

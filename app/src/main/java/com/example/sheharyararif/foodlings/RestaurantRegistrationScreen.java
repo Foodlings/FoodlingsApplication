@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class RestaurantRegistrationScreen extends AppCompatActivity {
 
     Button RegisterButton;
-    EditText RestaurantNameTextBox, EmailTextBox, PasswordTextBox, LocationTextBox, AboutTextBox;
+    EditText RestaurantNameTextBox, EmailTextBox, PasswordTextBox, CategoryTextBox, TimingTextBox, LocationTextBox, AboutTextBox;
     JSONArray dataArray = null;
     private ProgressDialog pDialog;
     Subscriber restaurantProfile;
@@ -38,6 +38,8 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
         RestaurantNameTextBox = (EditText) findViewById(R.id.RestaurantNameTextBox);
         EmailTextBox = (EditText) findViewById(R.id.EmailTextBox);
         PasswordTextBox = (EditText) findViewById(R.id.PasswordTextBox);
+        CategoryTextBox = (EditText) findViewById(R.id.CategoryTextBox);
+        TimingTextBox = (EditText) findViewById(R.id.TimingTextBox);
         LocationTextBox = (EditText) findViewById(R.id.LocationTextBox);
         AboutTextBox = (EditText) findViewById(R.id.AboutTextBox);
 
@@ -48,6 +50,12 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             public void onClick(View v)
             {
 
+                if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+                {
+                    EmailTextBox.setError("Invalid Email Format");
+                    return;
+                }
+
                 restaurantProfile = new Subscriber();
                 restaurantProfile.setSubscriberName(RestaurantNameTextBox.getText().toString());
                 restaurantProfile.setPassword(PasswordTextBox.getText().toString());
@@ -56,8 +64,8 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
                 restaurantProfile.setPhoneNumber("Phone");
                 restaurantProfile.setBio(AboutTextBox.getText().toString());
                 restaurantProfile.setAddress(LocationTextBox.getText().toString());
-                restaurantProfile.setTiming("Time");
-                restaurantProfile.setCategory("Category");
+                restaurantProfile.setTiming(TimingTextBox.getText().toString());
+                restaurantProfile.setCategory(CategoryTextBox.getText().toString());
 
                 emailValidationURL = emailValidationURL + EmailTextBox.getText().toString();
                 new JSONEmailValidator().execute();

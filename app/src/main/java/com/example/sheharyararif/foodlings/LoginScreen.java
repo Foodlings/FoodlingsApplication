@@ -140,6 +140,7 @@ public class LoginScreen extends AppCompatActivity {
                     GlobalData.SubscriberID = c.getString("SubscriberID");
                     GlobalData.Type = c.getString("Type");
                     startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
+                    finish();
                 }
                 else
                 {

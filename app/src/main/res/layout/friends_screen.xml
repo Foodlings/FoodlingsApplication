@@ -7,6 +7,7 @@
     android:weightSum="1"
     android:windowSoftInputMode="adjustPan|adjustResize"
     android:orientation="vertical"
+    android:background="#FFF"
     tools:context="com.example.sheharyararif.foodlings.FriendsScreen">
 
     <LinearLayout

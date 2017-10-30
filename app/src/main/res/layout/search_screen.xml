@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
+    android:background="#FFF"
     tools:context="com.example.sheharyararif.foodlings.SearchScreen">
 
     <LinearLayout

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFF"
     tools:context="com.example.sheharyararif.foodlings.SubscriberRegistrationScreen">
 
     <LinearLayout
@@ -23,7 +24,7 @@
             android:background="#ffffbb33" />
 
         <TextView
-            android:id="@+id/EmailText"
+            android:id="@+id/TitleText"
             android:text=" Subscriber "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,28 +65,46 @@
                 android:gravity="center_horizontal"
                 android:weightSum="10">
 
-                <Button
-                    android:id="@+id/FacebookRegisterButton"
+                <TextView
+                    android:id="@+id/SubscriberNameLabel"
                     android:layout_below="@id/LegendSeparator"
-                    android:text="Register with Facebook"
-                    android:background="#3b5998"
-                    android:textColor="#FFFFFF"
+                    android:text="Full Name"
+                    android:textColor="#000"
+                    android:textSize="15sp"
                     android:layout_width="match_parent"
-                    android:layout_height="200px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/SubscriberNameTextBox"
+                    android:layout_below="@id/SubscriberNameLabel"
+                    android:hint="Full Name"
+                    android:paddingLeft="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="14sp"
+                    android:ems="10"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_shape"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_below="@id/FacebookRegisterButton"
+                    android:layout_below="@id/SubscriberNameTextBox"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/SubscriberNameLabel"
-                        android:text="Full Name"
+                        android:id="@+id/GenderLabel"
+                        android:text="Gender"
                         android:textColor="#000"
                         android:textSize="15sp"
                         android:layout_width="0dp"
@@ -96,8 +115,8 @@
                         android:layout_marginTop="30dp"/>
 
                     <TextView
-                        android:id="@+id/UserNameLabel"
-                        android:text="Username"
+                        android:id="@+id/DoBLabel"
+                        android:text="Date of Birth"
                         android:textColor="#000"
                         android:textSize="15sp"
                         android:layout_width="0dp"
@@ -111,35 +130,36 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_below="@id/FacebookRegisterButton"
+                    android:layout_below="@id/SubscriberNameTextBox"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/SubscriberNameTextBox"
-                        android:layout_below="@id/SubscriberNameLabel"
-                        android:hint="Full Name"
+                    <Spinner
+                        android:id="@+id/GenderTextBox"
+                        android:layout_below="@id/GenderLabel"
                         android:paddingLeft="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textSize="14sp"
-                        android:ems="10"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:entries="@array/gender_list"
+                        android:prompt="@string/gender_prompt"
                         android:background="@drawable/edit_text_shape"/>
 
+
                     <EditText
-                        android:id="@+id/UserNameTextBox"
-                        android:layout_below="@id/UserNameLabel"
-                        android:hint="User Name"
+                        android:id="@+id/DoBTextBox"
+                        android:layout_below="@id/DoBLabel"
+                        android:hint="Date of Birth"
+                        android:clickable="true"
+                        android:editable="false"
+                        android:focusable="false"
                         android:paddingLeft="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
                         android:textSize="14sp"
                         android:ems="10"
                         android:layout_marginLeft="20dp"
