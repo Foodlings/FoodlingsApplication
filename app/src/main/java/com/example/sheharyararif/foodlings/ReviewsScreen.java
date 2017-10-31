@@ -84,7 +84,7 @@ public class ReviewsScreen extends AppCompatActivity
             RestaurantID = searchResult.getRestaurantID();
             reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=" + RestaurantID + "&SubscriberID=0&Scope=Restaurant";
 
-            if(searchResult.Type.equals("Subscriber")){
+            if(searchResult.Type.equals("Subscriber") || GlobalData.Type.equals("Visitor")){
                 reviewsURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/getAllReviews?RestaurantID=0&SubscriberID=" + searchResult.getSubscriberID() + "&Scope=" + searchResult.Type;
                 AddReview.setVisibility(View.GONE);
             }

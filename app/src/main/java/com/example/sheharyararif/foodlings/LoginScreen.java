@@ -43,21 +43,6 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
 
-
-        //Setting Main Block's Top Margin
-        LinearLayout MainBlock = (LinearLayout) findViewById(R.id.MainBlock);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-        if(getScreenHeight(this)>800)
-        {
-            params.setMargins(0,500,0,0);
-        }
-        else
-        {
-            params.setMargins(0,200,0,0);
-        }
-        MainBlock.setLayoutParams(params);
-
-
         //TextBox initialization
         EmailTextBox = (EditText) findViewById(R.id.EmailTextBox);
         EmailTextBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
@@ -72,6 +57,14 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v)
             {
                 url = url + EmailTextBox.getText();
+
+                if(EmailTextBox.getText().toString().equals("") || PasswordTextBox.getText().toString().equals(""))
+                {
+                    Toast.makeText(LoginScreen.this, "Fill all the fields first.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
 //                if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
 //                {

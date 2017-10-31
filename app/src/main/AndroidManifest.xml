@@ -69,7 +69,9 @@
         <activity android:name=".ReviewDetailScreen" />
         <activity android:name=".GalleryScreen" />
         <activity android:name=".FriendsScreen" />
-        <activity android:name=".CategoryResults"></activity>
+        <activity android:name=".CategoryResults" />
+        <activity android:name=".TopRestaurantsScreen" />
+        <activity android:name=".NearByRestaurantsScreen"></activity>
     </application>
 
 </manifest>

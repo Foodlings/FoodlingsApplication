@@ -37,7 +37,7 @@ public class SearchScreen extends AppCompatActivity
     ArrayList<SearchResult> searchResultsList;
 
     //URL to get JSON Array
-    private static String searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/searchSubscribers";
+    private static String searchURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,18 +48,31 @@ public class SearchScreen extends AppCompatActivity
         SearchListView = (ListView) findViewById(R.id.Search_ListView);
         ResultLabel = (TextView) findViewById(R.id.ResultLabel);
 
+        if(GlobalData.SearchedFrom.equals("Dashboard"))
+        {
+            searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/searchSubscribers";
+        }
+        else if(GlobalData.SearchedFrom.equals("Portal"))
+        {
+            searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/searchRestaurants";
+        }
+
 
         try
         {
             intent = getIntent();
             args = intent.getBundleExtra("BUNDLE");
             ArrayList<SearchResult> searchResultsList = (ArrayList<SearchResult>) args.getSerializable("searchResultsList");
+            adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
+            SearchListView.setAdapter(adapter);
 
             if(searchResultsList.size() > 0)
             {
-                adapter = new SearchAdapter(searchResultsList, SearchScreen.this);
-                SearchListView.setAdapter(adapter);
                 ResultLabel.setText("Search Results");
+            }
+            else
+            {
+                ResultLabel.setText("No Results Found.");
             }
         }
         catch (Exception ex)

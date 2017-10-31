@@ -175,6 +175,7 @@ public class DashboardScreen extends AppCompatActivity {
                     searchResultsList.add(new SearchResult(SubscriberID, RestaurantID ,Name, Type, Email, DisplayPicture, FriendCheck));
                 }
 
+                GlobalData.SearchedFrom = "Dashboard";
                 args.putSerializable("searchResultsList",(Serializable)searchResultsList);
                 intent.putExtra("BUNDLE",args);
                 startActivity(intent);

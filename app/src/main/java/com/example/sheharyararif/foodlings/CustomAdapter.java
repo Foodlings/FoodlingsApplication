@@ -303,67 +303,69 @@ public class CustomAdapter extends ArrayAdapter<Post> {
             }
 
 
-            CommentsImage.setOnClickListener(new View.OnClickListener()
+            if(!GlobalData.Type.equals("Visitor"))
             {
-                @Override
-                public void onClick(View v) {
-                    Intent serializedIntent = new Intent(mContext, CommentsScreen.class);
-                    Post postData = new Post();
-                    postData.setPostID(dataSet.get(i).getPostID());
-                    serializedIntent.putExtra("PostData", postData);
-                    mContext.startActivity(serializedIntent);
-                }
-            });
-
-            LikesImage.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
+                CommentsImage.setOnClickListener(new View.OnClickListener()
                 {
-                    int likesCount;
-
-                    if (dataSet.get(i).getCurrentUsersLike().equals("Yes"))
-                    {
-                        dataSet.get(i).setCurrentUsersLike("No");
-                        LikesImage.setImageResource(R.drawable.like_icon);
-                        likesCount = Integer.parseInt(LikesCount.getText().toString()) - 1;
-                        if (mContext instanceof NewsFeed)
-                        {
-                            ((NewsFeed) mContext).LikeDelete(dataSet.get(i).getPostID());
-                        }
-                        else if (mContext instanceof RestaurantProfile)
-                        {
-                            ((RestaurantProfile) mContext).LikeDelete(dataSet.get(i).getPostID());
-                        }
-                        else if (mContext instanceof SubscriberProfileScreen)
-                        {
-                            ((SubscriberProfileScreen) mContext).LikeDelete(dataSet.get(i).getPostID());
-                        }
+                    @Override
+                    public void onClick(View v) {
+                        Intent serializedIntent = new Intent(mContext, CommentsScreen.class);
+                        Post postData = new Post();
+                        postData.setPostID(dataSet.get(i).getPostID());
+                        serializedIntent.putExtra("PostData", postData);
+                        mContext.startActivity(serializedIntent);
                     }
-                    else
+                });
+
+                LikesImage.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
                     {
-                        dataSet.get(i).setCurrentUsersLike("Yes");
-                        LikesImage.setImageResource(R.drawable.like_red_icon);
-                        likesCount = Integer.parseInt(LikesCount.getText().toString()) + 1;
-                        if (mContext instanceof NewsFeed)
+                        int likesCount;
+
+                        if (dataSet.get(i).getCurrentUsersLike().equals("Yes"))
                         {
-                            ((NewsFeed) mContext).LikePost(dataSet.get(i).getPostID());
+                            dataSet.get(i).setCurrentUsersLike("No");
+                            LikesImage.setImageResource(R.drawable.like_icon);
+                            likesCount = Integer.parseInt(LikesCount.getText().toString()) - 1;
+                            if (mContext instanceof NewsFeed)
+                            {
+                                ((NewsFeed) mContext).LikeDelete(dataSet.get(i).getPostID());
+                            }
+                            else if (mContext instanceof RestaurantProfile)
+                            {
+                                ((RestaurantProfile) mContext).LikeDelete(dataSet.get(i).getPostID());
+                            }
+                            else if (mContext instanceof SubscriberProfileScreen)
+                            {
+                                ((SubscriberProfileScreen) mContext).LikeDelete(dataSet.get(i).getPostID());
+                            }
                         }
-                        else if (mContext instanceof RestaurantProfile)
+                        else
                         {
-                            ((RestaurantProfile) mContext).LikePost(dataSet.get(i).getPostID());
+                            dataSet.get(i).setCurrentUsersLike("Yes");
+                            LikesImage.setImageResource(R.drawable.like_red_icon);
+                            likesCount = Integer.parseInt(LikesCount.getText().toString()) + 1;
+                            if (mContext instanceof NewsFeed)
+                            {
+                                ((NewsFeed) mContext).LikePost(dataSet.get(i).getPostID());
+                            }
+                            else if (mContext instanceof RestaurantProfile)
+                            {
+                                ((RestaurantProfile) mContext).LikePost(dataSet.get(i).getPostID());
+                            }
+                            else if (mContext instanceof SubscriberProfileScreen)
+                            {
+                                ((SubscriberProfileScreen) mContext).LikePost(dataSet.get(i).getPostID());
+                            }
                         }
-                        else if (mContext instanceof SubscriberProfileScreen)
-                        {
-                            ((SubscriberProfileScreen) mContext).LikePost(dataSet.get(i).getPostID());
-                        }
+
+                        LikesCount.setText(Integer.toString(likesCount));
+                        dataSet.get(i).setLikesCount(Integer.toString(likesCount));
                     }
-
-                    LikesCount.setText(Integer.toString(likesCount));
-                    dataSet.get(i).setLikesCount(Integer.toString(likesCount));
-                }
-            });
-
+                });
+            }
         }
         catch (Exception e)
         {

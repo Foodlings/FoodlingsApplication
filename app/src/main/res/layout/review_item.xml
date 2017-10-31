@@ -10,6 +10,7 @@
         android:id="@+id/DisplayPicture"
         android:layout_height="67dp"
         android:layout_width="70dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/border_display_picture"
         android:src="@drawable/user_placeholder"
         android:layout_marginRight="10dp"

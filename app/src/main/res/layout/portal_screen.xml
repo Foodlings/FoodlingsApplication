@@ -84,10 +84,10 @@
                 android:background="@drawable/edit_text_shape"/>
 
             <Button
-                android:id="@+id/AdvanceSearchButton"
+                android:id="@+id/SearchButton"
                 android:layout_below="@id/SearchTextBox"
-                android:text="Advance Search"
-                android:layout_width="150dp"
+                android:text="Search"
+                android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#abafb6"
@@ -130,7 +130,7 @@
                 android:drawablePadding="-10dp"
                 android:text="Nearby Restaurants"
                 android:lineSpacingMultiplier="1.2"
-                android:layout_width="wrap_content"
+                android:layout_width="135dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
