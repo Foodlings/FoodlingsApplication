@@ -50,6 +50,12 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
             public void onClick(View v)
             {
 
+                if(RestaurantNameTextBox.getText().toString().equals("") || EmailTextBox.getText().toString().equals("") || PasswordTextBox.getText().toString().equals("") || CategoryTextBox.getText().toString().equals("") || LocationTextBox.getText().toString().equals("")){
+                    Toast.makeText(RestaurantRegistrationScreen.this, "Fill all the required fields to register.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
                 {
                     EmailTextBox.setError("Invalid Email Format");
@@ -60,7 +66,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
                 restaurantProfile.setSubscriberName(RestaurantNameTextBox.getText().toString());
                 restaurantProfile.setPassword(PasswordTextBox.getText().toString());
                 restaurantProfile.setType("Restaurant");
-                restaurantProfile.setEmail(EmailTextBox.getText().toString());
+                restaurantProfile.setEmail(EmailTextBox.getText().toString().toLowerCase());
                 restaurantProfile.setPhoneNumber("Phone");
                 restaurantProfile.setBio(AboutTextBox.getText().toString());
                 restaurantProfile.setAddress(LocationTextBox.getText().toString());
@@ -188,6 +194,7 @@ public class RestaurantRegistrationScreen extends AppCompatActivity {
 
                 GlobalData.SubscriberID = c.getString("SubscriberID");
                 GlobalData.Type = c.getString("Type");
+                GlobalData.HomeTown = c.getString("Address");
                 startActivity(new Intent(RestaurantRegistrationScreen.this, PictureUploadScreen.class));
             }
             catch (JSONException e)

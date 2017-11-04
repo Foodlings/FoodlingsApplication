@@ -9,15 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.sheharyararif.foodlings.DatabaseModel.Friend;
 import com.example.sheharyararif.foodlings.DatabaseModel.SearchResult;
 import com.example.sheharyararif.foodlings.ParserPackage.JSONParser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,13 +29,13 @@ public class TopRestaurantsScreen extends AppCompatActivity
     JSONArray jsonArray = null;
 
     //URL to get JSON Array
-    private static String searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/TopRestaurants";
+    private static String searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/topRestaurants";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.category_results);
+        setContentView(R.layout.top_restaurants_screen);
 
         TopRestaurants_ListView = (ListView) findViewById(R.id.TopRestaurants_ListView);
         TopRestaurantsResultLabel = (TextView) findViewById(R.id.TopRestaurantsResultLabel);
@@ -87,10 +83,9 @@ public class TopRestaurantsScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             searchResultsList = new ArrayList<>();
-            SearchResult searchResults = new SearchResult(GlobalData.SubscriberID, "",searchResult.Name, "", "", "", "");
 
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(searchURL, "POST", null, null, null, null, searchResults, null, null);
+            JSONObject json = jParser.getJSONFromUrl(searchURL, "GET", null, null, null, null, null, null, null);
             return json;
         }
 
@@ -114,8 +109,21 @@ public class TopRestaurantsScreen extends AppCompatActivity
                     String Email = fetchedData.getString("Email");
                     String DisplayPicture = fetchedData.getString("DisplayPicture");
                     String FriendCheck = fetchedData.getString("FriendCheck");
+                    String ReviewsCount = fetchedData.getString("ReviewsCount");
+                    String Scope = fetchedData.getString("Scope");
 
-                    searchResultsList.add(new SearchResult(SubscriberID, RestaurantID,Name, Type, Email, DisplayPicture, FriendCheck));
+                    SearchResult searchResult = new SearchResult();
+                    searchResult.setSubscriberID(SubscriberID);
+                    searchResult.setRestaurantID(RestaurantID);
+                    searchResult.setName(Name);
+                    searchResult.setType(Type);
+                    searchResult.setEmail(Email);
+                    searchResult.setDisplayPicture(DisplayPicture);
+                    searchResult.setFriendCheck(FriendCheck);
+                    searchResult.setReviewsCount(ReviewsCount);
+                    searchResult.setScope(Scope);
+
+                    searchResultsList.add(searchResult);
                 }
 
                 if(jsonArray.length() > 0)

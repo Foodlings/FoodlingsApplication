@@ -51,6 +51,7 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_marginTop="20dp"
+            android:fadeScrollbars="false"
             android:layout_below="@id/LegendSeparator"
             android:layout_height="0dp"
             android:layout_weight="0.88">
@@ -68,7 +69,7 @@
                 <TextView
                     android:id="@+id/SubscriberNameLabel"
                     android:layout_below="@id/LegendSeparator"
-                    android:text="Full Name"
+                    android:text="*Full Name"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
@@ -171,9 +172,39 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/EmailLabel"
+                    android:id="@+id/AddressLabel"
                     android:layout_below="@id/RestaurantNameTextBox"
-                    android:text="Email"
+                    android:text="*Home Town"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/AddressTextBox"
+                    android:layout_below="@id/AddressLabel"
+                    android:hint="Address"
+                    android:paddingLeft="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textSize="14sp"
+                    android:ems="10"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_shape"/>
+
+                <TextView
+                    android:id="@+id/EmailLabel"
+                    android:layout_below="@id/AddressTextBox"
+                    android:text="*Email"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
@@ -203,7 +234,7 @@
                 <TextView
                     android:id="@+id/PasswordLabel"
                     android:layout_below="@id/EmailTextBox"
-                    android:text="Password"
+                    android:text="*Password"
                     android:textColor="#000"
                     android:textSize="15sp"
                     android:layout_width="match_parent"

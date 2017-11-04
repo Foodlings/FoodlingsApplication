@@ -68,7 +68,7 @@
 
                 <TextView
                     android:id="@+id/RestaurantNameLabel"
-                    android:text="Restaurant Name"
+                    android:text="*Restaurant Name"
                     android:textColor="#000"
                     android:textSize="13.5sp"
                     android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                 <TextView
                     android:id="@+id/EmailLabel"
                     android:layout_below="@id/RestaurantNameTextBox"
-                    android:text="Email"
+                    android:text="*Email"
                     android:textColor="#000"
                     android:textSize="13.5sp"
                     android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                 <TextView
                     android:id="@+id/PasswordLabel"
                     android:layout_below="@id/EmailTextBox"
-                    android:text="Password"
+                    android:text="*Password"
                     android:textColor="#000"
                     android:textSize="13.5sp"
                     android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                 <TextView
                     android:id="@+id/CategoryLabel"
                     android:layout_below="@id/PasswordTextBox"
-                    android:text="Category"
+                    android:text="*Category"
                     android:textColor="#000"
                     android:textSize="13.5sp"
                     android:layout_width="match_parent"
@@ -217,7 +217,7 @@
                 <TextView
                     android:id="@+id/LocationLabel"
                     android:layout_below="@id/TimingTextBox"
-                    android:text="Location"
+                    android:text="*Location"
                     android:textColor="#000"
                     android:textSize="13.5sp"
                     android:layout_width="match_parent"

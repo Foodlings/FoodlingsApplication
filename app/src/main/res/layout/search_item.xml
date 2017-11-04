@@ -10,7 +10,6 @@
         android:layout_height="60dp"
         android:layout_width="60dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/border_display_picture"
         android:src="@drawable/user_placeholder"
         android:layout_marginRight="10dp" />
 
@@ -22,10 +21,23 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/DisplayPicture"
         android:layout_toEndOf="@+id/DisplayPicture"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/ReviewCountTextView"
+        android:text="Reviews: 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/DisplayPicture"
+        android:layout_toEndOf="@+id/DisplayPicture"
+        android:layout_below="@id/NameTextView"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="13sp"
         android:textColor="#000000" />
 
 </RelativeLayout>

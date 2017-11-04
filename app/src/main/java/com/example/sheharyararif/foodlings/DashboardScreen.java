@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -120,6 +121,11 @@ public class DashboardScreen extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(DashboardScreen.this, "Logged-out", Toast.LENGTH_SHORT).show();
+                        Intent intents = new Intent(DashboardScreen.this, HomeScreen.class);
+                        intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intents);
                         finish();
                     }})
                 .setNegativeButton(android.R.string.no, null).show();

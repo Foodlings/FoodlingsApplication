@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class PortalScreen extends AppCompatActivity {
 
-    Button CategoryButton, SearchButton, NearbyButton;
+    Button CategoryButton, SearchButton, NearbyButton, TopRestaurantButton;
     EditText SearchTextBox;
     JSONArray jsonArray = null;
     String searchText;
@@ -51,6 +51,15 @@ public class PortalScreen extends AppCompatActivity {
             { startActivity(new Intent(PortalScreen.this, CategoryScreen.class)); }
         });
 
+        TopRestaurantButton = (Button)findViewById(R.id.TopRestaurantButton);
+        TopRestaurantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(PortalScreen.this, TopRestaurantsScreen.class));
+            }
+        });
+
         NearbyButton = (Button)findViewById(R.id.NearbyButton);
         NearbyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +67,7 @@ public class PortalScreen extends AppCompatActivity {
             {
                 if(!GlobalData.Type.equals("Visitor"))
                 {
-
+                    startActivity(new Intent(PortalScreen.this, NearByRestaurantsScreen.class));
                 }
                 else
                 {

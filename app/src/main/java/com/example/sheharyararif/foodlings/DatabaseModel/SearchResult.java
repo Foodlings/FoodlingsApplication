@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class SearchResult implements Serializable
 {
-    public String DisplayPicture, Name, Email, Type, SubscriberID, RestaurantID, FriendCheck;
+    public String DisplayPicture, Name, Email, Type, SubscriberID, RestaurantID, FriendCheck, ReviewsCount, Scope;
 
     public SearchResult()
     {};
@@ -45,6 +45,12 @@ public class SearchResult implements Serializable
     public void setFriendCheck(String FriendCheck)
     {   this.FriendCheck = FriendCheck;   }
 
+    public void setReviewsCount(String ReviewsCount)
+    {   this.ReviewsCount = ReviewsCount;   }
+
+    public void setScope(String Scope)
+    {   this.Scope = Scope;   }
+
 
     public String getSubscriberID()
     {   return SubscriberID; }
@@ -66,4 +72,10 @@ public class SearchResult implements Serializable
 
     public String getFriendCheck()
     {   return FriendCheck; }
+
+    public String getReviewsCount()
+    {   return ReviewsCount; }
+
+    public String getScope()
+    {   return Scope; }
 }

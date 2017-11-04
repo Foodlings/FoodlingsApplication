@@ -8,4 +8,5 @@ public class GlobalData {
     public static String SubscriberID;
     public static String Type;
     public static String SearchedFrom;
+    public static String HomeTown;
 }

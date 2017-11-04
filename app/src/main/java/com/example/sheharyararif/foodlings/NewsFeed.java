@@ -87,6 +87,24 @@ public class NewsFeed extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_feed_screen);
 
+        FriendsIcon = (ImageView) findViewById(R.id.FriendsIcon);
+        if(GlobalData.Type.equals("Restaurant")){
+            FriendsIcon.setImageResource(R.drawable.reviews_icon);
+        }
+        FriendsIcon.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if(GlobalData.Type.equals("Restaurant")){
+                    startActivity(new Intent(NewsFeed.this, ReviewsScreen.class));
+                }
+                else
+                {
+                    startActivity(new Intent(NewsFeed.this, FriendsScreen.class));
+                }
+            }
+        });
+
         //Profile Icon
         ProfileIcon = (ImageView) findViewById(R.id.ProfileIcon);
         ProfileIcon.setOnClickListener(clickListener);
@@ -98,15 +116,6 @@ public class NewsFeed extends AppCompatActivity
             public void onClick(View v)
             {
                 onRestart();
-            }
-        });
-
-        FriendsIcon = (ImageView) findViewById(R.id.FriendsIcon);
-        FriendsIcon.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                startActivity(new Intent(NewsFeed.this, FriendsScreen.class));
             }
         });
 

@@ -22,7 +22,7 @@ public class SearchAdapter extends ArrayAdapter
 
     private ArrayList<SearchResult> dataSet;
     Context mContext;
-    TextView NameTextView;
+    TextView NameTextView, ReviewCountTextView;
     ImageView DisplayPicture;
 
     public SearchAdapter(ArrayList<SearchResult> data, Context context)
@@ -58,9 +58,34 @@ public class SearchAdapter extends ArrayAdapter
         View row = inflater.inflate(R.layout.search_item, null, false);
 
         NameTextView = (TextView) row.findViewById(R.id.NameTextView);
+        ReviewCountTextView = (TextView) row.findViewById(R.id.ReviewCountTextView);
         DisplayPicture = (ImageView) row.findViewById(R.id.DisplayPicture);
 
         NameTextView.setText(dataSet.get(i).getName());
+
+        try
+        {
+            if (!dataSet.get(i).getScope().equals("TopRestaurants"))
+            {
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) NameTextView.getLayoutParams();
+                params.topMargin = 15;
+                NameTextView.requestLayout();
+                ReviewCountTextView.setVisibility(View.GONE);
+            }
+            else
+            {
+                ReviewCountTextView.setText("Reviews: " + dataSet.get(i).getReviewsCount());
+            }
+        }
+        catch (Exception ex)
+        {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) NameTextView.getLayoutParams();
+            params.topMargin = 15;
+            NameTextView.requestLayout();
+            ReviewCountTextView.setVisibility(View.GONE);
+        }
+
+
 
         if (!dataSet.get(i).getDisplayPicture().equals("none"))
         {

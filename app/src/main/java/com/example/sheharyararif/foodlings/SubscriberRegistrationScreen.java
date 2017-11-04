@@ -31,7 +31,7 @@ import java.util.Locale;
 public class SubscriberRegistrationScreen extends AppCompatActivity {
 
     Button FacebookRegisterButton, RegisterButton;
-    EditText SubscriberNameTextBox, EmailTextBox, PasswordTextBox, AboutTextBox, DoBTextBox;
+    EditText SubscriberNameTextBox, EmailTextBox, PasswordTextBox, AboutTextBox, DoBTextBox, AddressTextBox;
     Spinner GenderTextBox;
     JSONArray post = null, dataArray = null;
     private ProgressDialog pDialog;
@@ -67,6 +67,7 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
         EmailTextBox = (EditText) findViewById(R.id.EmailTextBox);
         PasswordTextBox = (EditText) findViewById(R.id.PasswordTextBox);
         AboutTextBox = (EditText) findViewById(R.id.AboutTextBox);
+        AddressTextBox = (EditText) findViewById(R.id.AddressTextBox);
         DoBTextBox = (EditText) findViewById(R.id.DoBTextBox);
         DoBTextBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,12 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
             public void onClick(View v)
             {
 
+                if(SubscriberNameTextBox.getText().toString().equals("") || AddressTextBox.getText().toString().equals("") || EmailTextBox.getText().toString().equals("") || PasswordTextBox.getText().toString().equals("")){
+                    Toast.makeText(SubscriberRegistrationScreen.this, "Fill all the required fields to register.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
                 {
                     EmailTextBox.setError("Invalid Email Format");
@@ -95,11 +102,12 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
                 subscriber.setSubscriberName(SubscriberNameTextBox.getText().toString());
                 subscriber.setPassword(PasswordTextBox.getText().toString());
                 subscriber.setType("Subscriber");
-                subscriber.setEmail(EmailTextBox.getText().toString());
+                subscriber.setEmail(EmailTextBox.getText().toString().toLowerCase());
                 subscriber.setPhoneNumber("Phone");
                 subscriber.setBio(AboutTextBox.getText().toString());
                 subscriber.setGender(GenderTextBox.getSelectedItem().toString());
                 subscriber.setDoB(DoBTextBox.getText().toString());
+                subscriber.setAddress(AddressTextBox.getText().toString());
 
                 emailValidationURL = emailValidationURL + EmailTextBox.getText().toString();
                 new JSONEmailValidator().execute();
@@ -238,6 +246,8 @@ public class SubscriberRegistrationScreen extends AppCompatActivity {
                 JSONObject c = dataArray.getJSONObject(0);
 
                 GlobalData.SubscriberID = c.getString("SubscriberID");
+                GlobalData.Type = c.getString("Type");
+                GlobalData.HomeTown = c.getString("Address");
                 startActivity(new Intent(SubscriberRegistrationScreen.this, PictureUploadScreen.class));
             }
             catch (JSONException e)

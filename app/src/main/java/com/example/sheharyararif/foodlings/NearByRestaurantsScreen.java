@@ -33,13 +33,13 @@ public class NearByRestaurantsScreen extends AppCompatActivity
     JSONArray jsonArray = null;
 
     //URL to get JSON Array
-    private static String searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/NearByRestaurants";
+    private static String searchURL = "http://foodlingsapi.azurewebsites.net/api/FoodlingDatabase/nearByRestaurants";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.category_results);
+        setContentView(R.layout.near_by_restaurants_screen);
 
         NearByRestaurants_ListView = (ListView) findViewById(R.id.NearByRestaurants_ListView);
         NearByRestaurantsResultLabel = (TextView) findViewById(R.id.NearByRestaurantsResultLabel);
@@ -87,7 +87,7 @@ public class NearByRestaurantsScreen extends AppCompatActivity
             JSONParser jParser = new JSONParser();
 
             searchResultsList = new ArrayList<>();
-            SearchResult searchResults = new SearchResult(GlobalData.SubscriberID, "",searchResult.Name, "", "", "", "");
+            SearchResult searchResults = new SearchResult(GlobalData.SubscriberID, "",GlobalData.HomeTown, "", "", "", "");
 
             // Getting JSON from URL
             JSONObject json = jParser.getJSONFromUrl(searchURL, "POST", null, null, null, null, searchResults, null, null);

@@ -3,6 +3,8 @@ package com.example.sheharyararif.foodlings;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +58,7 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+
                 url = url + EmailTextBox.getText();
 
                 if(EmailTextBox.getText().toString().equals("") || PasswordTextBox.getText().toString().equals(""))
@@ -66,14 +69,11 @@ public class LoginScreen extends AppCompatActivity {
                 }
 
 
-//                if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
-//                {
-//                    EmailTextBox.setError("Invalid Email");
-//                }
-//                else
-//                {
-//                    new JSONParse().execute();
-//                }
+                if(!EmailTextBox.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+                {
+                    EmailTextBox.setError("Invalid Email Format");
+                    return;
+                }
 
                 new JSONParse().execute();
             }
@@ -128,10 +128,11 @@ public class LoginScreen extends AppCompatActivity {
                 String EmailAddress = c.getString("Email");
                 String Password = c.getString("Password");
 
-                if((EmailTextBox.getText().toString().equals(EmailAddress))&&(PasswordTextBox.getText().toString().equals(Password)))
+                if((EmailTextBox.getText().toString().toLowerCase().equals(EmailAddress.toLowerCase()))&&(PasswordTextBox.getText().toString().equals(Password)))
                 {
                     GlobalData.SubscriberID = c.getString("SubscriberID");
                     GlobalData.Type = c.getString("Type");
+                    GlobalData.HomeTown = c.getString("Address");
                     startActivity(new Intent(LoginScreen.this, DashboardScreen.class));
                     finish();
                 }

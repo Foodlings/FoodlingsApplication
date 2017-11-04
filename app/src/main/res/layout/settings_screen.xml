@@ -44,7 +44,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:layout_marginTop="-130dp">
+            android:fadeScrollbars="false"
+            android:layout_marginTop="-200dp"
+            android:layout_marginBottom="-15dp">
 
             <LinearLayout
                 android:id="@+id/ListLayout"
@@ -97,6 +99,33 @@
                     </TableRow>
 
                     <TableRow
+                        android:id="@+id/SecondLatestRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/HomeTownLabel"
+                            android:text="Home Town"
+                            android:layout_weight="1"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <EditText
+                            android:id="@+id/HomeTownTextBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:inputType="textPersonName"
+                            android:hint="Home Town"
+                            android:ems="7"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/edit_text"/>
+                    </TableRow>
+
+                    <TableRow
                         android:id="@+id/SecondRow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -141,6 +170,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/border"
                             app:srcCompat="@android:drawable/ic_input_add" />
                     </TableRow>
 
@@ -161,6 +192,8 @@
 
                         <ImageButton
                             android:id="@+id/CoverPhotoButton"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/border"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
@@ -208,56 +241,6 @@
                             android:layout_weight="1"
                             android:entries="@array/post_list"
                             android:prompt="@string/post_prompt" />
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/SixthRow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/TagLabel"
-                            android:text="Tag"
-                            android:layout_weight="1"
-                            android:textColor="#000"
-                            android:layout_gravity="center_vertical"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <ToggleButton
-                            android:id="@+id/TagToggleButton"
-                            android:textOn="Yes"
-                            android:textOff="No"
-                            android:checked="true"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/SeventhRow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/FriendListLabel"
-                            android:text="Friends List"
-                            android:layout_weight="1"
-                            android:textColor="#000"
-                            android:layout_gravity="center_vertical"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <Spinner
-                            android:id="@+id/FriendListDropDown"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|end"
-                            android:layout_weight="1"
-                            android:entries="@array/friend_list_list"
-                            android:prompt="@string/friend_list_prompt" />
                     </TableRow>
 
                     <TableRow
